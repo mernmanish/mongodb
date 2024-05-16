@@ -1,6 +1,7 @@
 class CustomErrorHandler extends Error {
    constructor(status, msg) {
-      super(msg); // Call the super constructor with the error message
+      super(); // Call the super constructor with the error message
+      this.message = msg;
       this.status = status;
    }
 
@@ -9,4 +10,4 @@ class CustomErrorHandler extends Error {
    }
 }
 
-module.exports = CustomErrorHandler; // Corrected export statement
+module.exports = CustomErrorHandler;
