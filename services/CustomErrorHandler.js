@@ -8,6 +8,11 @@ class CustomErrorHandler extends Error {
    static alreadyExist(message) {
       return new CustomErrorHandler(409, message);
    }
+
+   static wrongCredentials(message = "Mobile no or password is invalid !") {
+      console.log(message);
+      return new CustomErrorHandler(401,message);
+   }
 }
 
 module.exports = CustomErrorHandler;
