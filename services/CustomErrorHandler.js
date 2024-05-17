@@ -10,8 +10,11 @@ class CustomErrorHandler extends Error {
    }
 
    static wrongCredentials(message = "Mobile no or password is invalid !") {
-      console.log(message);
       return new CustomErrorHandler(401,message);
+   }
+
+   static dataNotExist(message) {
+      return new CustomErrorHandler(404,message);
    }
 }
 
