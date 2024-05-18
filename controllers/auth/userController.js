@@ -3,7 +3,7 @@ const { User } = require("../../models");
 const bcrypt = require('bcrypt');
 const JwtService = require('../../services/JwtService');
 const CustomErrorHandler = require('../../services/CustomErrorHandler');
-const { generateOtp,validateOtp } = require('../../services/userService');
+const { generateOtp, validateOtp } = require('../../services/userService');
 
 //send otp
 const sendOtp = async (req, res, next) => {
@@ -15,21 +15,20 @@ const sendOtp = async (req, res, next) => {
     if (error) {
         return next(error);
     }
-    const { mobile} = req.body;
-    try{
-        const user =await User.findOne({mobile: mobile});
-        if(user){
+    const { mobile } = req.body;
+    try {
+        const user = await User.findOne({ mobile: mobile });
+        if (user) {
             return next(CustomErrorHandler.alreadyExist('Mobile No already exists'))
         }
-        else{
+        else {
             const data = await generateOtp(mobile);
             res.send({
                 message: 'otp send successfully'
             });
         }
     }
-    catch(err)
-    {
+    catch (err) {
         return next(err);
     }
 }
@@ -40,25 +39,25 @@ const verifyOtp = async (req, res, next) => {
         mobile: Joi.string().min(10).max(10).required(),
         otp: Joi.string().min(6).max(6).required()
     });
-    const {error} = verifyOtpSchema.validate(req.body);
-    if(error){
+    const { error } = verifyOtpSchema.validate(req.body);
+    if (error) {
         return next(error);
     }
-    const {mobile, otp} = req.body;
-    try{
-        const userOtp = await validateOtp(mobile,otp);
-        if(userOtp){
+    const { mobile, otp } = req.body;
+    try {
+        const userOtp = await validateOtp(mobile, otp);
+        if (userOtp) {
             res.status(200).send({
                 message: 'otp verifed successfully'
             });
         }
-        else{
+        else {
             res.status(401).send({
                 message: 'invalid otp'
             })
         }
     }
-    catch(err){
+    catch (err) {
         return next(err);
     }
 };
@@ -92,12 +91,15 @@ const register = async (req, res, next) => {
             return next(CustomErrorHandler.alreadyExist('This user already registred'));
         }
         const result = await user.save();
-        access_token = await JwtService.sign({ _id: result._id, role: result.role });
+        access_token = await JwtService.sign({_id: user._id});
+        user.api_token = access_token;
+        await user.save();
+        res.json({ data: result });
     } catch (err) {
         return next(err);
     }
 
-    res.json({ access_token: access_token });
+   
 };
 
 
@@ -112,7 +114,7 @@ const login = async (req, res, next) => {
         return next(error);
     }
     try {
-        const user = await User.findOne({ mobile: req.body.mobile });
+        const user = await User.findOne({ mobile: req.body.mobile }).select('-createdAt -updatedAt -__v -deleteAt');
         if (!user) {
             return next(CustomErrorHandler.dataNotExist('Mobile No not registred'));
         }
@@ -121,8 +123,10 @@ const login = async (req, res, next) => {
             return next(CustomErrorHandler.wrongCredentials());
         }
 
-        const access_token = await JwtService.sign({ _id: user._id, role: user.role });
-        res.json({ access_token });
+        const access_token = await JwtService.sign({_id: user._id});
+        user.api_token = access_token;
+        await user.save();
+        res.json({ user });
         //  
     }
     catch (err) {
@@ -131,9 +135,13 @@ const login = async (req, res, next) => {
 
 }
 
+
+
+
 module.exports = {
     sendOtp,
+    verifyOtp,
     register,
-    login,
-    verifyOtp
+    login
+
 };

@@ -16,6 +16,10 @@ class CustomErrorHandler extends Error {
    static dataNotExist(message) {
       return new CustomErrorHandler(404,message);
    }
+
+   static unAuthorized(message = 'unAuthorized') {
+      return new CustomErrorHandler(401,message);
+   }
 }
 
 module.exports = CustomErrorHandler;
