@@ -8,13 +8,13 @@ const generateOtp = async (mobile) => {
         return data;
     }
     else {
-        const data = await UserOtp.updateOne({mobile: mobile},{otp: otp});
+        const data = await UserOtp.updateOne({ mobile: mobile }, { otp: otp });
         return data;
     }
 };
 
 const validateOtp = async (mobile, otp) => {
-    const data =  await UserOtp.findOne({ mobile: mobile, otp: otp});
+    const data = await UserOtp.findOne({ mobile: mobile, otp: otp });
     return data;
 };
 

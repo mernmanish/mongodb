@@ -47,10 +47,6 @@ const userSchema = new Schema({
     type: String,
     default: null
   },
-  api_token: {
-    type: String,
-    default: null
-  },
   deleteAt: {
     type: Date,
     default: null

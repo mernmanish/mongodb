@@ -26,7 +26,7 @@ mongoose.connect(DB_URL, {
 });
 
 app.get('/', async (req, resp) => {
-    resp.send('welcome to MongoDB Project');
+    resp.send({message: 'welcome to MongoDB Project'});
 })
 app.use(cors());
 app.use(express.json());

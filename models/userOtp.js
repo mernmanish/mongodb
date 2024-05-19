@@ -14,4 +14,4 @@ const UserOtpSchema = new Schema({
     },
 }, { timestamps: true });
 
-module.exports = mongoose.model('UserOtp',UserOtpSchema,'user_otp');
+module.exports = mongoose.model('UserOtp', UserOtpSchema, 'user_otp');
