@@ -3,6 +3,7 @@ const passport = require("passport");
 const cors  = require('cors');
 const {APP_PORT,DB_URL} = require('./config');
 const errorHandler = require('./middlewares/errorHandler');
+const bodyParser = require('body-parser');
 const app = express();
 const authRoutes = require('./routes/authRoutes');
 const routes = require('./routes/routes');
@@ -17,9 +18,10 @@ db.once('open', () => {
 });
 auth();
 app.use(passport.initialize());
-app.use(express.urlencoded({
-    extended: true
-}));
+// app.use(express.urlencoded({
+//     extended: true
+// }));
+
 mongoose.connect(DB_URL, {
     useNewUrlParser: true, 
     useUnifiedTopology: true
@@ -30,6 +32,9 @@ app.get('/', async (req, resp) => {
 })
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', passport.authenticate("jwt",{session:false}));
 app.use('/api',routes);
 app.use('/auth',authRoutes);

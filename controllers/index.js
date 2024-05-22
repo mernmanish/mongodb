@@ -1,2 +1,3 @@
 module.exports.userController = require('./auth/userController');
-module.exports.serviceController = require('./serviceController');
+module.exports.commonController = require('./commonController');
+module.exports.productController = require('./product/productController');
