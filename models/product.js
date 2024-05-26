@@ -1,6 +1,6 @@
 const { required } = require('joi');
 const mongoose = require('mongoose');
-const ProductMedia = require('./productMedia');
+// const ProductMedia = require('./productMedia');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
@@ -30,7 +30,11 @@ const productSchema = new Schema({
         enum: ['active', 'inactive'],
         default: 'active'
     },
-    productMedia: [{ type: Schema.Types.ObjectId, ref: 'ProductMedia' }]
+    // productMedia: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'ProductMedia'
+    // }]
+    //productMedia: [{ type: Schema.Types.ObjectId, ref: 'ProductMedia' }]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema, 'products');

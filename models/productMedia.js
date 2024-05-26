@@ -1,13 +1,13 @@
-const { required, string } = require("joi");
+const { required, string, ref } = require("joi");
 const mongoose = require("mongoose");
-
+//const Product = required("./product");
 const Schema = mongoose.Schema;
 
 const productMediaSchema = new Schema({
     product_id: {
-        type: Schema.Types.ObjectId, // Change type to ObjectId
-        ref: 'Product', // Reference to Product model
-        //default: null
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true
     },
     image: {
         type: String,

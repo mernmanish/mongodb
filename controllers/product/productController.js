@@ -42,14 +42,37 @@ const addProduct = async (req, res, next) => {
 }
 
 const allProduct = async (req, res, next) => {
-    try{
-        const data = await Product.find().select('-createdAt -updatedAt -__v').populate('productMedia');
-        res.status(200).json({ data: data });
-    }
-    catch(err) {
+    try {
+        const products = await Product.find().exec();
+        for (let product of products) {
+            const productMedia = await ProductMedia.find({ product_id: product._id }).exec();
+            product.productMedia = productMedia.map(media => ({
+                _id: media._id,
+                product_id : media.product_id,
+                image: media.image
+            }));
+        }
+        const result = products.map(product => ({
+            _id: product._id,
+            product_name: product.product_name,
+            price: product.price,
+            gender: product.gender,
+            description: product.description,
+            image: product.image,
+            status: product.status,
+            productMedia: product.productMedia,
+        }));
+        res.status(200).json({ data: result });
+    } catch (err) {
         return next(err);
     }
 };
+
+
+
+
+
+
 
 module.exports = {
     addProduct,
