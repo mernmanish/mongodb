@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const upload = multer();
+const upload = require('../services/fileUploadServices');
 const { commonController, productController } = require('../controllers');
 
 
 router.get('/all-user', commonController.getAll);
-router.post('/add-product',upload.single('image'), productController.addProduct);
+router.post('/add-product',upload, productController.addProduct);
+router.get('/all-product', productController.allProduct);
 
 module.exports = router;
