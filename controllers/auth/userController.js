@@ -175,18 +175,18 @@ const logOut = async (req, res, next) => {
         refresh_token: Joi.string().required()
     });
     const { error } = logOutSchema.validate(req.body);
-    if(error){
+    if (error) {
         return next(error);
     }
 
     try {
         const token = await RefreshToken.deleteOne({ token: req.body.refresh_token });
-        if(!token) {
+        if (!token) {
             return next(CustomErrorHandler.unAuthorized('Invalid refresh token'));
         }
 
-        res.send({message: 'user logout successfully'});
-        
+        res.send({ message: 'user logout successfully' });
+
     }
     catch (err) {
         return next(err);
