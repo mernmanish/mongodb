@@ -12,5 +12,6 @@ router.get('/all-product', productController.allProduct);
 router.post('/add-vendor-category', upload, vendorCategoryController.addVendorCategory);
 router.get('/all-vendor-category', vendorCategoryController.allVendorCategory);
 router.delete('/delete-vendor-category/:id', vendorCategoryController.deleteVendorCategory);
+router.put('/update-vendor-category/:id', upload, vendorCategoryController.updateVendorCategory);
 
 module.exports = router;

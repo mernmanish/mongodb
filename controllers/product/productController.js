@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const { Product, ProductMedia } = require('../../models')
 const CustomErrorHandler = require('../../services/CustomErrorHandler');
+const { unlinkFile } = require('../../utils/unlinkFile');
 
 const addProduct = async (req, res, next) => {
     const data = {
@@ -16,6 +17,9 @@ const addProduct = async (req, res, next) => {
     });
     const { error } = schema.validate(data);
     if (error) {
+        if (data.image) {
+            unlinkFile(`uploads/${data.image}`, next);
+        }
         return next(error);
     }
     try {
@@ -36,6 +40,9 @@ const addProduct = async (req, res, next) => {
         res.json({ message: 'Product added successfully', product });
     }
     catch (err) {
+        if (data.image) {
+            unlinkFile(`uploads/${data.image}`, next);
+        }
         return next(err);
     }
 

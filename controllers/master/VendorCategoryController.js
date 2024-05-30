@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const CustomErrorHandler = require('../../services/CustomErrorHandler');
+const { unlinkFile } = require('../../utils/unlinkFile');
 const { VendorCategory } = require('../../models');
 
 const addVendorCategory = async (req, res, next) => {
@@ -13,6 +14,9 @@ const addVendorCategory = async (req, res, next) => {
     });
     const { error } = schema.validate(data);
     if (error) {
+        if (data.image) {
+            unlinkFile(`uploads/${data.image}`, next);
+        }
         return next(error);
     }
     try {
@@ -28,17 +32,36 @@ const addVendorCategory = async (req, res, next) => {
             }
         }
         else {
+            if (data.image) {
+                unlinkFile(`uploads/${data.image}`, next);
+            }
             return next(CustomErrorHandler.alreadyExist(`${data.category_name} Already Exists`));
         }
     }
     catch (err) {
+        if (data.image) {
+            unlinkFile(`uploads/${data.image}`, next);
+        }
+        return next(err);
+    }
+};
+
+const updateVendorCategory = async (req, res, next) => {
+    
+    try{
+        const { id } = req.params;
+        console.log(id);
+
+        res.json({});
+    }
+    catch(err) {
         return next(err);
     }
 };
 
 const allVendorCategory = async (req, res, next) => {
     try {
-        const data = await VendorCategory.find({ status: 'active' }).select('-createdAt -updatedAt -__v');
+        const data = await VendorCategory.find({ status: 'active' }).select('-createdAt -updatedAt -__v -deleted');
         if (data.length > 0) {
             res.status(200).json({ data: data });
         }
@@ -70,5 +93,6 @@ const deleteVendorCategory = async (req, res, next) => {
 module.exports = {
     addVendorCategory,
     allVendorCategory,
-    deleteVendorCategory
+    deleteVendorCategory,
+    updateVendorCategory
 }
