@@ -23,7 +23,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['CUSTOMER', 'ADMIN', 'MODERATOR', 'WORKER'],
+    enum: ['CUSTOMER', 'ADMIN', 'VENDOR', 'WORKER'],
     default: 'CUSTOMER'
   },
   status: {
@@ -33,7 +33,8 @@ const userSchema = new Schema({
   },
   gender: {
     type: String,
-    default: null
+    enum: ['male', 'female','transgender'],
+    default: 'male'
   },
   profile_image: {
     type: String,
@@ -47,10 +48,10 @@ const userSchema = new Schema({
     type: String,
     default: null
   },
-  deleteAt: {
-    type: Date,
-    default: null
-  },
+  deleted: {
+    type: Boolean,
+    default: false,
+  }
 
 }, { timestamps: true });
 

@@ -18,9 +18,6 @@ db.once('open', () => {
 });
 auth();
 app.use(passport.initialize());
-// app.use(express.urlencoded({
-//     extended: true
-// }));
 
 mongoose.connect(DB_URL, {
     // useNewUrlParser: true, 
@@ -39,6 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', passport.authenticate("jwt",{session:false}));
 app.use('/api',routes);
 app.use('/auth',authRoutes);
+app.use('/uploads',express.static('uploads'));
 app.use(errorHandler);
 
 app.listen(APP_PORT, () => {

@@ -5,14 +5,10 @@ const { REFRESH_SECRET } = require('../../config');
 const JwtService = require('../../services/JwtService');
 const CustomErrorHandler = require('../../services/CustomErrorHandler');
 const { generateOtp, validateOtp } = require('../../services/userService');
-
+const { otpSchema, verifyOtpSchema, registerSchema, loginSchema, refreshTokenSchema, logOutSchema, vendorSchema } = require('../../validators/userValidator');
 //send otp
 const sendOtp = async (req, res, next) => {
-    const otpSchema = Joi.object({
-        mobile: Joi.string().min(10).max(10).required()
-    });
-
-    const { error } = otpSchema.validate(req.body);
+    const { error } = await otpSchema.validate(req.body);
     if (error) {
         return next(error);
     }
@@ -36,11 +32,7 @@ const sendOtp = async (req, res, next) => {
 
 //verifyOtp
 const verifyOtp = async (req, res, next) => {
-    const verifyOtpSchema = Joi.object({
-        mobile: Joi.string().min(10).max(10).required(),
-        otp: Joi.string().min(6).max(6).required()
-    });
-    const { error } = verifyOtpSchema.validate(req.body);
+    const { error } = await verifyOtpSchema.validate(req.body);
     if (error) {
         return next(error);
     }
@@ -65,18 +57,10 @@ const verifyOtp = async (req, res, next) => {
 
 //registred user
 const register = async (req, res, next) => {
-    const registerSchema = Joi.object({
-        name: Joi.string().min(3).max(30).required(),
-        email: Joi.string().email().required(),
-        mobile: Joi.string().min(10).max(10).required(),
-        password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-        repeat_password: Joi.ref('password')
-    });
-    const { error } = registerSchema.validate(req.body);
+    const { error } = await registerSchema.validate(req.body);
     if (error) {
         return next(error);
     }
-
     const { name, email, mobile, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
@@ -108,11 +92,7 @@ const register = async (req, res, next) => {
 
 //login user
 const login = async (req, res, next) => {
-    const loginSchema = Joi.object({
-        mobile: Joi.string().min(10).max(10).required(),
-        password: Joi.string().required(),
-    });
-    const { error } = loginSchema.validate(req.body);
+    const { error } = await loginSchema.validate(req.body);
     if (error) {
         return next(error);
     }
@@ -138,10 +118,7 @@ const login = async (req, res, next) => {
 
 // refresh_token
 const refreshToken = async (req, res, next) => {
-    const refreshTokenSchema = Joi.object({
-        refresh_token: Joi.string().required()
-    });
-    const { error } = refreshTokenSchema.validate(req.body);
+    const { error } = await refreshTokenSchema.validate(req.body);
     if (error) {
         return next(error);
     }
@@ -170,11 +147,9 @@ const refreshToken = async (req, res, next) => {
     }
 };
 
+// user logout
 const logOut = async (req, res, next) => {
-    const logOutSchema = Joi.object({
-        refresh_token: Joi.string().required()
-    });
-    const { error } = logOutSchema.validate(req.body);
+    const { error } = await logOutSchema.validate(req.body);
     if (error) {
         return next(error);
     }

@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../services/fileUploadServices');
-const { commonController, productController, vendorCategoryController } = require('../controllers');
+const { commonController, productController, vendorCategoryController, vendorRegistrationController } = require('../controllers');
+
+//vendor controller
+router.post('/vendor-registration', vendorRegistrationController.vendorRegistration);
+
 
 //Manage Product 
 router.get('/all-user', commonController.getAll);

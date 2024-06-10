@@ -1,6 +1,6 @@
 const { required } = require('joi');
 const mongoose = require('mongoose');
-
+const {APP_URL} = require('../config');
 const Schema = mongoose.Schema;
 const VendorCategorySchema = new Schema({
     category_name: {
@@ -9,7 +9,10 @@ const VendorCategorySchema = new Schema({
     },
     image: {
         type: String,
-        default: null
+        default: null,
+        get: (image) => {
+          return `${APP_URL}/uploads/${image}`;
+        }
     },
     status: {
         type: String,
@@ -20,7 +23,7 @@ const VendorCategorySchema = new Schema({
         type: Boolean,
         default: false,
     },
-},{timestamps: true});
+},{timestamps: true, toJSON: { getters: true }});
 
   VendorCategorySchema.pre('find', function() {
     this.where({ deleted: { $ne: true } });
