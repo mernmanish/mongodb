@@ -4,11 +4,15 @@ const RefreshToken = require('./refreshToken');
 const Product = require('./product');
 const ProductMedia = require('./productMedia');
 const VendorCategory = require('./vendorCategory');
+const Vendor = require('./vendor');
+const Hub = require('./hub');
 module.exports = {
     User,
     UserOtp,
     RefreshToken,
     Product,
     ProductMedia,
-    VendorCategory
+    VendorCategory,
+    Vendor,
+    Hub
 };

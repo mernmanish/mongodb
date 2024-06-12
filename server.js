@@ -20,9 +20,8 @@ auth();
 app.use(passport.initialize());
 
 mongoose.connect(DB_URL, {
-    // useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    useNewUrlParser: true,    
+    //useNewUrlParser: true,
+    //useUnifiedTopology: true
 });
 
 app.get('/', async (req, resp) => {

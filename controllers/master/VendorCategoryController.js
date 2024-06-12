@@ -19,7 +19,7 @@ const addVendorCategory = async (req, res, next) => {
         return next(error);
     }
     try {
-        const checkCategory = await VendorCategory.findOne({ category_name: data.category_name });
+        const checkCategory = await VendorCategory.exists({ category_name: data.category_name });
         if (!checkCategory) {
             const category = new VendorCategory({
                 category_name: data.category_name,

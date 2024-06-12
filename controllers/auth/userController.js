@@ -61,12 +61,13 @@ const register = async (req, res, next) => {
     if (error) {
         return next(error);
     }
-    const { name, email, mobile, password } = req.body;
+    const { name, email, mobile, password,role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
         name,
         email,
         mobile,
+        role,
         password: hashedPassword
     });
     let access_token;

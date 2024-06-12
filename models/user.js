@@ -1,4 +1,3 @@
-const { required, string } = require("joi");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -33,7 +32,7 @@ const userSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female','transgender'],
+    enum: ['male', 'female', 'transgender'],
     default: 'male'
   },
   profile_image: {
@@ -50,9 +49,17 @@ const userSchema = new Schema({
   },
   deleted: {
     type: Boolean,
-    default: false,
+    default: false
   }
-
 }, { timestamps: true });
+
+userSchema.virtual('vendor', {
+  ref: 'Vendor',
+  localField: '_id',
+  foreignField: 'user_id',
+  justOne: true
+});
+userSchema.set('toObject', { virtuals: true });
+userSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('User', userSchema, 'users');
