@@ -27,14 +27,21 @@ const profileImageSchema = Joi.object({
     second_image: Joi.string().allow(null).optional()
 });
 
-const hubSchema = Joi.object({
-    hub_name: Joi.string().min(3).max(30).required(),
+//territory schema
+const territorySchema = Joi.object({
+    territory_name: Joi.string().min(3).max(30).required()
 });
 
+//hub Schema
+const hubSchema = Joi.object({
+    territory_id: Joi.string().required(),
+    hub_name: Joi.string().min(3).max(30).required(),
+});
 
 module.exports = {
     vendorCategorySchema,
     vendorSchema,
     profileImageSchema,
-    hubSchema
+    hubSchema,
+    territorySchema
 }

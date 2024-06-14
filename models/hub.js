@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
-const {APP_URL} = require('../config');
 const Schema = mongoose.Schema;
+
 const HubSchema = new Schema({
+    territory_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Territory',
+        required: true
+    },
     hub_name: {
         type: String,
         unique: true,
@@ -12,21 +17,20 @@ const HubSchema = new Schema({
         enum: ['active', 'inactive'],
         default: 'active'
     },
-    deleted: {
+    
+    flagDelete: {
         type: Boolean,
         default: false,
-    },
-},{timestamps: true, toJSON: { getters: true }});
+    }
+}, { timestamps: true, toJSON: { getters: true } });
 
-  HubSchema.pre('find', function() {
-    this.where({ deleted: { $ne: true } });
-  });
-  
-  HubSchema.pre('findOne', function() {
-    this.where({ deleted: { $ne: true } });
-  });
-  
-  HubSchema.statics.findNotDeleted = function() {
-    return this.find({ deleted: { $ne: true } });
-  };
-module.exports = mongoose.model('Hub',HubSchema,'hubs');
+HubSchema.set('toObject', { virtuals: false });
+HubSchema.set('toJSON', {
+    versionKey: false,
+    transform: function (doc, ret) {
+        ret.hub = ret.territory_id; // Embed hub_id under hub
+        delete ret.territory_id; // Delete hub_id field
+    }
+});
+
+module.exports = mongoose.model('Hub', HubSchema, 'hubs');

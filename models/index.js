@@ -6,6 +6,7 @@ const ProductMedia = require('./productMedia');
 const VendorCategory = require('./vendorCategory');
 const Vendor = require('./vendor');
 const Hub = require('./hub');
+const Territory = require('./territory');
 module.exports = {
     User,
     UserOtp,
@@ -14,5 +15,6 @@ module.exports = {
     ProductMedia,
     VendorCategory,
     Vendor,
-    Hub
+    Hub,
+    Territory
 };
