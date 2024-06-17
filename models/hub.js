@@ -9,7 +9,7 @@ const HubSchema = new Schema({
     },
     hub_name: {
         type: String,
-        unique: true,
+        unique: false,
         required: true
     },
     status: {
@@ -17,7 +17,6 @@ const HubSchema = new Schema({
         enum: ['active', 'inactive'],
         default: 'active'
     },
-    
     flagDelete: {
         type: Boolean,
         default: false,
@@ -26,10 +25,10 @@ const HubSchema = new Schema({
 
 HubSchema.set('toObject', { virtuals: false });
 HubSchema.set('toJSON', {
-    versionKey: false,
+    versionKey: true,
     transform: function (doc, ret) {
-        ret.hub = ret.territory_id; // Embed hub_id under hub
-        delete ret.territory_id; // Delete hub_id field
+        ret.territory = ret.territory_id; // Embed hub_id under hub
+        delete ret.territory_id; // territory_id hub_id field
     }
 });
 

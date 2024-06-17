@@ -18,8 +18,8 @@ const TerritorySchema = new Schema({
     }
 }, { timestamps: true, toJSON: { getters: true } });
 
-TerritorySchema.virtual('territory', {
-    ref: 'Hub',
+TerritorySchema.virtual('Territory', {
+    ref: 'territory',
     localField: '_id',
     foreignField: 'territory_id',
     justOne: true

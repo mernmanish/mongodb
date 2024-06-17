@@ -1,30 +1,30 @@
 const CustomErrorHandler = require('../../services/CustomErrorHandler');
-const { hubSchema } = require('../../validators/serviceValidator');
-const { Territory } = require('../../models');
+const { hubSchema, territoryWiseHubSchema } = require('../../validators/serviceValidator');
+const { Hub } = require('../../models');
 
-const addTerritory = async (req, res, next) => {
+const addHub = async (req, res, next) => {
     const { error } = hubSchema.validate(req.body);
     if (error) {
         return next(error);
     }
-    const { hub_id, territory_name } = req.body;
+    const { territory_id, hub_name } = req.body;
     try {
-        const checkTerritory = await Territory.findOne({ territory_name: territory_name, hub_id: hub_id }).exec();
-        if (checkTerritory) {
-            if (checkTerritory.flagDelete == true) {
-                checkTerritory.flagDelete = false;
-                const updatedTerritory = await checkTerritory.save();
-                return res.status(200).send({ message: 'Territory recovered successfully', data: updatedTerritory });
+        const checkHub = await Hub.findOne({ hub_name: hub_name, territory_id: territory_id }).exec();
+        if (checkHub) {
+            if (checkHub.flagDelete == true) {
+                checkHub.flagDelete = false;
+                const updatedHub = await checkHub.save();
+                return res.status(200).send({ message: 'Hub recovered successfully', data: updatedHub });
             }
-            return next(CustomErrorHandler.alreadyExist(`${territory_name} Already Exists`));
+            return next(CustomErrorHandler.alreadyExist(`${hub_name} Already Exists`));
         }
-        const territory = new Territory({
-            hub_id: hub_id,
-            territory_name: territory_name,
+        const hub = new Hub({
+            territory_id: territory_id,
+            hub_name: hub_name,
         });
-        const result = await territory.save();
+        const result = await hub.save();
         if (result) {
-            res.status(201).send({ message: 'Territory created successfully', data: result });
+            res.status(201).send({ message: 'Hub created successfully', data: result });
         }
     } catch (err) {
         return next(err);
@@ -32,12 +32,12 @@ const addTerritory = async (req, res, next) => {
 };
 
 
-const allTerritory = async (req, res, next) => {
+const allHub = async (req, res, next) => {
     try {
-        const results = await Territory.find({ status: 'active' })
-            .select('-__v -createdAt -updatedAt -id -flagDelete -id')
+        const results = await Hub.find({ flagDelete: false })
+            .select('-__v -createdAt -updatedAt -flagDelete')
             .populate({
-                path: 'hub_id',  // Populate the 'hub_id' field in Territory
+                path: 'territory_id',
                 select: '-__v -createdAt -updatedAt -flagDelete'
             })
             .exec();
@@ -51,11 +51,84 @@ const allTerritory = async (req, res, next) => {
     }
 };
 
+const singleHub = async (req, res, next) => {
+    try {
+        const data = await Hub.findOne({ _id: req.params.id }).select('-__v -createdAt -updatedAt -id -flagDelete -id').populate({ path: 'territory_id', select: '-__v -createdAt -updatedAt -flagDelete' });
+        if (data) {
+            res.status(200).send({ data: data });
+        }
+        else {
+            return next(CustomErrorHandler.dataNotExist('no data found'));
+        }
+    }
+    catch (error) {
+        return next(error);
+    }
+}
+
+const updateHub = async (req, res, next) => {
+    const { error } = await hubSchema.validate(req.body);
+    if (error) {
+        return next(error);
+    }
+    try {
+        const { territory_id, hub_name } = req.body;
+        const result = await Hub.findByIdAndUpdate({ _id: req.params.id }, {
+            territory_id: territory_id,
+            hub_name: hub_name
+        }, { new: true });
+        if (result) {
+            return res.status(200).send({ message: 'data updated successfully', data: result });
+        }
+    }
+    catch (error) {
+        return next(error);
+    }
+}
+
+const deleteHub = async (req, res, next) => {
+    try {
+
+        const checkHub = await Hub.exists({ _id: req.params.id });
+        if (!checkHub) {
+            return next(CustomErrorHandler.dataNotExist('data not found'));
+        }
+        await Hub.findByIdAndUpdate(req.params.id, { flagDelete: true });
+        res.status(200).send({ message: 'data deleted successfully' });
+    }
+    catch (err) {
+        return next(err);
+    }
+};
+
+const territoryWiseHub = async (req, res, next) => {
+    const { error } = await territoryWiseHubSchema.validate(req.body);
+    if(error) {
+        return next(error);
+    }
+    const { territory_id } = req.body;
+    try {
+        const results = await Hub.find({territory_id: territory_id, flagDelete: false, status: 'active'}).select('-__v -createdAt -updatedAt -id -flagDelete -id');
+        if(results.length > 0) {
+            res.status(200).send({ data: results });
+        }
+        else {
+            return next(CustomErrorHandler.dataNotExist('data not found'));
+        }
+    }
+    catch (err) {
+        return next(err);
+    }
+}
 
 
 
 
 module.exports = {
-    addTerritory,
-    allTerritory
+    addHub,
+    allHub,
+    singleHub,
+    updateHub,
+    deleteHub,
+    territoryWiseHub
 }

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const CustomErrorHandler = require('../../services/CustomErrorHandler');
-const { vendorSchema, profileImageSchema } = require('../../validators/serviceValidator');
+const { vendorSchema, profileImageSchema, assignVendorHub } = require('../../validators/serviceValidator');
 const { Vendor } = require('../../models');
 
 const vendorRegistration = async (req, res, next) => {
@@ -59,10 +59,10 @@ const updateProfileImage = async (req, res, next) => {
     }
     try {
         const result = await Vendor.findOneAndUpdate({ user_id: req.user._id }, {
-        ...(data.image && {logo: data.image}),
-        ...(data.second_image && {thumbnail: data.second_image}),
+            ...(data.image && { logo: data.image }),
+            ...(data.second_image && { thumbnail: data.second_image }),
         }, { new: true });
-        if(result) {
+        if (result) {
             res.status(201).json({ message: 'Profile image updated successfully', data: result });
         }
     }
@@ -79,9 +79,31 @@ const updateProfileImage = async (req, res, next) => {
         }
         return next(err);
     }
-};
+}
+
+const assignHub = async (req, res, next) => {
+    const { error } = await assignVendorHub.validate(req.body);
+    if (error) {
+        return next(error);
+    }
+    const { territory_id, hub_id, user_id } = req.body;
+    try {
+        const result = await Vendor.findOneAndUpdate({ user_id: user_id }, {
+            territory_id: territory_id,
+            hub_id: hub_id
+        },
+            { new: true });
+        if (result) {
+            res.status(200).send({ message: 'hub assigned successfully' });
+        }
+    }
+    catch (err) {
+        return next(err);
+    }
+}
 
 module.exports = {
     vendorRegistration,
-    updateProfileImage
+    updateProfileImage,
+    assignHub
 }

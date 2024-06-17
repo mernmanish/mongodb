@@ -7,6 +7,8 @@ const VendorCategory = require('./vendorCategory');
 const Vendor = require('./vendor');
 const Hub = require('./hub');
 const Territory = require('./territory');
+const ProductCategory = require('./productCategory');
+const ProductTag = require('./productTag');
 module.exports = {
     User,
     UserOtp,
@@ -16,5 +18,7 @@ module.exports = {
     VendorCategory,
     Vendor,
     Hub,
-    Territory
+    Territory,
+    ProductCategory,
+    ProductTag
 };

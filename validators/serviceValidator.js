@@ -38,10 +38,39 @@ const hubSchema = Joi.object({
     hub_name: Joi.string().min(3).max(30).required(),
 });
 
+//territory wise hub schema
+const territoryWiseHubSchema = Joi.object({
+    territory_id: Joi.string().required()
+});
+
+//assign vendor hub schema
+const assignVendorHub = Joi.object({
+    territory_id: Joi.string().required(),
+    hub_id: Joi.string().required(),
+    user_id: Joi.string().required()
+});
+
+//product category schema
+const productCategorySchema = Joi.object({
+    category_name: Joi.string().min(3).max(30).required(),
+    image: Joi.string().allow(null).optional()
+});
+
+//product tag schema
+const productTagSchema = Joi.object({
+    tag_name: Joi.string().min(3).max(30).required(),
+    image: Joi.string().allow(null).optional()
+});
+
+
 module.exports = {
     vendorCategorySchema,
     vendorSchema,
     profileImageSchema,
+    territorySchema,
     hubSchema,
-    territorySchema
+    territoryWiseHubSchema,
+    assignVendorHub,
+    productCategorySchema,
+    productTagSchema
 }
