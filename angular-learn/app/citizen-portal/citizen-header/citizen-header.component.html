@@ -1,0 +1,333 @@
+<!-- Header -->
+<header class="head-sec ">
+    <nav class="top-sec">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="odisha-govt-section">
+                        <h1 class="logo mb-0">
+                            <a href="/citizen-portal/dashboard" class="d-flex text-dark">
+                              <div class=" mobile-design">
+                                <img src="{{siteURL}}assets/images/odisha-govt-ogo.png" alt="IRMS" class="me-3 img-fluid">
+                              </div>
+                            
+                              <span class="text-start ">
+                                E & IT Department <small class="d-block mt-0">Government of Odisha</small> 
+                              </span>  
+                                       
+                              </a>
+                          </h1>
+                        <!-- <a routerLink="/citizen-portal/dashboard">
+                            <img src="{{siteURL}}assets/images/odisha-govt-ogo.png" alt=" Government of Odisha" class="logo-border"> -->
+                            <!-- <img src="{{siteURL}}assets/images/k-odisha.png" alt=" Government of Odisha"> -->
+                            <!-- <span>{{'IRMS' | translate}}</span> -->
+                        <!-- </a> -->
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="top-menu-list">
+                        <!-- <select class="top-element" #langSelect (change)="changeLang(langSelect.value)">
+                            <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+                                [selected]="lang === translate.currentLang">{{ lang |translate}}</option>
+                        </select> -->
+                        <div class="theme">
+                            <label id="switch" class="switch">
+                                <input type="checkbox" (click)="toggleTheme()" id="slider">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="fontresizer">
+                            <a class="fontresize top-element " title="Click here to decrease font size"
+                                (click)="DecreaseFontSize()" href="javascript:void(0);">-</a>
+                            <a class="fontresize top-element" title="Click here to Normal font size"
+                                (click)="ResetFontSize()" href="javascript:void(0);">A</a>
+                            <a class="fontresize top-element" title="Click here to increase font size"
+                                (click)="IncreaseFontSize()" href="javascript:void(0);">+</a>
+                        </div>
+
+                        <!-- <div class="helpline pt-1">
+                            <i class="icon-classictelephone"></i> <a href="tel:155 333">{{'HELPLINE' | translate}} : 155
+                                333</a>
+                        </div> -->
+
+                        <ng-container *ngIf="loginSts; then aftrLgIn else bfrLgIn"></ng-container>
+                        <ng-template #aftrLgIn>
+                            <!-- <a href="javascript:void(0);" class="text-white login-link me-2  text-decoration-none"
+                        routerLink="/citizen-portal/dashboard">{{'Dashboard' |translate}}</a> -->
+                        </ng-template>
+                        <ng-template #bfrLgIn>
+                            <a href="javascript:void(0);" class="text-white login-link me-2  text-decoration-none"
+                                routerLink="../Newregister">Register</a>
+                            <ul class="loginlist">
+                                <li><a>Login</a>
+                                    <ul>
+                                        <!-- <li><a routerLink="/citizen-portal/login">Farmer </a></li>
+                                        <li><a href="{{domainURL}}" target="_blank">Officer </a></li> -->
+                                        <li><a class="dropdown-item" routerLink="../login">KO User/ Agri
+                                                Entrepreneur</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)" (click)="sendBankuser()"
+                                                target="_blank">Bank User</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0)"
+                                                (click)="sendBankuser()">Department User</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </nav>
+    <nav class="navbar main-nav">
+        <div class="container-fluid">
+            <div class="citizenmenu">
+                <nav class="navbar">
+                    <div class="container-fluid">
+                        <div class="navbar-collapse" id="navbarNav">
+                            <ng-container *ngIf="loginSts; then aftrLgInMn"></ng-container>
+                            <ng-template #aftrLgInMn>
+                                <ul class="navbar-nav">
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" routerLink="/home"
+                                            routerLinkActive="active"><i
+                                                class="icon-home-solid"></i>{{'Home' | translate}}</a>
+                                    </li> -->
+                                        <li class="nav-item">
+                                            <div class="crush_ic" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                                                <i class="bi bi-x-lg"></i>
+                                            </div>
+                                        </li>
+
+                                    <li class="nav-item" *ngIf="isInstructionStatus == 'true'">
+                                        <a class="nav-link" routerLink="/citizen-portal/instructions"
+                                            routerLinkActive="active"><i
+                                                class="icon-tachometer-alt-solid"></i>{{'Instructions' | translate}}</a>
+                                    </li>
+                                    <li class="nav-item" *ngIf="isInstructionStatus == 'false'">
+                                        <a class="nav-link" routerLink="/citizen-portal/dashboard"
+                                            routerLinkActive="active"><i
+                                                class="icon-tachometer-alt-solid"></i>{{'Dashboard' | translate}}</a>
+                                    </li>
+                                    <li class="nav-item" *ngIf="isInstructionStatus == 'false'">
+                                        <a class="nav-link" (click)="getRegistrationAccess()" style="cursor: pointer;"  routerLinkActive="active">
+                                            <i class="icon-id-card-solid"></i>Registration
+                                        </a>
+                                    </li>
+
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" routerLink="/citizen-portal/scheme-directorate"
+                                            routerLinkActive="active"><i class="icon-dropbox"></i>{{'Apply for Incentives' |
+                                            translate}} </a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a href="javascipt:void(0)" class="nav-link" (click)="scroll('BankDetails')"><i class="icon-dropbox"></i>{{'Apply Loan' |
+                                            translate}} </a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                    <a class="nav-link" routerLink="/citizen-portal/service-directorate" routerLinkActive="active"><i
+                                            class="icon-sellsy"></i>Other Departmental Services</a>
+                                </li> -->
+
+                                    <!-- <li class="nav-item">
+                                    <a class="nav-link" (click)="getIFSC()" routerLinkActive="active" id="ifscLink"><i
+                                            class="icon-laptop-code-solid"></i>Know IFSC Code</a>
+                                </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" routerLink="/citizen-portal/trackstatus"
+                                            routerLinkActive="active"><i class="icon-fast-forward-solid"></i>{{'Track
+                                            Status' | translate}}</a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" routerLink="/citizen-portal/claimtatus"
+                                            routerLinkActive="active"><i class="icon-fast-forward-solid"></i>{{'Claim
+                                            ' | translate}}</a>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                    <a class="nav-link" routerLink="/citizen-portal/dpr-generate" routerLinkActive="active"><i
+                                            class="icon-search-solid"></i>{{'DPR Generate' | translate}}</a>
+                                </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" routerLink="/citizen-portal/dprdetails"
+                                            routerLinkActive="active"><i class="icon-newspaper"></i>{{'DPR Details' |
+                                            translate}}</a>
+                                    </li> -->
+
+
+                                    <!-- <li class="nav-item profile-dropdown">
+                                        <a class="nav-link "  href="javascript:void(0)"
+                                        routerLinkActive="active"><i class="icon-newspaper"></i>{{'DPR Details' |
+                                        translate}}</a>
+                                        <ul class="header-dropdown mw-165">
+                                            <li><a class="nav-link" routerLink="/citizen-portal/dprdetails"
+                                                routerLinkActive="active"><i class="icon-newspaper me-1"></i>{{'Create DPR' |
+                                                translate}}</a></li>
+                                            <li><a class="nav-link" routerLink="/citizen-portal/dprstusdtls"
+                                                routerLinkActive="active"><i class="icon-newspaper me-1"></i>{{'My DPRs' |
+                                                translate}}</a></li>
+
+                                        </ul>                            
+                                        
+                                    </li> -->
+                                </ul>
+
+                            </ng-template>
+                        </div>
+                    </div>
+                </nav>
+
+            </div>
+
+            <nav class="User-nav navbar navbar-expand navbar-light ">
+                <div class="container-fluid">
+
+                    <div class="collapse navbar-collapse">
+                        <div class="notis-section me-4 mt-2">
+                            <a *ngIf="masterNotificationObj.totSMS>0 && masterNotificationObj.totSMS!=''" title="SMS Inbox" href="#" class="me-3 position-relative" data-bs-toggle="modal" data-bs-target="#noticebg" (click)="openNotificationModal('2')"><i
+                                class="icon-bell1"></i>
+                                <div class="noticebg">{{masterNotificationObj.totSMS}}</div>
+                            </a>
+                            <!-- <a *ngIf="masterNotificationObj.totEmail>0 && masterNotificationObj.totEmail!=''" title="Email Inbox"  href="#" class="position-relative" data-bs-toggle="modal" data-bs-target="#emailbg" (click)="openNotificationModal('1')"><i class="icon-email"></i>
+                                <div class="noticebg">{{masterNotificationObj.totEmail}}</div>
+                            </a> -->
+                        </div>
+                        <ng-container *ngIf="loginSts; then aftrLgInWlc"></ng-container>
+                        <ng-template #aftrLgInWlc>
+                            <div class="profile-dropdown"><a href="javascript:void(0)" class="dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span><small class="d-block ">{{'Welcome' | translate}}</small> <span
+                                            class="">{{citizenNm}}</span></span>
+                                    <!-- <img [src]="citizenPic" class="" alt="Profile Photo"> -->
+                                </a>
+                                <div class="header-dropdown">
+                                    <!-- <ng-container *ngIf="applicantSource == 2">
+                                        <form action="{{krushakOdishaUrl}}" method="post" target="_blank" #form>
+                                            <input type="hidden" name="aadhaar_no" value={{this.addharNo}} />
+                                            <input type="hidden" name="source" value="credit-portal" />
+                                            <input type="hidden" name="return_url" value="{{sourceAppUrl}}" />
+                                            <a type="submit" (click)="form.submit()"> <i
+                                                    class="icon-lock-solid "></i>&nbsp;{{'Go To Krushak Odisha'|
+                                                translate}} </a>
+                                        </form>
+                                    </ng-container> -->
+                                    <!-- <a class="nav-link" routerLink="/citizen-portal/applicant-profile"
+                                        routerLinkActive="active"><i class="icon-newspaper me-1"></i>{{'My Profile' |
+                                        translate}}</a> -->
+                                    <a class="nav-link" routerLink="/citizen-portal/changepassword"
+                                        routerLinkActive="active"><i class="icon-newspaper me-1"></i>{{'Change Password' |
+                                        translate}}</a>
+                                    <a (click)="doLogout()" href="javascript:void(0)" class="btn-logout" title=""
+                                        data-toggle="tooltip" data-placement="bottom" data-original-title="Logout"><i
+                                            class="icon-sign-out-alt-solid me-1"></i> {{'Sign Out' | translate}}</a>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+
+        </div>
+    </nav>
+</header> <!-- End Header -->
+
+
+<div class="modal fade checkstatus" id="noticebg" tabindex="-1" aria-labelledby="exampleresubmit" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header d-block">
+                <div class="d-block text-center">
+                    <h5 class="modal-title" id="exampleresubmit">SMS Inbox Details
+                        <div class="heading-style mt-1"></div>
+                    </h5>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="isDataFlag">
+                <table class="table">
+                    <thead>
+                        <tr >
+                            <th>Sl No.</th>
+                            <th>SMS Inbox</th>
+                            <th>Date & Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let notification of NotificationListSms  let j = index">
+                            <td>{{j+1}}</td>
+                            <td><p innerHtml="{{notification.text}}"></p></td>
+                            <td width="160px">{{notification.createdOn}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-container *ngIf="!isDataFlag">
+
+                      
+                <div class="modal-body" >
+                  <h6 class="no-content"> SMS Not Found</h6>
+                </div>
+               
+              
+              </ng-container>
+        </div>
+    </div>
+    <div class="loader" *ngIf="loading">
+        <div class="loader-item"></div>
+        <p>Loading...</p>
+    </div>
+</div>
+
+<div class="modal fade checkstatus" id="emailbg" tabindex="-1" aria-labelledby="example" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+            <div class="modal-header d-block">
+                <div class="d-block text-center">
+                    <h5 class="modal-title" id="example">Email inbox Details
+                        <div class="heading-style mt-1"></div>
+                    </h5>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="isDataFlag">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sl#</th>
+                            <th>Email Details</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let notification of NotificationListEmail  let j = index">
+                            <td>{{j+1}}</td>
+                            <td>{{notification.text}}</td>
+                            <td  width="160px">{{notification.createdOn}}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <ng-container *ngIf="!isDataFlag">
+
+                      
+                <div class="modal-body" >
+                  <h6 class="no-content"> Email Not Found</h6>
+                </div>
+               
+              
+              </ng-container>
+        </div>
+    </div>
+    <div class="loader" *ngIf="loading">
+        <div class="loader-item"></div>
+        <p>Loading...</p>
+    </div>
+</div>

@@ -1,0 +1,237 @@
+.nav-tabs {
+   
+  border-bottom: 1px solid var(--bs-gray-300);
+  
+  .nav-link{
+      border-radius: 0;
+      
+      &.show,&.active{
+          color:var(--base-color-600);
+          background-color: var(--white);
+          border-color: var(--bs-gray-300);
+          border-bottom-color: var(--white);
+          border-top: 2px solid var(--base-color-600);
+      }
+  }
+ 
+}
+
+.dynamic-ctrls{
+ 
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -1rem;
+  margin-right: -1rem
+}
+.onegrid{
+  flex: 0 0 100%; 
+   display:flex;
+  align-items: flex-start;
+  padding: 0 0rem;
+  margin-bottom: 1rem;
+  .fulldtls{
+      flex: 0 0 100%; 
+      display:flex;
+     align-items: flex-start;  
+  }
+  .form-group{
+      margin-bottom: 0;
+      
+  }
+  label{
+      flex: 0 0 25%;  
+      max-width: 25%;
+      padding: 0 1rem;
+  }
+ .control-holder{
+  flex: 0 0 75%;  
+  max-width: 75%;
+  padding: 0 1rem;
+      label{
+          flex: auto;  
+         
+          padding: 0;
+          
+      }
+      .form-check-inline{
+          .form-check-label{    
+              
+              display: inline;
+              line-height: 1.5;}
+      }
+ }
+ &.fullwidthSection{
+  margin-bottom: 1rem;
+  .control-holder{
+      padding: 0 1rem;
+      flex: 0 0 100%;  
+  max-width: 100%;
+       .control-holder{
+          flex: 0 0 75%;  
+          max-width: 75%;margin-bottom: 1rem}
+  }
+ }
+}
+.twogrid{flex: 0 0 50%; 
+ 
+ align-items: center;
+ padding: 0 1rem;
+ .fulldtls{
+ 
+  display:block;
+ align-items: flex-start;  
+}
+ .form-group{
+     margin-bottom: 1rem;
+     
+ }
+ label{
+   display: inline-block;
+   padding:0rem;
+ }
+.control-holder{
+width: 100%;
+.form-check-inline{
+  .form-check-label{    
+      
+      display: inline;
+      line-height: 1.5;}
+}
+}
+&.fullwidthSection{
+    width: 100%;
+    flex: 0 0 100%; 
+    max-width: 100%;
+    margin-bottom: 1rem;
+    .fulldtlsTwo{
+        display: flex;
+        flex-wrap: wrap;
+margin-left: -1rem;
+margin-right: -1rem;
+  }
+    .fulldtlsinner{
+      flex: 0 0 50%; 
+      padding:0 1rem;
+    }
+}
+}
+.threegrid{flex: 0 0 33.33%; 
+ 
+  align-items: center;
+  padding: 0 1rem;
+  &.fullwidthSection{
+      width: 100%;
+      flex: 0 0 100%; 
+      max-width: 100%;
+  }
+  .fulldtls{
+      display:block;
+     align-items: flex-start;  
+  }
+  .form-group{
+      margin-bottom: 1rem;
+      
+  }
+  label{
+    display: inline-block;
+    padding: 0rem;
+  }
+ .control-holder{
+ width: 100%;
+ .form-check-inline{
+  .form-check-label{    
+      
+      display: inline;
+      line-height: 1.5;}
+}
+ }
+ &.fullwidthSection{
+  width: 100%;
+  flex: 0 0 100%; 
+  max-width: 100%;
+  margin-bottom: 1rem;
+  .fulldtlsTwo{
+      display: flex;
+      flex-wrap: wrap;
+margin-left: -1rem;
+margin-right: -1rem;
+}
+  .fulldtlsinner{
+    flex: 0 0 33.33%; 
+    padding:0 1rem;
+    @media screen and (max-width: 800px) {
+        flex: 0 0 50%;
+    
+    }
+    @media screen and (max-width: 500px) {
+      flex: 0 0 100%;
+  
+  }
+
+  }
+}
+
+}
+
+ ::ng-deep .ck-editor__editable {
+  min-height: 200px !important;
+}
+.fullgrid{
+
+  flex-flow: column;
+  .control-holder{
+      width: 100%;
+      max-width: 100%;
+  }
+}
+.text-right{
+  text-align: right;
+}
+.pl-1{padding-left: .5rem!important}
+
+.control-holder
+{
+  .table-responsive{
+      min-height: 50px
+  }
+}
+
+
+
+
+
+@media screen and (max-width: 800px) {
+  .threegrid{
+    flex: 0 0 50%;
+  }
+
+table{
+  td{
+    .od_domicile_sc, .od_domicile_st, .od_domicile_general, .od_domicile_sc_f, .od_domicile_disabled_f, .od_domicile_st_f, 
+    .od_domicile_disabled, .od_domicile_total_emp, .od_domicile_general_f, .od_nondomicile_general, .od_nondomicile_sc, .od_nondomicile_st, .od_nondomicile_general, 
+    .od_nondomicile_disabled, .od_nondomicile_general_f, .od_nondomicile_sc_f, .od_nondomicile_st_f, .od_nondomicile_disabled_f, .od_nondomicile_total_emp
+    { width:100px;}
+  }
+}
+
+.dynamic-ctrls{ display: block;}
+
+}
+
+@media screen and (max-width: 600px) {
+.onegrid{  display: block;  }
+.onegrid label{    flex: 0 0 100%;   max-width: 100%;  }
+.onegrid .control-holder { flex: 0 0 100%;  max-width: 100%;  padding: 0 1rem;}
+.onegrid .fulldtls {display: block;}
+.onegrid.fullwidthSection .control-holder .control-holder{ flex: 0 0 100%;   max-width: 100%; padding: 0;}
+.dynamic-ctrls{ display: block;}
+
+
+
+}
+
+@media screen and (max-width: 500px) {
+  .threegrid{  flex: 0 0 100%; }
+
+}

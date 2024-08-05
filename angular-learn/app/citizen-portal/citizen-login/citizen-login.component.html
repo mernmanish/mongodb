@@ -1,0 +1,93 @@
+
+<div class="reg-body">
+        <div class="registration-form">
+            <div class="language">
+                 <!-- <span class="text-light">Language &nbsp;</span>    -->
+                    <select class="top-element" #langSelect (change)="changeLang(langSelect.value)">
+                            <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+                                [selected]="lang === translate.currentLang">{{ lang }}</option>
+                        </select>
+            </div>
+                <div class="reg-header">
+                        <img src="{{siteURL}}assets/images/slogo2.png">
+                        <!-- <h1 class="">
+                            {{'SUGAM' | translate}}
+                            <small class="d-block"> {{ 'Fisheries & Animal Resources Development Department' | translate }},</small>
+    
+                                <span class="d-block">{{'Department of Agriculture and Farmer Empowerment' | translate}}</span>
+                           
+                        </h1>
+     -->
+                    </div>
+                    <div class="control-div">
+                       
+
+                        <div class="login__content">
+                                <h5>{{'Farmer Login' | translate}} </h5>
+                
+                                <div class="form-group">
+                                    <label>{{'Mobile Number' | translate}}  </label>
+                                    <input type="text" class="form-control vchEmail" placeholder="Mobile Number" id="vchEmailId"
+                                        name="vchEmailId" value="" autocomplete="off" [(ngModel)]="citizenUserId"
+                                        (keypress)="vldChkLst.isNumberKey($event)" maxlength="10" />
+                                    <div class="addon"><i class="icon-user-solid"></i></div>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label>{{'Password' | translate}} </label>
+                                    <input type="password" class="form-control password" readonly=""
+                                        onfocus="this.removeAttribute('readonly');" id="Upassword" name="Upassword"
+                                        placeholder="Password" autocomplete="off" value="" [(ngModel)]="citizenPassword" />
+                                    <div class="addon"><i class="icon-lock-solid"></i></div>
+                                    <a class="passwordshowbtn" (click)="showPassword()">
+                                        <img src='{{siteURL}}assets/images/hide.png' alt='hide'>
+                                      </a>
+                                    <p class="text-right mt-1 mb-0">
+                                        <a class="link" [routerLink]="[ '/citizen-portal/forgotpassword']">
+                                          {{'Forgot password ?'  | translate}} </a>
+                                    </p>
+                                </div>
+                                <div class=" form-group">
+                                        <label>{{'Captcha Code' | translate}}</label>
+                                <div class="row ">
+                                      
+                                    <div class="col-6">
+                                      
+                                               
+                                            <input type="text" maxlength="50" class="form-control " value="" onfocus="this.select();"
+                                                id="mathcaptcha" name="mathcaptcha" placeholder="Captcha" autocomplete="off"
+                                                [attr.data-val]="captchaData" [(ngModel)]="captchaInput">
+                                            <div class="addon"><i class="icon-code-solid"></i></div>
+                                        
+                                    </div>
+                                    <div class="col-6">
+                                      
+                                           
+                                            <div class="input-group ">
+                                                <img *ngIf="captchaImgDisplay" src="{{captchaImg}}" id="captchaImage"
+                                                    class="form-control" alt="captcha">
+                                                <div class="addon" style="outline: 0;top:9px">
+                                                    <a href="javascript:void(0);" class="lod" (click)="reloadCaptcha()"
+                                                        style="outline: 0;"><i class="icon-sync-solid"></i></a>
+                                                </div>
+                                            </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="submit" value="Login" (click)="doLogin();" id="login-btn"
+                            class="log-link mb-2 mt-4 otp-btn">
+                        <p class="text-center mb-0 mt-3">
+                            <a class="link" [routerLink]="[ '/']"><i class="icon-home-solid"></i>  {{'Back to Home' | translate}}</a>
+                        </p>
+                        <p class="text-center mt-2 mb-0">{{"Don't have account?" | translate}} 
+                            <a class="link" [routerLink]="[ '/citizen-portal/registration']">
+                                {{'Register Now' | translate}} </a>
+                        </p>
+                      
+                        </div> 
+                </div>
+            </div>
+
+</div>

@@ -1,0 +1,329 @@
+<div class="resgister custom-form"> 
+	<h4 class="formtop_head w-auto overflow-hidden">Preview of {{ formName}}</h4>
+	<div *ngIf="sectionwise" class="accordion" id="accordionExample">
+		<!-- section Wise -->
+		<div class="accordion-item" *ngFor="let dynPrvKeys of dynamicCtrlPreviewKeys; let i = index">
+			<h2 class="accordion-header" id="headingTwo">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					[attr.data-bs-target]="'#collapseTwo'+i" aria-expanded="false" aria-controls="collapseTwo">
+					{{dynamicpreviewDetails[dynPrvKeys]['sectionName']}}
+				</button>
+			</h2>
+			<div id="collapseTwo{{i}}" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+				data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<div class="dynamic-ctrls"
+						*ngFor="let dynPrvForm of dynamicpreviewDetails[dynPrvKeys]['arrFormWiseValue'];let dynPreviewIndex = index">
+
+						<div class="dynGridCls"
+							[ngClass]="{'onegrid':gridtype == 1, 'twogrid': gridtype == 2, 'threeGrid':gridtype == 3}">
+
+							<label *ngIf=" dynPrvForm.ctrlTypeId!=12" class="mb-2 dynlabel ">
+								{{ dynPrvForm.ctrlName}}
+							</label>
+							<div class="control-holder">
+								<div class="form-group">
+
+									<div *ngIf="dynPrvForm.ctrlTypeId==10">
+										<!-- For Add More -->
+										<div class="table-responsive">
+										<ng-container
+											*ngIf="dynPrvForm.radioAddmoreviewtype!='table';else showTabularWise">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th>Sl#</th>
+														<th *ngFor="let addMoreTh of dynPrvForm.addMoreDetails[0];">
+															{{addMoreTh.ctrlName}}
+														</th>
+
+													</tr>
+												</thead>
+												<tbody>
+													<tr
+														*ngFor="let addMoreDet of dynPrvForm.addMoreDetails; let addMoreTrCtr=index">
+														<td>{{addMoreTrCtr + 1}} </td>
+														<ng-container *ngFor="let addMoreTdDet of addMoreDet ">
+															<td *ngIf="addMoreTdDet.ctrlTypeId!=7">
+																
+																{{addMoreTdDet.ctrlValue }}</td>
+															<td *ngIf="addMoreTdDet.ctrlTypeId==7">
+																<ng-container
+																	*ngIf="addMoreTdDet.ctrlValue!='';else showBlank">
+																	<a target="_blank" class="ps-3 h4 mt-2 d-inline-block"
+																		[href]="addMoreTdDet.ctrlValue"><i
+																			class="icon-download-solid"></i></a>
+																</ng-container>
+																<ng-template #showBlank>
+																	--
+																</ng-template>
+															</td>
+														</ng-container>
+													</tr>
+												</tbody>
+											</table>
+										</ng-container>
+                                     </div>
+									 <div class="table-responsive">
+										<ng-template #showTabularWise>
+
+											<div
+												[attr.data-shorttabularWise]="shortTabularWiseData(dynPrvForm.addMoreDetails,i+dynPreviewIndex)">
+												<table class="table table-bordered valign-middle mb-0 ">
+													<thead>
+														<tr>
+															<th width="140px"></th>
+															<th valign="middle"
+																*ngFor="let addMoreTabularTh of dynPrvForm.addMoreDetails[addMoreTabularData[i+dynPreviewIndex][0]].addMoreDetails">
+																{{addMoreTabularTh.ctrlName }} </th>
+															<!-- </ng-container> -->
+														</tr>
+														<!-- {{dynPrvForm.addMoreDetails[addMoreTabularKeys] | json}} -->
+														<tr *ngFor="let addMoreTabularKeys of addMoreTabularData[i+dynPreviewIndex]"
+															valign="middle">
+															<td>{{dynPrvForm.addMoreDetails[addMoreTabularKeys].ctrlRowdataName}}
+															</td>
+															<ng-container
+																*ngFor="let addMoreTabularTd of dynPrvForm.addMoreDetails[addMoreTabularKeys].addMoreDetails">
+																<td *ngIf="addMoreTabularTd.ctrlTypeId!=7">
+																	{{addMoreTabularTd.ctrlValue }}</td>
+																<td *ngIf="addMoreTabularTd.ctrlTypeId==7">
+																	<ng-container
+																		*ngIf="addMoreTabularTd.ctrlValue!='';else showBlank">
+																		<a target="_blank" class="ps-3 h4 mt-2 d-inline-block"
+																			[href]="addMoreTabularTd.ctrlValue"><i
+																				class="icon-download-solid"></i></a>
+																	</ng-container>
+																	<ng-template #showBlank>
+																		--
+																	</ng-template>
+																</td>
+															</ng-container>
+														</tr>
+
+													</thead>
+													<tbody>
+													</tbody>
+												</table>
+											</div>
+											
+										</ng-template>
+										</div>
+									</div>
+									<div *ngIf="dynPrvForm.ctrlTypeId==8">
+										<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h2';else h3heading">
+											<h2>{{dynPrvForm.ctrlValue}}</h2>
+										</ng-container>
+										<ng-template #h3heading>
+											<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h3';else h4heading">
+												<h3>{{dynPrvForm.ctrlValue}}</h3>
+											</ng-container>
+										</ng-template>
+										<ng-template #h4heading>
+											<ng-container *ngIf="dynPrvForm.ctrlHeadingType =='h4';else h5heading">
+												<h4 class="formtop_head">{{dynPrvForm.ctrlValue}}</h4>
+											</ng-container>
+										</ng-template>
+										<ng-template #h5heading>
+											<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h5';else h6heading">
+												<h5 class="h6">{{dynPrvForm.ctrlValue}}</h5>
+											</ng-container>
+										</ng-template>
+										<ng-template #h6heading>
+											<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h6';else h1heading">
+												<h6 class="h6">{{dynPrvForm.ctrlValue}}</h6>
+											</ng-container>
+										</ng-template>
+										<ng-template #h1heading>
+											<ng-container>
+												<h1>{{dynPrvForm.ctrlValue}}</h1>
+											</ng-container>
+										</ng-template>
+									</div>
+									<label *ngIf="dynPrvForm.ctrlTypeId!=7 && dynPrvForm.ctrlTypeId!=10"
+										[innerHTML]="dynPrvForm.ctrlValue"></label>
+									<ng-container *ngIf="dynPrvForm.ctrlTypeId==7">
+
+										<ng-container *ngIf="dynPrvForm.ctrlValue!='';else blankFileTemplate">
+											<a target="_blank" class="ps-3 h4 mt-2 d-inline-block"
+												[href]="dynPrvForm.ctrlValue"><i class="icon-download-solid"></i></a>
+										</ng-container>
+										<ng-template #blankFileTemplate>
+											--
+										</ng-template>
+									</ng-container>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div *ngIf="!sectionwise">
+		<!-- without section -->
+		<div class="dynamic-ctrls" *ngFor="let dynPrvKeys of dynamicCtrlPreviewKeys; let i = index">
+			<div class="dynGridCls"
+			[ngClass]="{
+				'onegrid': gridtype == 1 || dynPrvForm.ctrlTypeId == 8,
+				'twogrid': gridtype == 2 && dynPrvForm.ctrlTypeId != 8 ,
+				'fullwidthSection': (gridtype == 2 && dynPrvForm.ctrlTypeId == 10),
+				'threeGrid': gridtype == 3
+			 }"
+			 *ngFor="let dynPrvForm of dynamicpreviewDetails[dynPrvKeys]['arrFormWiseValue']; let dynPreviewIndex = index">
+
+				<label *ngIf="dynPrvForm.ctrlTypeId!=8 && dynPrvForm.ctrlTypeId!=12" class="mb-2 dynlabel ">
+					{{ dynPrvForm.ctrlName}}
+				</label>
+				<div *ngIf="dynPrvForm.ctrlTypeId==10" class="control-holder">
+			
+					<ng-container *ngIf="dynPrvForm.radioAddmoreviewtype!='table';else showTabularWise">
+<div class="table-responsive mb-2 ps-3">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Sl#</th>
+									<th *ngFor="let addMoreTh of dynPrvForm.addMoreDetails[0];">
+										{{addMoreTh.ctrlName}}
+									</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let addMoreDet of dynPrvForm.addMoreDetails; let addMoreTrCtr=index">
+									<td>{{addMoreTrCtr + 1}} </td>
+									<ng-container *ngFor="let addMoreTdDet of addMoreDet ">
+										
+										<!-- <td *ngIf="addMoreTdDet.ctrlTypeId !== 7">
+											<ng-container *ngIf="addMoreTdDet.ctrlValue | isValidDate; else notDate">
+											{{ addMoreTdDet.ctrlValue | date: 'dd-MMM-yyyy' }}
+											</ng-container>
+											<ng-template #notDate>
+											{{ addMoreTdDet.ctrlValue }}
+											</ng-template>
+										</td> -->
+										<td *ngIf="addMoreTdDet.ctrlTypeId!=7">{{addMoreTdDet.ctrlValue }}</td>
+
+										<!-- <td *ngIf="addMoreTdDet.ctrlTypeId!=7">{{addMoreTdDet.ctrlValue }}</td> -->
+										<td *ngIf="addMoreTdDet.ctrlTypeId==7">
+											<a target="_blank" class="ps-3 h4 mt-2 d-inline-block ps-3"
+												[href]="addMoreTdDet.ctrlValue"><i class="icon-download-solid"></i></a>
+										</td>
+									</ng-container>
+
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</ng-container>
+					<ng-template #showTabularWise>
+
+
+					
+						<div
+							[attr.data-shorttabularWise]="shortTabularWiseData(dynPrvForm.addMoreDetails,i+dynPreviewIndex)" class="" >
+					
+							<div class="table-responsive mb-2 ps-3" *ngIf="dynPrvForm.addMoreDetails!='' ">
+							<table class="table table-bordered ">
+								<thead>
+									<tr>
+										<th width="140px"></th>
+										<th valign="middle"
+											*ngFor="let addMoreTabularTh of dynPrvForm.addMoreDetails[addMoreTabularData[i+dynPreviewIndex][0]].addMoreDetails">
+											{{addMoreTabularTh.ctrlName }} </th>
+										<!-- </ng-container> -->
+									</tr>
+									<!-- {{dynPrvForm.addMoreDetails[addMoreTabularKeys] | json}} -->
+									<tr *ngFor="let addMoreTabularKeys of addMoreTabularData[i+dynPreviewIndex]"
+										valign="middle">
+										<td>{{dynPrvForm.addMoreDetails[addMoreTabularKeys].ctrlRowdataName}}</td>
+										<ng-container
+											*ngFor="let addMoreTabularTd of dynPrvForm.addMoreDetails[addMoreTabularKeys].addMoreDetails">
+											<td *ngIf="addMoreTabularTd.ctrlTypeId!=7">{{addMoreTabularTd.ctrlValue }}
+											</td>
+											<td *ngIf="addMoreTabularTd.ctrlTypeId==7">
+												<a target="_blank" class="ps-3 h4 mt-2 d-inline-block ps-3"
+													[href]="addMoreTabularTd.ctrlValue"><i
+														class="icon-download-solid"></i></a>
+											</td>
+										</ng-container>
+									</tr>
+
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+</div>
+
+					</ng-template>
+				</div>
+
+				<div *ngIf="dynPrvForm.ctrlTypeId==8">
+					<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h2';else h3heading">
+						<h2>{{dynPrvForm.ctrlValue}}</h2>
+					</ng-container>
+					<ng-template #h3heading>
+						<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h3';else h4heading">
+							<h3>{{dynPrvForm.ctrlValue}}</h3>
+						</ng-container>
+					</ng-template>
+					<ng-template #h4heading>
+						<ng-container *ngIf="dynPrvForm.ctrlHeadingType =='h4';else h5heading">
+							<h4 class="formtop_head">{{dynPrvForm.ctrlValue}}</h4>
+						</ng-container>
+					</ng-template>
+					<ng-template #h5heading>
+						<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h5';else h6heading">
+							<h5 class="h6">{{dynPrvForm.ctrlValue}}</h5>
+						</ng-container>
+					</ng-template>
+					<ng-template #h6heading>
+						<ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h6';else h1heading">
+							<h6 class="h6">{{dynPrvForm.ctrlValue}}</h6>
+						</ng-container>
+					</ng-template>
+					<ng-template #h1heading>
+						<ng-container>
+							<h1>{{dynPrvForm.ctrlValue}}</h1>
+						</ng-container>
+					</ng-template>
+				</div>
+				<div class="control-holder"
+					*ngIf="dynPrvForm.ctrlTypeId!=8 && dynPrvForm.ctrlTypeId!=12 && dynPrvForm.ctrlTypeId!=10">
+					<div class="form-group">
+
+						<label *ngIf="dynPrvForm.ctrlTypeId!=7" [innerHTML]="dynPrvForm.ctrlValue"></label>
+						<a *ngIf="dynPrvForm.ctrlTypeId == 7 && dynPrvForm.ctrlValue" 
+						target="_blank" 
+						class="ps-3 h4 mt-2 d-inline-block" 
+						[href]="dynPrvForm.ctrlValue">
+						<i class="icon-download-solid"></i>
+						
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="text-center" >
+		
+		<ng-container *ngIf="!btnShow; else showBackButton;">
+			<button class="btn btn-outline-secondary me-2" (click)="editIncentive()"><i class="fa-solid fa-arrow-left"></i>Edit </button>
+			<button class="btn btn-success me-2" (click)="applyIncentive()">Submit</button>
+		</ng-container>
+		<ng-template #showBackButton>
+			<button class="btn btn-outline-danger me-2" (click)="backIncentive()"> <i class="bi bi-arrow-left-short"></i> Back</button>
+		</ng-template>
+	</div>
+
+</div>
+
+<div class="loader" *ngIf="loading">
+    <div class="loader-item"></div>
+    <p>Loading...</p>
+</div>

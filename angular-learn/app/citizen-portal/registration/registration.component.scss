@@ -1,0 +1,169 @@
+.dynamic-ctrls{
+   
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -1rem;
+  margin-right: -1rem
+}
+.onegrid{
+  flex: 0 0 100%; 
+   display:flex;
+  align-items: flex-start;
+  padding: 0 0rem;
+  margin-bottom: 1rem;
+  .fulldtls{
+      flex: 0 0 100%; 
+      display:flex;
+     align-items: flex-start;  
+  }
+  .form-group{
+      margin-bottom: 0;
+      
+  }
+  label{
+      flex: 0 0 25%;  
+      max-width: 25%;
+      padding: 0 1rem;
+  }
+ .control-holder{
+  flex: 0 0 75%;  
+  max-width: 75%;
+  padding: 0 1rem;
+      label{
+          flex: auto;  
+         
+          padding: 0;
+          
+      }
+      .form-check-inline{
+          .form-check-label{    
+              
+              display: inline;
+              line-height: 1.5;}
+      }
+ }
+ &.fullwidthSection{
+  .control-holder{
+      padding: 0 1rem;
+      
+  }
+ }
+}
+.border {
+  display: flex;
+  flex-wrap: wrap;
+  .custome-form{
+    flex: 0 0 33.33%;
+    align-items: center;
+    padding: 0 1rem;
+ 
+  }
+}
+.twogrid{flex: 0 0 50%; 
+ 
+ align-items: center;
+ padding: 0 1rem;
+ .fulldtls{
+ 
+  display:block;
+ align-items: flex-start;  
+}
+ .form-group{
+     margin-bottom: 1rem;
+     
+ }
+ label{
+   display: inline-block;
+   padding:0rem;
+ }
+.control-holder{
+width: 100%;
+.form-check-inline{
+  .form-check-label{    
+      
+      display: inline;
+      line-height: 1.5;}
+}
+}
+&.fullwidthSection{
+    width: 100%;
+    flex: 0 0 100%; 
+    max-width: 100%;
+    .fulldtlsTwo{
+        display: flex;
+        flex-wrap: wrap;
+margin-left: -1rem;
+margin-right: -1rem;
+  }
+    .fulldtlsinner{
+      flex: 0 0 50%; 
+      padding:0 1rem;
+    }
+}
+}
+.threegrid{flex: 0 0 33.33%; 
+ 
+  align-items: center;
+  padding: 0 1rem;
+  &.fullwidthSection{
+      width: 100%;
+      flex: 0 0 100%; 
+      max-width: 100%;
+  }
+  .fulldtls{
+      display:block;
+     align-items: flex-start;  
+  }
+  .form-group{
+      margin-bottom: 1rem;
+      
+  }
+  label{
+    display: inline-block;
+    padding: 0rem;
+    color: #4f4f4f;
+   
+  }
+ .control-holder{
+ width: 100%;
+ .form-check-inline{
+  .form-check-label{    
+      
+      display: inline;
+      line-height: 1.5;}
+}
+ }
+ &.fullwidthSection{
+  width: 100%;
+  flex: 0 0 100%; 
+  max-width: 100%;
+  .fulldtlsTwo{
+      display: flex;
+      flex-wrap: wrap;
+margin-left: -1rem;
+margin-right: -1rem;
+}
+  .fulldtlsinner{
+    flex: 0 0 33.33%; 
+    padding:0 1rem;
+  }
+}
+
+}
+
+ ::ng-deep .ck-editor__editable {
+  min-height: 200px !important;
+}
+.fullgrid{
+
+  flex-flow: column;
+  .control-holder{
+      width: 100%;
+      max-width: 100%;
+  }
+}
+.text-right{
+  text-align: right;
+}
+.pl-1{padding-left: .5rem!important}

@@ -1,0 +1,118 @@
+
+<div class="pagenavigation">
+
+        <div class="container">
+                <h2>{{'Know your status' | translate}}</h2>
+        </div>    
+        </div>
+
+        <div class="container">
+                <div class="page-container content-section" >
+                    <form [formGroup]="statusform" (ngSubmit)="getApplicationDetails()">
+                        <div class="row ">
+                              <!-- <div class="col-md-6 col-lg-4">
+                                      <div class="form-group">
+                                          <label><span class="text-danger">*</span> Type </label>
+                                          <select formControlName="selectType" class="form-select">
+                                                  <option >Select</option>
+                                                  <option>-</option>
+                                          </select>
+                                         
+                                           </div>
+                              </div> -->
+                              <div class="col-md-6 col-lg-4">
+                                      <div class="form-group">
+                                          <label class="form-label"><span class="text-danger">*</span> {{'Application' | translate}} / {{'Phone No.' | translate}}  </label>
+                                          <input formControlName="txtapplicationId" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.txtapplicationId.errors }">
+                                          <div *ngIf="submitted && f.txtapplicationId.errors" class="invalid-feedback">
+                                              <div *ngIf="f.txtapplicationId.errors.required">Application / Phone Number can not be left blank</div>
+                                          </div>
+                                           </div>
+                              </div>
+                              <div class="col-md-6 col-lg-4">
+                                     <button class="btn btn-success mt-4" >{{'Submit' | translate}}</button> 
+                              </div>
+              
+                        </div>
+                      </form> 
+                  <div class="separator separator-dashed"></div>
+                
+                
+                                <h5 class="common-heading2">{{'Application Details' | translate}} </h5> 
+                                <div  *ngIf="isDataFlag;else other_content ">
+                                <div class="mb-4">
+                                               
+                                                <div *ngFor="let applicantInfo of applicationDetails">       
+                                        <div class="row flex-column flex-md-row">
+                                              
+                                                <div class="col-md-6 col-lg-4 ">
+                                                        <p class="mb-3 ">
+                                                                        <small class="text-gray" > {{'Name' | translate}}</small>
+                                                                        <span class="d-block mt-1 ">{{ applicantInfo.applicantName}}</span>
+                                                                    </p>
+                                        </div>
+                                                    <div class="col-md-6 col-lg-4">
+                                                            
+                                                                    <p class="mb-3 ">
+                                                                    <small class="text-gray">Directorate</small>
+                                                                    <span class="d-block mt-1 ">{{ applicantInfo.directorate}}</span>
+                                                                </p>
+                                                           
+                                                        </div>
+                                                        <div class="col-md-6 col-lg-4">
+                                                                
+                                                                        <p class="mb-3 ">
+                                                                        <small class="text-gray">Scheme Name</small>
+                                                                        <span class="d-block mt-1 ">{{applicantInfo.strSchmServcNm}}</span>
+                                                                    </p>
+                                                                
+                                                            </div>
+
+                                                    </div>
+
+                                                  
+                                                    <div class="row flex-column flex-md-row">  
+                                                                <div class="col-md-6 col-lg-4 ">
+                                                               
+                                                                       
+                                                                                <p class="mb-3 ">
+                                                                                <small class="text-gray">Application Number</small>
+                                                                                <span class="d-block mt-1 ">{{ applicantInfo.strAppltnNo}}</span>
+                                                                            </p>
+                                                                       
+                                                                    </div> 
+                                                            <div class="col-md-6 col-lg-4 ">
+                                                               
+                                                                       
+                                                                    <p class="mb-3 ">
+                                                                    <small class="text-gray">Applied On</small>
+                                                                    <span class="d-block mt-1 ">{{ applicantInfo.strApplOn}}</span>
+                                                                </p>
+                                                           
+                                                        </div> 
+                                               <div class="col-md-6 col-lg-4">
+                                                                    
+                                                                            <p class="mb-3 ">
+                                                                            <small class="text-gray">Application Status</small>
+                                                                            <span class="d-block mt-1 "><strong class="text-success">{{ applicantInfo.strAppSts}}</strong></span>
+                                                                        </p>
+                                                                   
+                                                                </div>
+                                          </div>
+                                          <div class="separator separator-dashed my-10"></div>    
+                                     
+                                          </div>
+                                         
+                                </div>
+                            </div>
+                                <ng-template #other_content>
+
+                      
+    
+                                        <h6 class="no-content"> No Application details found</h6>
+                                      
+                                </ng-template>
+                            
+</div>
+    </div>
+

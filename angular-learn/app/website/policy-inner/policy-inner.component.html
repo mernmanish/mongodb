@@ -1,0 +1,56 @@
+
+<div class="pagenavigation">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <div class="breadcrumb-level">
+          <div> 
+            <h2>{{this.processDetailsList.vchProcessName}}</h2>                       
+          <ol class="breadcrumb mb-0">             
+            <li class="breadcrumb-item"><a href="#" routerLink="/home">Home</a></li>
+            <li class="breadcrumb-item"><a href="#" routerLink="/home/policies">{{'Policies' | translate }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{this.processDetailsList.policyName | translate }}</li>
+          </ol>
+        </div> 
+      </div>
+      </nav>               
+    </div>    
+    </div>
+
+
+    <div class="content-section pt-0">
+        <div class="how-to-apply-inner">
+            <div class="container">                         
+              <div class="row">
+                <div class="col-xl-8 col-lg-8 order-md-1 order-2">
+                     <div class="" id="v-pills-tabContent"><!-- tab-content -->
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                           <div [innerHTML]="this.processContentList"></div>
+                        </div>
+                        <!-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> -->
+                      </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 order-md-2 order-1 mb-md-0 mb-4">
+                  <div class="how-to-apply-inner-card">
+                    <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title">{{this.policyCount}} Incentives  <span class="small-heading">({{this.processDetailsList.policyName}})</span></h4>
+                          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <ul>
+                                <li *ngFor="let processDet of processAllIncentiveList"><a class="nav-link {{ this.processDetailsList.vchProcessName == processDet.vchProcessName ? 'active' : '' }}" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"  (click)="handleProcessClick(processDet)">
+                                  {{processDet.vchProcessName}}
+                                </a>
+                                </li>
+                             </ul>
+                           
+                          </div>
+                        </div>
+                      </div>  
+                    </div>
+
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>

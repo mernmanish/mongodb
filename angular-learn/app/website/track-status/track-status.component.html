@@ -1,0 +1,111 @@
+
+<div class="body-section">
+   <div class="container">
+      <div class="top-breadcumb pt-5">
+         <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="#"><i class="icon-home-solid"></i></a></li>
+               <li class="breadcrumb-item active" aria-current="page">Application Details</li>
+            </ol>
+         </nav>
+      </div>
+      <div class="farmer-info">
+         <h4 class="section-heading">
+            {{'Application Details' | translate }}
+            <div class="heading-style"></div>
+         </h4>
+        
+         <div class="row">
+            <div class="col-lg-12">
+<div class="track-statusbg" *ngFor="let applicantInfo of applicationDetails">  <!------------------- for repeat copy this box -------------------->
+
+                    <div class="row d-flex align-items-center">
+                            <div class="col-lg-4"  *ngIf="! farmerInfo">
+                               <div class="loanamount d-flex align-items-center">
+                                  <i class="icon-file-alt-solid moneybag"></i>
+                              
+                                  <div >
+                                     <h6 class="mb-0 text-grey">{{'Applicant Name' | translate}}</h6>
+                                     <h6 class="mb-0">{{ applicantInfo.applicantName}}</h6>
+                                  </div>
+                               </div>
+                            </div>
+                            <div class="col-lg-4 ">
+                                <div class="loanamount d-flex align-items-center">
+                                   <i class="icon-university-solid moneybag"></i>
+                                  
+                                   <div>
+                                      <h6 class="mb-0 text-grey">Mobile Number</h6>
+                                      <h6 class="mb-0">{{ applicantInfo.vchMobileNo}}</h6>
+                                   </div>
+                                </div>
+                             </div>
+                            <div class="col-lg-4">
+                                <div class="loanamount d-flex align-items-center">
+                                   <i class="icon-file-alt-solid moneybag"></i>
+                               
+                                   <div>
+                                      <h6 class="mb-0 text-grey">Application Number</h6>
+                                      <h6 class="mb-0">{{ applicantInfo.strAppltnNo}}</h6>
+                                   </div>
+                                </div>
+                             </div>
+                         </div>
+                       <hr>
+                         <div class="statusBox">
+                                <div class="statusBoxLength">
+                                   <div class="order-tracking completed">
+                                        <span class="is-complete"></span>
+                                        <p class="mb-1"><strong class="me-1">Applied,</strong><span><small> {{applicantInfo.stmCreatedOn | date:' dd MMMM y'}}</small></span></p>
+                                        <p class="text-green">Your Application Submitted</p>
+                                    </div>
+                                   <div class="order-tracking  completed ">
+                                      <span class="is-complete"></span>
+                                      <p class="mb-1"><strong></strong></p>
+                                     <p class="mb-1"><span>{{applicantInfo.strAppSts}}</span></p>
+                                     <small>{{applicantInfo.updatedAtDate | date:' dd MMMM y'}}</small>
+                                   </div>
+                                   <div class="order-tracking  completed    ">
+                                        <span class="is-complete"></span>
+                                        <p class="mb-1">{{applicantInfo.vchActionName }}</p>
+                                           <span> <small>{{applicantInfo.updatedAtDate | date:' dd MMMM y'}}</small></span>
+                                   </div>
+                                </div>
+                             </div>
+
+                             <div class="statusBox" *ngFor="let applicantInfoAction of applicantInfo.resultResaction">
+                              <div class="statusBoxLength">
+                                 <div class="order-tracking completed">
+                                      <span class="is-complete"></span>
+                                      <!-- <p class="mb-1"><strong class="me-1">Applied,</strong><span><small> {{applicantInfo.stmCreatedOn | date:' dd MMMM y'}}</small></span></p> -->
+                                      <p class="text-green">{{applicantInfoAction.vchActionName }}</p>
+                                  </div>
+                                 <div class="order-tracking  completed ">
+                                    <span class="is-complete"></span>
+                                    <p class="mb-1"><strong></strong></p>
+                                   <p class="mb-1"><span>Applied Date</span></p>
+                                   <small>{{applicantInfoAction.dtAppliedDate | date:' dd MMMM y'}}</small>
+                                 </div>
+                                 <div class="order-tracking  completed    ">
+                                      <span class="is-complete"></span>
+                                      <p class="mb-1">Take Action</p>
+                                         <span> <small>{{applicantInfoAction.dtActionTaken | date:' dd MMMM y'}}</small></span>
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div> <!------------------- end box -------------------->
+
+
+
+                        
+            </div>
+            </div>
+      </div>
+   </div>
+</div>
+
+<div class="loader" *ngIf="loading">
+   <div class="loader-item"></div>
+   <p>Loading...</p>
+</div>

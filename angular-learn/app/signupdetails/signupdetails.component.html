@@ -1,0 +1,100 @@
+<app-header></app-header>
+<div class="pagenavigation">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <div class="breadcrumb-level">
+          <div> 
+            <h2>Sign Up Details</h2>                       
+          <ol class="breadcrumb mb-0">             
+            <li class="breadcrumb-item"><a href="#" routerLink="/home">Home</a></li>
+            <li class="breadcrumb-item active"><a  aria-current="page">{{'Sign Up Details' | translate }}</a></li>                  
+          </ol>
+        </div> 
+      </div>
+      </nav>               
+    </div>    
+    </div>
+
+    
+  <section class="faq">
+    <div class="content-section">
+    <div class="container">           
+      <h4 class="section-heading"> {{'Sign Up Details' | translate }}
+        <div class="heading-style"></div>
+      </h4>
+      <div class="panel panel-content-pd" id="">             
+        <div class="panel-item row">
+          
+          <div class="col-md-4">
+            <label for="dt-length-0" class="col-md-8"> Records per page</label>
+            <div class="dt-length col-md-2">
+              <select name="example_length" aria-controls="example" class="form-controls input-sm" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+                <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+              </select>
+          </div>
+          </div>
+          <div class="col-md-5"></div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="searchQuery" (input)="filterItems()" placeholder="Search...">
+            </div>
+          </div>
+          
+          <div class="col-md-12 viewTable">
+          <table class="table table-responsive table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>sl#</th>
+                    <th>Policy Name</th>
+                    <th>Organization Name</th>
+                    <th>Email Id</th>
+                    <th>Mobile No</th>
+                    <th>Signup Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Display signup details using Angular's *ngFor directive -->
+                <tr *ngFor="let signupDet of displayedItems; let i = index">
+                  <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                    <td>{{ signupDet.orgTypeName }}</td>
+                    <td>{{ signupDet.orgName }}</td>
+                    <td>{{ signupDet.orgEmail }}</td>
+                    <td>{{ signupDet.orgMob }}</td>
+                    <td>{{ signupDet.regdOn }}</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+        <div *ngIf="signUpResult.length === 0 && !loading" class="search-not-found center">
+          No results found for "{{ searchQuery }}".
+        </div> 
+        <div class="panel panel-content-pd" id="">             
+          <!-- Your existing HTML code -->
+          <div class="dt-info" aria-live="polite" id="example_info" role="status">
+              Showing {{ getFirstEntryIndex() }} to {{ getLastEntryIndex() }} of {{ totalItems }} entries
+          </div>
+          <div *ngIf="signUpResult.length > 0 || loading" style="display: flex; justify-content: flex-end;">
+              <!-- Previous button -->
+              <button class="btn btn-primary btn-sm" (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Previous</button>&nbsp; 
+              <!-- Current page number -->
+              <!-- <span class="btn btn-primary">{{ currentPage }}</span>
+              <span>...</span>
+              <span class="btn btn-primary">{{ getLastPageNumber() }}</span> -->
+              <!-- Next button -->
+              <button class="btn btn-primary btn-sm" (click)="currentPage = currentPage + 1" [disabled]="currentPage * itemsPerPage >= signUpResult.length">Next</button>
+          </div>
+   </div>
+   </div>
+      
+                
+      </div>                
+  </div>
+</div> 
+  </section>
+
+  <app-footer></app-footer>
+<div class="loader" *ngIf="loading">
+<div class="loader-item"></div>
+<p>Loading...</p>
+</div>
+

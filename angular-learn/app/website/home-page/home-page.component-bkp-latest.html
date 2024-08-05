@@ -1,0 +1,894 @@
+
+
+<app-header></app-header>
+
+
+<!-- start banner section -->
+<div class="body-section">
+    <div class="banner-sec">
+      <div class="banner-imagecover">
+        <img src="{{siteURL}}assets/images/banner.png" >
+      </div>
+            
+           
+            <div class="banner-text">
+              <span>Welcome to the</span>
+              <h2 class="mb-3">Incentive Reimbursement Management System</h2>
+              <!-- <p class="text-white">{{'Simplified Application for Agricultural Loans' | translate}}</p> -->
+              <p class="">Odisha Govt aims to create an investment-friendly atmosphere, leveraging strategic initiatives and facilitation to propel growth in ESDM, IT, Data Centers, and BPO sectors, aspiring to lead among states.</p>
+          <span class="d-block mb-2">Discover more</span>
+             <a href="javascript:void(0);" class="arrow-icon" (click)="scrollToMainContent()"><i class="bi bi-chevron-down"></i></a>
+            </div> 
+       
+        <div class="banner-directorate">
+                <div class="container">
+       <!-- <div class="row justify-content-start justify-content-md-center">
+            <div class="col-6 col-md-4 col-lg-2" *ngFor="let directorateinfo of groupedDirectorate;let aRwCnt=index;">
+            <div class="directorate-list" >
+                    <div class="img-div" >
+                    <img src="{{siteURL}}assets/images/{{dirIcons[directorateinfo.directorate]}}">
+                    </div>
+                    <h6>{{directorateinfo.directorateName | translate }}</h6>
+                    <a href="javascript:void(0)" (click)="viewSchemsPage(directorateinfo.directorate,'10');" ></a>
+                </div>
+           
+
+            </div>
+       </div> -->
+
+       <nav class="navbar navbar-expand-lg menu" [class.scrolled]="isScrolled">
+        <div class="container">
+         
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"> <i class="icon-home"></i> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" routerLink="/home" >Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" routerLink="/home/policies"
+                routerLinkActive="active">Policies</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" routerLink="/home/faq"
+                routerLinkActive="active">FAQ</a>
+              </li>
+            
+              <li class="nav-item">
+                <span class="small-border"></span>
+                 <a class="nav-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <i class="icon-search"></i></a>
+              </li>
+              <li class="nav-item">
+                
+                  <div class="theme">
+                    <label id="switch" class="switch">
+                       
+                      <span (click)="toggleTheme()" id="slider"> <i class="icon-black-and-white"></i></span> 
+                       
+                    </label>
+                </div>
+                  
+                  
+                 
+              </li>
+               <li>
+                <div class="fontresizer">
+                  <a class="fontresize top-element " title="Click here to decrease font size"
+                      (click)="DecreaseFontSize()" href="javascript:void(0);">-</a>
+                  <a class="fontresize top-element" title="Click here to Normal font size"
+                      (click)="ResetFontSize()" href="javascript:void(0);">A</a>
+                  <a class="fontresize top-element" title="Click here to increase font size"
+                      (click)="IncreaseFontSize()" href="javascript:void(0);">+</a>
+              </div>
+               </li>
+            </ul>
+            
+          </div>
+          <div class="collapse search__open" id="collapseExample">
+            <div class="card card-body">
+              <div class="input-group">
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Search Here">
+                <a class="input-group-text" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" ><i class="bi bi-x-circle"></i></a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+       
+</div>
+</div>
+    </div>
+    <!-- service section starts -->
+
+   <section>
+
+      <div class="container">
+
+        <div class="swiper mySwiper">
+          
+          <div class="swiper-wrapper services services--std">
+          
+            <div class="swiper-slide"> 
+              <div class="services__item"> 
+                  <a class="services__item-link" routerLink="/home/policies">
+                    <div class="services__item-icons">
+                        <span class="services__item-icon">
+                        <i class="icon-it-policy"></i>
+                        </span>
+                        <div class="services__item-arrow">
+                          <span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                                <defs>
+                                    <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                                </defs>
+                                <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                    <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                      <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                      <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                    </g>
+                                </g>
+                              </svg>
+                          </span>
+                          <span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                                <defs>
+                                    <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                                </defs>
+                                <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                    <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                      <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                      <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                    </g>
+                                </g>
+                              </svg>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="services__item-txt">
+                        <div class="txt-content txt-styles txt-x-small">
+                          <h3 class="h5">IT Policy</h3>
+                          <p>Fostering innovation, digitalization, and economic growth for sustainable development and prosperity.</p>
+                        </div>
+                    </div>
+                  </a>
+              </div>
+
+            </div>
+
+
+            <div class="swiper-slide"> 
+             <div class="services__item">
+                <a class="services__item-link" routerLink="/home/policies">
+                   <div class="services__item-icons">
+                      <span class="services__item-icon">
+                      <i class="icon-dp-policy"></i>
+                      </span>
+                      <div class="services__item-arrow">
+                         <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                               <defs>
+                                  <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                               </defs>
+                               <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                  <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                     <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                     <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                  </g>
+                               </g>
+                            </svg>
+                         </span>
+                         <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                               <defs>
+                                  <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                               </defs>
+                               <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                  <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                     <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                     <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                  </g>
+                               </g>
+                            </svg>
+                         </span>
+                      </div>
+                   </div>
+                   <div class="services__item-txt">
+                      <div class="txt-content txt-styles txt-x-small">
+                         <h3 class="h5">Data Center Policy</h3>
+                         <p>Framework for efficient, secure, and sustainable data infrastructure development and management.</p>
+                      </div>
+                   </div>
+                </a>
+             </div>
+            </div>
+
+            <div class="swiper-slide"> 
+             <div class="services__item">
+                <a class="services__item-link" routerLink="/home/policies">
+                   <div class="services__item-icons">
+                      <span class="services__item-icon">
+                      <i class="icon-bpo-policy"></i>
+                      </span>
+                      <div class="services__item-arrow">
+                         <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                               <defs>
+                                  <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                               </defs>
+                               <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                  <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                     <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                     <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                  </g>
+                               </g>
+                            </svg>
+                         </span>
+                         <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                               <defs>
+                                  <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                               </defs>
+                               <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                  <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                     <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                     <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                  </g>
+                               </g>
+                            </svg>
+                         </span>
+                      </div>
+                   </div>
+                   <div class="services__item-txt">
+                      <div class="txt-content txt-styles txt-x-small">
+                         <h3 class="h5">BPO Policy</h3>
+                         <p>Facilitating growth, efficiency, and competitiveness in outsourcing industry operations and services.</p>
+                      </div>
+                   </div>
+                </a>
+             </div>
+            
+          </div>
+
+          <div class="swiper-slide"> 
+             <div class="services__item">
+                <a class="services__item-link" routerLink="/home/policies">
+                   <div class="services__item-icons">
+                      <span class="services__item-icon">
+                      <i class="icon-e-policy"></i>
+                      </span>
+                      <div class="services__item-arrow">
+                         <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                               <defs>
+                                  <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                               </defs>
+                               <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                  <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                     <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                     <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                  </g>
+                               </g>
+                            </svg>
+                         </span>
+                         <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21.2132" height="22.62742" viewBox="0 0 21.2132 22.62742">
+                               <defs>
+                                  <style>.b966e337-9653-4e39-b585-64a99a33be0e{fill:none;stroke:#1b3530;stroke-miterlimit:10;stroke-width:2px}</style>
+                               </defs>
+                               <g id="b147b058-53e3-42fa-9472-36d10078ae26" data-name="Layer 2">
+                                  <g id="beb8a2a2-88e9-4e6f-87dd-afb92714fddd" data-name="Layer 1">
+                                     <polyline class="b966e337-9653-4e39-b585-64a99a33be0e" points="9.192 0.707 19.799 11.314 9.192 21.92" vector-effect="non-scaling-stroke"></polyline>
+                                     <line class="b966e337-9653-4e39-b585-64a99a33be0e" x1="18.38478" y1="11.31371" y2="11.31371" vector-effect="non-scaling-stroke"></line>
+                                  </g>
+                               </g>
+                            </svg>
+                         </span>
+                      </div>
+                   </div>
+                   <div class="services__item-txt">
+                      <div class="txt-content txt-styles txt-x-small">
+                         <h3 class="h5">Electronics Policy</h3>
+                         <p>Stimulating growth, innovation, and competitiveness in the electronics industry ecosystem.</p>
+                      </div>
+                   </div>
+                </a>
+             </div>
+            </div>
+        
+    
+          </div>
+
+
+          <div class="swiper-pagination"></div>
+          </div>   
+            
+    
+       </div>
+  
+  
+     </section>
+       
+
+
+ <!-- service section ends -->
+
+    <!-- <section class="chk-ststus ">
+      <div class="container">
+        <div class="col-lg-12 position-relative">
+        <div class="check-status">
+          <div class="row">
+          <div class="col-lg-4 d-flex align-items-center pr-0">
+           <h4 class="mb-0 mb-2-m">{{'Check Your Application Status' | translate}}</h4>
+            </div>
+            <div class="col-lg-6 mb-2-m ps-0">
+              <form [formGroup]="statusforms" (ngSubmit)="onSubmit()">
+                <div class="input-group">               
+                  <input type="text" class="form-control" placeholder="{{'Application Reference No' | translate}}." aria-label="Enter Application Number" aria-describedby="basic-addon2" [(ngModel)]="txtapplicationId" name="txtapplicationId">
+                  
+                  <button class="btn btn-warning" type="submit" id="button-addon2">{{'Check Status' | translate}}</button>    
+                  <div class="clearfix" ></div> -->
+                  <!-- <div *ngIf="submitted && f.txtapplicationId.errors" class="invalid-feedback">
+                    <div *ngIf="f.txtapplicationId.errors.required">Application Reference No. can not be left blank</div>
+                </div>                     -->
+                <!-- </div>
+              </form>  
+            </div> -->
+            <!-- <div class="col-lg-2">
+              <ng-container *ngIf="loginSts; then aftrLgIn else bfrLgIn"></ng-container>
+              <ng-template #aftrLgIn>
+                <a href="" routerLink="/citizen-portal/scheme-directorate" class="btn btn-success">{{'Apply for Loan' | translate}}</a>
+              </ng-template>
+              <ng-template #bfrLgIn> -->
+                <!-- <a href="" routerLink="/login" class="btn btn-success">Apply for Loan</a>  -->
+                <!-- <a (click)="redirectToLogin()" class="btn btn-success d-block">{{'Apply for Loan' | translate}}</a>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section> -->
+    <!-- <section class="it-policy">
+      <div class="container"> 
+        <h4 class="section-heading  mb-2-m"> {{' Policies' | translate }}
+          <div class="heading-style"></div>
+      </h4>
+      <p class="mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt ipsum quae deserunt corporis soluta nisi tempora.</p>
+    <div class="row">
+    <div class="col-lg-3 col-sm-6 ">
+      <a routerLink="/home/policies" class="crad-hover">
+      <div class="card text-center custome-shadow ">
+        <div class="card-body">
+          <img src="{{siteURL}}assets/images/it-policy-img1.png"  alt="Process flow" />
+          <h2 class="mb-0 fw-normal mt-4">IT Policy-2022</h2>
+        </div>
+        
+      </div>
+    </a>
+    </div>
+    <div class="col-lg-3 col-sm-6 ">
+      <a routerLink="/home/policies" class="crad-hover">
+      <div class="card text-center custome-shadow mt-sm-0 mt-3">
+        <div class="card-body">
+          <img src="{{siteURL}}assets/images/it-policy-img2.png"  alt="Process flow" />
+          <h2 class="mb-0 fw-normal mt-4">Odisha Data Center <br>Policy-2022</h2>
+        </div>
+        
+      </div>
+      </a>
+    </div>
+    <div class="col-lg-3 col-sm-6 ">
+      <a routerLink="/home/policies" class="crad-hover ">
+      <div class="card text-center custome-shadow mt-lg-0 mt-3">
+        <div class="card-body">
+          <img src="{{siteURL}}assets/images/it-policy-img3.png"  alt="Process flow" />
+          <h2 class="mb-0 fw-normal mt-4">Odisha BPO <br> Policy-2021</h2>
+        </div>
+        
+      </div>
+      </a>
+    </div>
+    <div class="col-lg-3 col-sm-6 ">
+      <a routerLink="/home/policies" class="crad-hover ">
+      <div class="card text-center custome-shadow mt-lg-0 mt-3">
+        <div class="card-body">
+          <img src="{{siteURL}}assets/images/it-policy-img4.png"  alt="Process flow" />
+          <h2 class="mb-0 fw-normal mt-4">Odisha Electronics Policy-2021</h2>
+        </div>
+        
+      </div>
+      </a>
+    </div>
+    </div>
+        </div>
+      </section> -->
+    <!-- <section class="process-flow">
+      <div class="container"> 
+        <ul>
+          <li>
+            <div>
+              <img src="{{siteURL}}assets/images/signup.svg"  alt="Process flow" />
+            <h3>SIGN UP</h3>
+            <p class="mb-0">Company / entrepreneur are welcome to sign up by providing minimum formation</p>
+            </div>
+            
+          </li>
+          <li>
+            <div>
+            <img src="{{siteURL}}assets/images/Registration.svg"  alt="Process flow" />
+            <h3>REGISTRATION</h3>
+            <p class="mb-0">Register your company by providing detail information.</p>
+            </div>
+          </li>
+          <li>
+            <img src="{{siteURL}}assets/images/incentive.svg"  alt="Process flow" />
+            <h3>INCENTIVE APPLICATION & APPROVAL</h3>
+            <p class="mb-0">Check the incentives provided by the Government of Odisha and apply according eligibilty.</p>
+          </li>
+          <li>
+            <img src="{{siteURL}}assets/images/claim.svg"  alt="Process flow" />
+            <h3> DISBURSEMENT</h3>
+            <p class="mb-0">Claim the reimbursement according the defined frequecy/period.</p>
+          </li>
+        </ul>
+     
+      
+        </div>
+      </section> -->
+      <!-- Slider main container -->
+
+
+<section class="apply applying-incentives section__space" #mainContent id="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h3>
+        <span>  Process for </span>  
+         <span class="fw-bold d-block">Applying Incentives</span> 
+      </h3>
+     
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12">
+        <p class="apply_para">Odisha Electronics Policy 2021 has been conceptualized to position Odisha as an attractive destination for the Electronics industry by providing class leading infrastructure and policy initiatives.</p>
+           <div class="row">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+              <div class="card">
+                <div class="apply-item">
+                  <div class="apply-num apply-num--orange">                    
+                    <span>1</span>
+                  </div>
+                  <div class="apply-format">
+                    <h6>Sign Up</h6>
+                    <p>Company / entrepreneur are welcome to sign up by providing minimum formation</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+              <div class="card">
+                <div class="apply-item">
+                  <div class="apply-num apply-num--green-white">
+                    <span>2</span>
+                  </div>
+                  <div class="apply-format">
+                    <h6>Registration</h6>
+                    <p>Register your company by providing detail information.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+              <div class="card">
+                <div class="apply-item">
+                  <div class="apply-num apply-num--blue">
+                    <span>3</span>
+                  </div>
+                  <div class="apply-format">
+                    <h6>Incentive Application & Approval</h6>
+                    <p>Check the incentives provided by the Government of Odisha and apply according eligibility.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+              <div class="card">
+                <div class="apply-item">
+                  <div class="apply-num apply-num--yellow">
+                    <span>4</span>
+                  </div>
+                  <div class="apply-format">
+                    <h6>Disbursement</h6>
+                    <p>Claim the reimbursement according the defined frequecy/period.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div> 
+      </div>
+      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="apply-img">
+          <img src="{{siteURL}}assets/images/apply.png" alt="apply-img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<section class="count section__space">
+  <div class="container">
+  <h3>
+    Helping to make measurable and 
+    <span>long lasting impact</span>
+  </h3>
+
+  <div class="swiper Swipercard">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper count__area">
+        <!-- Slides -->
+        <div class="swiper-slide">
+          <div class="count__item arrow-bottom-left">
+            <h4>
+              3,457
+            </h4>
+            <span>
+              Applications 
+            </span>
+            <span>
+              Received Till Date
+            </span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="count__item arrow-bottom-left">
+            <h4>
+            3,457
+            </h4>
+            <span>
+            Applications 
+          </span>
+            <span>
+            Received Till Date
+            </span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="count__item arrow-bottom-left">
+            <h4>
+            3,457
+            </h4>
+            <span>
+            Applications 
+          </span>
+            <span>
+            Received Till Date
+            </span>
+          </div>
+        </div>
+       
+    </div>
+      <!-- If we need navigation buttons -->
+<!-- <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> -->
+
+</div>
+
+<!-- <div class="count__area">
+  <div class="count__item arrow-bottom-left">
+    <h4>
+      3,457
+    </h4>
+    <span>
+      Applications 
+    </span>
+    <span>
+      Received Till Date
+    </span>
+  </div>
+  <div class="count__item arrow-bottom-left">
+    <h4>
+    3,457
+    </h4>
+    <span>
+    Applications 
+  </span>
+    <span>
+    Received Till Date
+    </span>
+  </div>
+  <div class="count__item arrow-bottom-left">
+    <h4>
+    3,457
+    </h4>
+    <span>
+    Applications 
+  </span>
+    <span>
+    Received Till Date
+    </span>
+  </div>
+</div> -->
+
+</div>
+</section>
+
+<!-- <section class="story-statistics">
+  <div class="container">   
+    <h4 class="section-heading  mb-2-m"> {{'Success Stories and Statistics' | translate }}
+      <div class="heading-style"></div>
+  </h4>
+ 
+    <div class="row">
+      <div class="col-lg-6">   
+        <div class="bigimg">   
+       
+
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{siteURL}}assets/images/applicants-image.jpg" class="d-block w-100" alt="farmer">              
+              </div>
+              <div class="carousel-item">
+                <img src="{{siteURL}}assets/images/applicants-image.jpg" class="d-block w-100" alt="farmer">
+              </div>
+              <div class="carousel-item">
+                <img src="{{siteURL}}assets/images/applicants-image.jpg" class="d-block w-100" alt="farmer">
+              </div>
+              <div class="carousel-item">
+                <img src="{{siteURL}}assets/images/applicants-image.jpg" class="d-block w-100" alt="farmer">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="insta">
+         <div class="disburshedbg ">
+          <div class="loandetails">
+            <h2>{{totalApplicationApply}}</h2>
+            <h5 >{{'Applications' | translate}}</h5>
+            <h5 class="ln">{{'Received till date' | translate}}</h5>
+          </div>
+          <div class="loanicon ">
+            <img src="{{siteURL}}assets/images/received-application-icon.png"  alt="" />
+          </div>
+         </div>
+</div>
+<div class="insta">
+         <div class="disburshedbg applicationbg">
+          <div class="loandetails">
+            <h2>{{allSancAppl}}</h2>
+            <h5 class="appl">{{'Applications'|translate}}</h5>
+            <h5 class="text-white">{{'Approved till date'|translate}}</h5>
+          </div>
+          <div class="loanicon ">
+            <img src="{{siteURL}}assets/images/approved-application-icon.png"  alt="" />
+          </div>
+         </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+  <section class="faq section__space">
+    <div class="container">
+     
+      <!-- <h4 class="section-heading"> {{'Frequently Asked Questions (FAQs)' | translate }}
+        <div class="heading-style"></div>
+    </h4> -->
+  
+  <!-- <div class="row">
+    <div class="col-lg-12 mb-3 mt-4" >
+        <div class="form-check form-check-inline"  *ngFor="let faqType of faqTypes;let aRwCnt=index;">
+          <input class="form-check-input faqType" type="checkbox" id="inlineChk_{{faqType.faqId}}" value="{{faqType.faqId}}" (click)="getFaqs($event.target)" #faqType>
+          <label class="form-check-label" for="inlineChk_{{faqType.faqId}}">{{faqType.faqType}}</label>
+        </div>
+    </div>
+  </div>
+    <hr> -->
+  
+   
+    <div class="row">
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <h3>FAQs</h3>
+        <p>This section contains answers to frequently asked questions (FAQs) relating to the Odisha Government's IRMS services.</p>
+
+        <div>
+          <img src="{{siteURL}}assets/images/faq-img.png" alt="faq-img">
+        </div>
+      </div>
+
+
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <div class="content-section">
+  <div class="accordion accordion-content-pd" id="myAccordion">
+       
+        <div class="accordion-item" *ngFor="let faq of faqs;let aRwCnt=index;">
+            <h2 class="accordion-header" id="heading{{aRwCnt}}">
+                <button *ngIf="this.language=='Odia'" type="button" class="accordion-button collapsed" data-bs-toggle="collapse" attr.data-bs-target="#collapse{{aRwCnt}}" aria-expanded="false">{{faq.faqO}}</button>									
+                <button *ngIf="this.language=='English'" type="button" class="accordion-button collapsed" data-bs-toggle="collapse" attr.data-bs-target="#collapse{{aRwCnt}}" aria-expanded="false">{{faq.faq}}</button>									
+            </h2>
+            <div [ngClass]="{'show': aRwCnt === 0}" id="collapse{{aRwCnt}}" class="accordion-collapse collapse" data-bs-parent="#myAccordion">
+                <div class="accordion-body">
+                    <p *ngIf="this.language=='Odia'" innerHtml="{{faq.ansO}}" class="mb-0"></p>
+                    <p *ngIf="this.language=='English'" innerHtml="{{faq.faqE}}" class="mb-0"></p>
+                </div>
+            </div>
+        </div>
+   
+      </div>
+    </div>
+      </div>
+
+    </div>
+   
+  
+  
+  
+  </div>
+  </section>
+        
+
+
+
+
+
+<app-footer></app-footer> 
+<div class="loader" *ngIf="loading">
+    <div class="loader-item"></div>
+    <p>Loading...</p>
+</div>
+
+<script>
+
+function toWords (num) {
+   var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+    return '#collapse'+str;
+}
+
+</script>
+
+
+<ng-template #someModal id="someModal" let-modal>
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      
+      <div class="modal-header d-block">
+        <div class="col-md-12 text-right "><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeOtpModal()"></button></div>
+        <div class="d-block text-center">
+        <h5 class="modal-title" id="exampletrackStatus">Your Log Details Application Reference No. : {{ applicationDetailList.vchApplicationNo}}
+          <div class="heading-style mt-1"></div>
+        </h5>
+      </div>       
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="loanamount d-flex align-items-center">
+              <i class="icon-user1 moneybag"></i>
+              <div> <h6 class="mb-0 text-grey">Applicant Name</h6>
+               <h6 class="mb-0">{{applicantName}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-4">
+            <div class="loanamount d-flex align-items-center">
+              <i class="icon-mobile-solid moneybag"></i>
+              <div> <h6 class="mb-0 text-grey">Mobile No</h6>
+                  <h6 class="mb-0">{{mobileNo}}</h6>
+                 </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="loanamount d-flex align-items-center">
+              <!-- <i class="icon-university-solid moneybag"></i> -->
+             <img src="{{siteURL}}assets/images/signing.png" class="ps-2 moneybag me-3" /> 
+              <div> <h6 class="mb-0 text-grey">{{'Loan Product'|translate}}</h6>
+                  <h6 class="mb-0">{{applicationDetailList.strSchmServcNm}}</h6>
+                 </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-4">
+            <div class="loanamount d-flex align-items-center">
+              <i class="icon-university-solid moneybag"></i>
+              <div> <h6 class="mb-0 text-grey">{{'Bank Name'|translate}}</h6>
+                  <h6 class="mb-0">{{ applicationDetailList.vchModuleName}}</h6>
+                 </div>
+            </div>
+          </div>
+         </div>
+         <div class="row">
+          <div class="col-lg-6 mb-4" *ngIf="applicationDetailList.loanAmount">
+            <div class="loanamount d-flex align-items-center">
+              <i class="icon-moneybag moneybag"></i>
+              <div> <h6 class="mb-0 text-grey">Loan Amount</h6>
+               <h6 class="mb-0"><i class="icon-rupee-sign-solid me-1"></i>{{applicationDetailList.loanAmountShow}}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-4" *ngIf="applicationDetailList.sanctionAmount">
+            <div class="loanamount d-flex align-items-center">
+              <i class="icon-file-alt-solid moneybag"></i>
+              <div> <h6 class="mb-0 text-grey">Sanctioned Amount</h6>
+                  <h6 class="mb-0"><i class="icon-rupee-sign-solid me-1"></i>{{applicationDetailList.sanctionAmountShow}}</h6>
+                 </div>
+            </div>
+          </div>
+        </div>
+         <div class="timeline" >         
+          <div class="events">             
+            <ng-container *ngFor="let resultReact of applicationDetailList.resultResaction">
+            <div class="event">
+              <div class="knob"></div>              
+              <div class="description">
+                <p><strong>{{resultReact.vchActionName}}, </strong> <span><small> {{resultReact.dtActionTaken | date:' dd MMMM y'}}</small></span> 
+                <a *ngIf="resultReact.vchReSubDoc!='--'" class="btn btn-sm btn-outline-warning" title="View Resubmit Document" href="{{resultReact.vchReSubDoc}}" target="_blank" ><i class="icon-file-alt-solid moneybag"></i></a><a *ngIf="resultReact.vchSanctionDoc!='--'" class="btn btn-sm btn-outline-warning" title="View Bank Document"  target="_blank" href="{{resultReact.vchSanctionDoc}}" ><i class="icon-file-alt-solid moneybag"></i></a></p>
+                <p><small>Pending Authority: {{resultReact.pendingAt}}</small>  </p>
+                <p>Remark : <span [innerHTML]="resultReact.txPublicNoting"></span></p>
+                <ng-container *ngIf="resultReact.intStatus==7 && resultReact.vchRejectResion!=''">
+                    <div class="description">
+                      <p><strong class="me-1">Reject Reason,</strong><span><small> </small></span></p>
+                      <p *ngFor="let rejectReason of applicationDetailList.rejectReason; let j=index;"><small>{{(j+1) +'. ' + rejectReason.vchReason}}</small></p>
+                    </div>                    
+                </ng-container>
+              </div>
+            </div>
+            
+          </ng-container>
+          
+            <div class="event">
+              <div class="knob"></div>              
+              <div class="description">
+                <p><strong class="me-1">Applied,</strong><span><small> {{applicationDetailList.appliedOn | date:' dd MMMM y'}}</small></span></p>
+                <p class="text-green"> Application Submitted</p>
+              </div>
+            </div>            
+            <div class="line"></div>
+          </div>          
+
+      </div>
+  </div>
+  </div>
+</div>
+
+</ng-template>

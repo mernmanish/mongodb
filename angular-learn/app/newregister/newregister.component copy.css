@@ -1,0 +1,81 @@
+.loginbody{
+    min-height: 100vh;
+    display: flex;
+    background: #1953a7 url(../../assets/images/Login-bg.jpg);
+    background-size: cover;
+    align-items: center;
+    justify-content: end;
+}
+
+.loginform{
+    background-color: var(--white);
+    padding: 30px;
+    width: 578px;
+    margin-right: 2rem;
+    border-radius: 15px;
+}
+.dynlabel{
+    display: none;
+}
+.btn-warning {
+    color: #000!important;
+    background-color: #f2cb46;
+    border-color: #f2cb46;
+}
+.logo span {
+    font-size: 26px!important;
+    margin-top: 0.7rem;
+    font-weight: bold!important;
+    color: #000 !important;
+}
+.logo span small{
+  font-size: 14px;
+  font-weight: normal;
+}
+.btn {
+    padding: 0.575rem 1rem;
+}
+.form-control, .form-select {
+    padding: 0.75rem 0.75rem;
+}
+.hide{ display: none;}
+.welcome{
+    color: #1953a7;
+    font-weight: bold;
+}
+.login-header h3{ font-weight: bold;}
+
+.heading-style{
+    position: relative;
+    width: 12%;
+    height: 1px;
+    background-color: var(--light-grey);
+    margin-top: 1rem;
+    }
+    .heading-style::before{
+      content: "";
+      display: block;
+      width: 45%;
+      height: 3px;
+      background-color: var(--text-orange);
+      position: absolute;
+      top: -1px;
+    }
+
+    .showDiv input{ border-left: none;    padding-left: 2px;    }
+    .showDiv i{ font-size: 1.5rem; color: #009a4e;}
+    .showDiv i.aadhaar-icon { font-size: .9rem;}
+    .showDiv .input-group-text.bg-green{ background-color: #4a8b71; color: var(--white);padding-left: 1rem;  padding-right: 1rem;}
+    .showDiv .input-group-text {  border: 1px solid #e3e3e3;    border-top-left-radius: 4.5px;
+        border-bottom-left-radius: 4.5px;}
+    .form-control:focus {  background-color: #fff; box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%); }
+    .login-header h3{ font-weight: bold;font-size: 1.5rem;}
+    .loginform .heading-style{    margin: inherit;}
+    .language-change{ width: 100px;}
+.language-change .form-select{ padding: 3px 6px;border: 1px solid #ebebeb;background-color: #f9f9f9;}
+@media screen and (max-width:1366px) {
+    .loginform {padding: 12px 20px;  width: 463px;}
+    .mt-4 { margin-top: 0.8rem!important; }
+        .login-inputs .form-group{ margin-bottom: .5rem;}
+        .login-inputs p{margin-bottom: .5rem !important;}
+}

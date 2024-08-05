@@ -1,0 +1,247 @@
+/* .accordion-button:not(.collapsed) {
+    color: #1f529c;
+    background: #fff;
+} */
+.accordion{
+    margin-bottom: 1rem;
+    border: 0!important;
+}
+/* .incentive-status .accordion-item{
+    border-left: none;
+    border-right: 0;
+    border-top: none;
+} */
+
+/* .incentive-status .accordion-button {
+    color: #1f529c;
+    padding: 1rem 1rem 1rem 0.5rem;
+    background-color: #f3f8ff;
+} */
+.theme-dark .incentive-status .accordion-button {
+    color: #7ab0ff;
+}
+
+.theme-dark .incentive-status .accordion-button.collapsed {
+    color: #7ab0ff;
+}
+
+
+/* .incentive-status .accordion-button.collapsed {
+    background-color: transparent;
+} */
+
+
+
+.accordion-collapse {
+    padding: 22px 0!important;
+}
+.label-text{
+    color: #4f4f4f;
+    font-weight: normal!important;
+}
+.accordion-button:focus{
+    box-shadow: none;
+}
+.h1{font-size: 2.2rem!important;}
+.h2{font-size: 2rem!important;}
+.h3{font-size: 1.8rem!important;}
+.h4{font-size: 1.6rem!important;}
+.h5{font-size: 1.4rem!important;}
+.h6{font-size: 1.2rem!important;}
+
+.dynamic-ctrls{
+    display: flex;
+    flex-wrap: wrap;
+}
+.dynamic-ctrls .dynlabel{
+    font-weight: 400!important;
+  }
+  .dynamic-ctrls .data-label{
+      font-weight: 600 !important;
+      padding: 0.1rem 0rem;
+      width: 100%;
+      border-radius: 3px;
+    }
+.onegrid {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 0rem;
+    margin-bottom: 1rem;
+}
+.onegrid .fulldtls {
+    flex: 0 0 100%;
+    display: flex;
+    align-items: flex-start;
+}
+.onegrid .form-group {
+    margin-bottom: 0;
+}
+.onegrid label {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0 1rem;
+}
+.onegrid .control-holder {
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding: 0 1rem;
+}
+.onegrid .control-holder label {
+    flex: auto;
+    padding: 0;
+}
+.onegrid .control-holder .form-check-inline .form-check-label {
+    display: inline;
+    line-height: 1.5;
+}
+.onegrid.fullwidthSection {
+    margin-bottom: 1rem;
+}
+/* .onegrid.fullwidthSection .control-holder {
+    padding: 0 1rem;
+    flex: 0 0 100%;
+    max-width: 100%;
+} */
+.onegrid.fullwidthSection .control-holder .control-holder {
+    flex: 0 0 75%;
+    max-width: 75%;
+    margin-bottom: 1rem;
+}
+
+.twogrid {
+    flex: 0 0 50%;
+    align-items: center;
+    padding: 0 1rem;
+}
+.twogrid .fulldtls {
+    display: block;
+    align-items: flex-start;
+}
+.twogrid .form-group {
+    margin-bottom: 1rem;
+}
+.twogrid label {
+    display: inline-block;
+    padding: 0rem;
+}
+.twogrid .control-holder {
+    width: 100%;
+}
+.twogrid .control-holder .form-check-inline .form-check-label {
+    display: inline;
+    line-height: 1.5;
+}
+.twogrid.fullwidthSection {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+.twogrid.fullwidthSection .fulldtlsTwo {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+.twogrid.fullwidthSection .fulldtlsinner {
+    flex: 0 0 50%;
+    padding: 0 1rem;
+}
+
+.threegrid {
+    flex: 0 0 33.33%;
+    align-items: center;
+    padding: 0 1rem;
+}
+.threegrid.fullwidthSection {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.threegrid .fulldtls {
+    display: block;
+    align-items: flex-start;
+}
+.threegrid .form-group {
+    margin-bottom: 1rem;
+}
+.threegrid label {
+    display: inline-block;
+    padding: 0rem;
+}
+.threegrid .control-holder {
+    width: 100%;
+}
+.threegrid .control-holder .form-check-inline .form-check-label {
+    display: inline;
+    line-height: 1.5;
+}
+.threegrid.fullwidthSection {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+.threegrid.fullwidthSection .fulldtlsTwo {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+.threegrid.fullwidthSection .fulldtlsinner {
+    flex: 0 0 33.33%;
+    padding: 0 1rem;
+}
+::ng-deep .ck-editor__editable {
+    min-height: 200px !important;
+}
+.fullgrid {
+    flex-flow: column;
+}
+.fullgrid .control-holder {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+@media screen and (max-width: 600px) {
+    .onegrid{  display: block;  }
+    .onegrid label{    flex: 0 0 100%;   max-width: 100%;  }
+    .onegrid .control-holder { flex: 0 0 100%;  max-width: 100%;  padding: 0 1rem;}
+    .onegrid .fulldtls {display: block;}
+    .onegrid.fullwidthSection .control-holder .control-holder{ flex: 0 0 100%;   max-width: 100%; padding: 0;}
+    .dynamic-ctrls{ display: block;}
+    .formtop_head{font-size: 18px;}
+    .custom-form .h6{font-size: 16px;}
+    .onegrid{flex-direction: column;}
+    
+    
+    }
+
+@media screen and (max-width: 480px) {
+    .twogrid {
+        flex: 0 0 100% !important;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+}
+
+.icon-download-solid{
+    background: #ffa500;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.1rem;
+    border: 1px solid #eba524;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.icon-download-solid:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+

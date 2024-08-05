@@ -1,0 +1,1175 @@
+
+<div class="resgister custom-form"> 
+
+    <ng-container *ngIf="intFormId == 'no-data';else second">
+        <div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="">This Incentive is not Applicable </h4>
+            </div>
+        </div>
+    </ng-container>
+    
+    <ng-template #second>
+        <div >
+            <div class="d-flex justify-content-between align-items-center  mb-0" data-placement="top">
+                <h4 class="formtop_head">{{formName}}</h4>
+                <!-- <a  title="" href="javascript:void(0)" class="btn btn-sm btn-primary mr-3" id="backicon" data-toggle="tooltip" data-placement="top" (click)="backClicked()" data-original-title="Back"><i class="icon-arrow-left-solid"></i></a> -->
+            </div>
+    
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" *ngIf="dynamicCtrlDetKeys[0] != 'sec_0'">
+                <li class="nav-item" role="presentation" *ngFor="let sctrls of dynamicCtrlDetKeys;let secCtr=index">
+                    <button [disabled]="false" [ngClass]="secCtr==0 ? 'nav-link active' : 'nav-link'" id="sec-tab-{{sctrls}}" data-bs-toggle="pill" [attr.data-bs-target]="'#'+sctrls" type="button" role="tab" aria-controls="pills-home" aria-selected="true" (click)="curSelectedSec(sctrls)" ng-readonly="true">{{ dynamicCtrlDetails[sctrls]['sectionName']}} </button>
+    
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div *ngFor="let sctrls of dynamicCtrlDetKeys;let secCtr=index" id="pills-profile" [ngClass]="secCtr==0 ? 'tab-pane fade  active show' : 'tab-pane fade'" id="{{sctrls}}" role="tabpanel" [attr.aria-labelledby]="'sec-tab-'+sctrls">
+                    <div class="dynamic-ctrls row align-items-end" *ngIf="dynamicCtrlDetails[sctrls]['formDetails'].length > 0">
+                        
+                        <!--<div  [ngClass]="{'onegrid':dynamicCtrlDetails[sctrls]['gridType'] == 1, 'twogrid': dynamicCtrlDetails[sctrls]['gridType'] == 2, 'threegrid':dynamicCtrlDetails[sctrls]['gridType'] == 3 ,'fullwidthSection':formctrls.ctrlTypeId== (10||8||12), 'd-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}"  *ngFor="let formctrls of dynamicCtrlDetails[sctrls]['formDetails']" class="dynGridCls"><!-- Form Wise Loop-->
+    
+                            <!--Added by :Rohit  :: on: 16-02-2024-->
+                            <div  [ngClass]="[(
+                
+                        formctrls.ctrlTypeId== 10 || formctrls.ctrlTypeId== 8 || formctrls.ctrlTypeId== 12) ? 'fullwidthSection' : 
+                        
+                        (dynamicCtrlDetails[sctrls]['gridType'] == 1 && ( formctrls.gridClass==undefined || formctrls.gridClass==0) ) ? 'col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12' : 
+                        
+                        
+                        (dynamicCtrlDetails[sctrls]['gridType'] == 2 && ( formctrls.gridClass==undefined || formctrls.gridClass==0) ) ? 'col-xxl-4 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12' : 
+                        
+                        (dynamicCtrlDetails[sctrls]['gridType'] == 3 && ( formctrls.gridClass==undefined || formctrls.gridClass==0) ) ? 'col-xxl-4 col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12' : 
+                        
+                        (dynamicCtrlDetails[sctrls]['gridType'] == 4 && ( formctrls.gridClass==undefined || formctrls.gridClass==0) ) ? 'col-xxl-3 col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12' :
+                        (formctrls.gridClass!=undefined && formctrls.gridClass > 0) ?  'col-md-'+formctrls.gridClass   : '',(formctrls.additionalParentClass!=undefined && formctrls.additionalParentClass!='' ? formctrls.additionalParentClass : '' )]"  *ngFor="let formctrls of dynamicCtrlDetails[sctrls]['formDetails']"  class="dynGridCls"   
+                        
+                       bind-class="(formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true) ?'d-none ' : ''  
+                       "  >
+                            <!--Added by :Rohit  :: on: 16-02-2024-->
+    
+                            <!-- Form Wise Loop-->
+                            <label *ngIf="formctrls.ctrlTypeId!=8 && formctrls.ctrlTypeId!=12 && formctrls.ctrlTypeId!=10" class="mb-2 dynlabel" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}">{{formctrls.ctrlLabel}}
+                            <span *ngIf="formctrls.ctrlMandatory == true" class="text-danger">*</span>
+                            <a href="javascript:void(0)" *ngIf="formctrls.ctrlhelptext" [attr.data-bs-toggle]="formctrls.ctrlhelptext" data-bs-placement="top" [title]="formctrls.ctrlhelptext">
+                                <i class="icon-info-circle-solid"></i>
+                            </a>
+                            </label>
+                            <div class="control-holder" [ngSwitch]="formctrls.ctrlTypeId">
+                                <div class="form-group">
+                                    <div *ngSwitchCase=1>
+                                    <label [attr.data-dependflagstatus]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']" *ngIf="formctrls.ctrlTypeId!=8 && formctrls.ctrlTypeId!=12" class="mb-2 dynlabel" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}">{{formctrls.ctrlLabelData}}
+                                        <span *ngIf="formctrls.ctrlMandatory == true" class="text-danger">*</span>
+                                        <a href="javascript:void(0)" *ngIf="formctrls.ctrlhelptext" [attr.data-bs-toggle]="formctrls.ctrlhelptext" data-bs-placement="top" [title]="formctrls.ctrlhelptext">
+                                        <i class="icon-info-circle-solid"></i>
+                                        </a>
+                                    </label>
+                                    </div>
+                                    <div *ngSwitchCase=2>
+                                    <input [type]="formctrls.ctrlAttributeType == 0 ? 'text' : formctrls.ctrlAttributeType" [name]="formctrls.ctrlName" class="form-control" [placeholder]="formctrls.ctrlPlaceholder" [id]="formctrls.ctrlId" bind-class="formctrls.ctrlClass" (keypress)="formctrls.validationDetails==1 ? vldChkLst.isNumberKey($event) : '' || formctrls.validationDetails==2 ? vldChkLst.isCharKey($event) : '' || formctrls.validationDetails==3 ? vldChkLst.isAlphaNumeric($event) : '' || formctrls.validationDetails==4 ? vldChkLst.isDecimal($event) : ''" (input)="vldChkLst.validatePositiveNum($event)" autocomplete="off" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-typeid]="formctrls.ctrlTypeId" [value]="dynamicCtrlDetails[sctrls]['dataValue'] == null || dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']] == 'NULL' ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']] " [attr.data-calcflag]="formctrls.calculationDetails[0]['ctrlChkCalculation']" [attr.data-clacfielddetails]="setCalcFieldValue(formctrls.calculationDetails[0]['ctrlCalcOptions'],formctrls.ctrlId)" [attr.data-dependflagstatus]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']" (keydown)="formctrls.ctrlAttributeType === 'date' ? $event.preventDefault() : null"/>
+                                    </div>
+                                    <div *ngSwitchCase=3>
+    
+                                    <select class="form-select" bind-class="formctrls.ctrlClass" [id]="formctrls.ctrlId" [name]="formctrls.ctrlName" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true?false:true" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-typeid]="formctrls.ctrlTypeId" [attr.data-dynbindflag]="formctrls['cascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false" [attr.data-dynbinddependflag]="formctrls['cascadingCtrlDetails'][0]['ctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="formctrls['cascadingCtrlDetails'][0].ctrlCCbinddepentfld" [attr.data-otherval]="storeCasDetials(formctrls['cascadingCtrlDetails'][0],formctrls.ctrlId)" [attr.data-id]="formctrls.ctrlId"
+    
+                                    (change)="loadDynDepend(formctrls.ctrlId);loadStaticDetails(formctrls.ctrlId,formctrls.ctrlTypeId);"
+                                    [attr.data-setstaticdependbind]="setStaticDependBindArr(formctrls.cascadingCtrlDetails[0].ctrlStaticOptions,formctrls['cascadingCtrlDetails'][0].ctrlCCbinddepentfld)" [attr.data-dependflagstatus]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']"
+    
+                                    >
+                                        <option value="0">Select</option>
+                                        <ng-container *ngIf="formctrls.cascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBind">
+                                        <ng-container *ngFor="let cdStatic of formctrls.cascadingCtrlDetails[0].ctrlStaticOptions;let s = index">
+                                            <option class="form-check-label" [selected]="((dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']]) == (cdStatic.ctrlCCStaticValue))" [value]="cdStatic.ctrlCCStaticValue">{{cdStatic.ctrlCCStaticName}}</option>
+                                        </ng-container>
+                                        </ng-container>
+                                        <ng-template #loadDyanmicBind>
+                                        <ng-container *ngFor="let cdStatic of arralldynVal[formctrls.ctrlId];let s = index">
+                                            <option class="form-check-label" [value]="cdStatic[formctrls['cascadingCtrlDetails'][0].ctrlCCDValueColumnName]" [selected]="((dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']]) == (cdStatic[formctrls['cascadingCtrlDetails'][0].ctrlCCDValueColumnName]))">{{cdStatic[formctrls['cascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</option>
+                                        </ng-container>
+                                        </ng-template>
+                                    </select>
+                                    </div>
+                                    <div *ngSwitchCase=4>
+                                    <textarea *ngIf="formctrls.ctrlClass != ckEdtorCls || formctrls.ctrlClass==''" rows="3" cols="3" [name]="formctrls.ctrlName" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}" class="form-control" [placeholder]="formctrls.ctrlPlaceholder" [id]="formctrls.ctrlId" bind-class="formctrls.ctrlClass" (keypress)="formctrls.validationDetails==1 ? vldChkLst.isNumberKey($event) : '' || formctrls.validationDetails==2 ? vldChkLst.isCharKey($event) : '' || formctrls.validationDetails==3 ? vldChkLst.isAlphaNumeric($event) : '' || formctrls.validationDetails==4 ? vldChkLst.isDecimal($event) : ''" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-typeid]="formctrls.ctrlTypeId" [attr.data-dependflagstatus]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']">{{dynamicCtrlDetails[sctrls]['dataValue'] == null  ? '' : encDec.decodeHtml(dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']])  }}</textarea>
+                                    <!-- <ckeditor [editor]="editor" *ngIf="formctrls.ctrlClass == ckEdtorCls" rows="1" [id]="formctrls.ctrlId" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}" bind-class="formctrls.ctrlClass" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-typeid]="formctrls.ctrlTypeId" [data]="dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : setHtmlData(dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']])" (change)="setCkEdtorValue($event,formctrls.ctrlId)" (ready)="setCkedtorArr(dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']] ,formctrls.ctrlId )"></ckeditor> -->
+                                    </div>
+                                    <div *ngSwitchCase=5>
+                                    <div [attr.data-dynbindflag]="formctrls['cascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false" [attr.data-dynbinddependflag]="formctrls['cascadingCtrlDetails'][0]['ctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="formctrls['cascadingCtrlDetails'][0].ctrlCCbinddepentfld" [attr.data-otherval]="storeCasDetials(formctrls['cascadingCtrlDetails'][0],formctrls.ctrlId)" [attr.data-id]="formctrls.ctrlId" [attr.data-id]="formctrls.ctrlId" [attr.data-typeid]="formctrls.ctrlTypeId" [attr.data-dependflagstatus]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']">
+                                        <ng-container *ngIf="formctrls.cascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindcheckbox">
+                                        <div class="form-check form-check-inline" *ngFor="let cdStatic of formctrls.cascadingCtrlDetails[0].ctrlStaticOptions;let r = index">
+                                            <input bind-class="formctrls.ctrlClass" class="form-check-input gridcheckbox" type="checkbox" [name]="formctrls.ctrlId" [id]="formctrls.ctrlId +  r" [value]="cdStatic.ctrlCCStaticValue" (change)="loadDynDepend(formctrls.ctrlId,5)" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true" [attr.data-typeid]="formctrls.ctrlTypeId" [ngClass]="formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true ?'d-none  cls_'+formctrls.ctrlId   : 'cls_'+formctrls.ctrlId" [checked]="setDynRadioBtn((dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']]),cdStatic.ctrlCCStaticValue )" />
+                                            <label class="form-check-label" [ngClass]=" formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true ? 'd-none' : ''" for="{{formctrls.ctrlId +  r}}">{{cdStatic.ctrlCCStaticName}}</label>
+                                        </div>
+                                        </ng-container>
+                                        <ng-template #loadDyanmicBindcheckbox>
+                                        <div class="form-check form-check-inline" *ngFor="let cdDynamic of arralldynVal[formctrls.ctrlId];let r = index">
+                                            <input class="form-check-input gridcheckbox " bind-class="formctrls.ctrlClass" type="checkbox" [name]="formctrls.ctrlId" [id]="formctrls.ctrlId +  r" [value]="cdDynamic[formctrls['cascadingCtrlDetails'][0].ctrlCCDValueColumnName]" (change)="loadDynDepend(formctrls.ctrlId,5)" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ?false:true" [attr.data-typeid]="formctrls.ctrlTypeId" [ngClass]="formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true ?'d-none  cls_'+formctrls.ctrlId   : 'cls_'+formctrls.ctrlId" [checked]="((dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']]) == (cdDynamic[formctrls['cascadingCtrlDetails'][0].ctrlCCDValueColumnName]))" />
+                                            <label class="form-check-label" for="{{formctrls.ctrlId +  r}}" [ngClass]=" formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true ? 'd-none' : ''">{{cdDynamic[formctrls['cascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                        </div>
+                                        </ng-template>
+                                    </div>
+                                    </div>
+                                    <div *ngSwitchCase=6>
+                                    <div [attr.data-dynbindflag]="formctrls['cascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false" [attr.data-dynbinddependflag]="formctrls['cascadingCtrlDetails'][0]['ctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="formctrls['cascadingCtrlDetails'][0].ctrlCCbinddepentfld" [attr.data-otherval]="storeCasDetials(formctrls['cascadingCtrlDetails'][0],formctrls.ctrlId)" [attr.data-id]="formctrls.ctrlId" [attr.data-id]="formctrls.ctrlId" [attr.data-typeid]="formctrls.ctrlTypeId" [attr.data-dependflagstatus]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']">
+                                        <ng-container *ngIf="formctrls.cascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindRadio">
+                                        <div class="form-check form-radio-inline" *ngFor="let cdStatic of formctrls.cascadingCtrlDetails[0].ctrlStaticOptions;let r = index">
+                                            <input bind-class="formctrls.ctrlClass" [class.d-none]="formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true" [ngClass]="'cls_'+formctrls.ctrlId" class="form-check-input gridradio" type="radio" [name]="formctrls.ctrlId" [id]="formctrls.ctrlId +  r" [value]="cdStatic.ctrlCCStaticValue" (change)="loadDynDepend(formctrls.ctrlId,6)" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true" [attr.data-typeid]="formctrls.ctrlTypeId" [checked]="((dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']]) == (cdStatic.ctrlCCStaticValue))" />
+                                            <label class="form-check-label" [class.d-none]="formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true" [ngClass]="'chk_'+formctrls.ctrlId +  r" for="{{formctrls.ctrlId +  r}}">{{cdStatic.ctrlCCStaticName}}</label>
+                                        </div>
+                                        </ng-container>
+                                        <ng-template #loadDyanmicBindRadio>
+                                        <div class="form-check form-radio-inline" *ngFor="let cdDynamic of arralldynVal[formctrls.ctrlId];let r = index">
+                                            <input class="form-check-input gridradio " bind-class="formctrls.ctrlClass" type="radio" [name]="formctrls.ctrlId" [id]="formctrls.ctrlId +  r" [value]="cdDynamic[formctrls['cascadingCtrlDetails'][0].ctrlCCDValueColumnName]" (change)="loadDynDepend(formctrls.ctrlId,6)" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true" [attr.data-typeid]="formctrls.ctrlTypeId" [ngClass]="'cls_'+formctrls.ctrlId" [checked]="((dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']]) == (cdDynamic[formctrls['cascadingCtrlDetails'][0].ctrlCCDValueColumnName]))" />
+                                            <label class="form-check-label" [ngClass]="'chk_'+formctrls.ctrlId" for="{{formctrls.ctrlId +  r}}">{{cdDynamic[formctrls['cascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                        </div>
+                                        </ng-template>
+                                    </div>
+                                    </div>
+                                    <div *ngSwitchCase=7 class="d-flex gap_new">
+                                      <div class="custom-file-input" style="width:100%">
+                                    <input type="file" class="form-control" [name]="formctrls.ctrlName" [id]="formctrls.ctrlId" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}" bind-class="formctrls.ctrlClass" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']" [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [attr.data-typeid]="formctrls.ctrlTypeId" (change)="saveFileTemp($event,formctrls.ctrlId,formctrls.ctrlFileType,formctrls.ctrlFileMaxLength,formctrls.ctrlForApproval,formctrls.ctrlFileSizeType)" [attr.data-fnccall]="showUploadFile(dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' :  dynamicCtrlDetails[sctrls]['dataValue'][formctrls['tablecolDetails'][0]['ctrlTblColName']],formctrls.ctrlId,formctrls.ctrlForApproval,formctrls.ctrlFileType)"[attr.data-dependflagstatus]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']" />
+                                    <div class="custom_file form-control" [id]="'fileName_'+formctrls.ctrlId">  Browse File  </div>
+                                    <small class="text-danger">1 file upto {{formctrls.ctrlFileMaxLength + ' ' + formctrls.ctrlFileSizeType}} or less (
+                                    <ng-container *ngIf="formctrls.ctrlFileType == 'doc';else pdf">
+                                        {{'document'}}
+                                    </ng-container>
+                                    <ng-template #pdf>
+                                        <ng-container *ngIf="formctrls.ctrlFileType == 'pdf';else excel">
+                                        {{'pdf'}}
+                                        </ng-container>
+                                    </ng-template>
+                                    <ng-template #excel>
+                                      <ng-container *ngIf="formctrls.ctrlFileType == 'excel';else image">
+                                      {{'excel'}}
+                                      </ng-container>
+                                    </ng-template>
+                                    <ng-template #image>
+                                      <ng-container *ngIf="formctrls.ctrlFileType == 'image';else other">
+                                      {{'Jpeg,jpg,png'}}
+                                      </ng-container>
+                                    </ng-template>
+                                      <ng-template #other>
+                                        <ng-container>
+                                          {{formctrls.ctrlFileType}}
+                                        </ng-container>
+                                    </ng-template>
+                                      ) </small>
+                                  </div>
+                                    <div class="d-flex align-items-start gap_new d-none" [id]="'fileDownloadDiv_'+formctrls.ctrlId">
+                                        <a class="btn btn-outline-danger filesremovebtn btn-sm" href="javascript:void(0)" (click)="removeFile(formctrls.ctrlId)" title="Remove file">
+                                        <i class="bi bi-trash"></i>
+                                        </a>
+                                        <a class="btn btn-outline-primary btn-sm downloadbtn " href="javascript:void(0)" target="_blank">
+                                        <i class="bi bi-eye"></i>
+                                        </a>
+                                    </div>
+                                    </div>
+                                    <div  *ngSwitchCase=8>
+                                    <ng-container *ngIf="formctrls.ctrlHeadingType == 'h2';else h3heading">
+                                        <h2 bind-class="formctrls.ctrlClass">{{formctrls.ctrlLabel}}</h2>
+                                    </ng-container>
+                                    <ng-template #h3heading>
+                                        <ng-container *ngIf="formctrls.ctrlHeadingType == 'h3';else h4heading">
+                                        <h3 bind-class="formctrls.ctrlClass">{{formctrls.ctrlLabel}}</h3>
+                                        </ng-container>
+                                    </ng-template>
+                                    <ng-template #h4heading>
+                                        <ng-container *ngIf="formctrls.ctrlHeadingType =='h4';else h5heading">
+                                        <h4 bind-class="formctrls.ctrlClass">{{formctrls.ctrlLabel}}</h4>
+                                        </ng-container>
+                                    </ng-template>
+                                    <ng-template #h5heading>
+                                        <ng-container *ngIf="formctrls.ctrlHeadingType =='h5';else h6heading">
+                                        <h5 [ngClass]="formctrls.ctrlClass">{{formctrls.ctrlLabel}}</h5>
+                                        </ng-container>
+                                    </ng-template>
+                                    <ng-template #h6heading>
+                                        <ng-container *ngIf="formctrls.ctrlHeadingType == 'h6';else h1heading">
+                                        <h6 [ngClass]="formctrls.ctrlClass" class="h6" >{{formctrls.ctrlLabel}}</h6>
+                                        </ng-container>
+                                        <!-- <button class="btn btn-sm btn-primary" *ngIf="formctrls.ctrlClass == 'cls_financial_details'" (click)="selectFinancialDetails()">Select Details</button> -->
+                                    </ng-template>
+                                    <ng-template #h1heading>
+                                        <ng-container>
+                                        <h1 bind-class="formctrls.ctrlClass">{{formctrls.ctrlLabel}}</h1>
+                                        </ng-container>
+                                    </ng-template>
+                                    </div>
+                                </div>
+                                <!-- Added by Rohit for column wise add more on 31-10-23 -->
+                                <div *ngSwitchCase=10  [id]="formctrls.ctrlId"  bind-class="formctrls.ctrlClass" [ngClass]="{'d-none':formctrls['dependctrlDetails'][0]['ctrlChkDepend'] == true}" [attr.data-parentflag]="formctrls['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true"   [attr.addmoredetails]="setArrAddMoreDetails(formctrls.ctrlId,formctrls['addmoreDetails'])"  [attr.data-typeid]="formctrls.ctrlTypeId" [attr.data-dependctrlId]="formctrls['dependctrlDetails'][0]['ctrlSelDependParent']"  [attr.data-dependentvalue]="formctrls['dependctrlDetails'][0]['ctrlSelDependValue']" [data-dynbinddependctlfldid]="formctrls['cascadingCtrlDetails'][0].ctrlCCbinddepentfld"
+                                [attr.data-ctrlccbinddatatype]="formctrls['cascadingCtrlDetails'][0].ctrlCCbindDatatype"
+                               
+                                > 
+                                <!--For AddMore -->
+                                <div class="heading-btn">
+                                    <h6 class="mb-2 h6">{{formctrls.ctrlLabel}} 
+                                    <span *ngIf="formctrls.ctrlMandatory == true" class="text-danger">*</span>
+                                    <a class="custom-icon"  *ngIf="formctrls.ctrlhelptext" [attr.data-bs-toggle]="formctrls.ctrlhelptext" data-bs-placement="top" [title]="formctrls.ctrlhelptext">
+                                    <i class="bi bi-info-circle"></i>
+                                    </a>
+                                </h6>
+                                </div>
+                                    <!-- Added Info button and mendatory for addmore label line 237-242 -->
+                                        <ng-container *ngIf="formctrls['radioAddmoreviewtype']=='row';else showAddMoreColumnwise"> <!--row wise -->
+                                            <div class="rounded-1" [attr.filladdmorearray]="fillAddMoreArray(formctrls.ctrlId,arrAddmoreDetails[formctrls.ctrlId],dynamicCtrlDetails[sctrls]['addMoreValueDetails'],formctrls.ctrlClass)">
+                                           <div class="fulldtlsTwo row ">
+                                                <ng-container class="fulldtlsTwo" *ngFor="let addMoreTd of formctrls['addmoreDetails']">
+                                                <div class="fulldtls fulldtlsinner" [ngClass]="[addMoreTd.addMoregridClass!=undefined ? 'col-md-'+addMoreTd.addMoregridClass : '' ,addMoreTd.addMoreadditionalParentClass!=undefined ? addMoreTd.addMoreadditionalParentClass : ''  ]" >
+                                                    <label  class="mb-2 dynlabel">{{addMoreTd.ctrlLabel}}  <span *ngIf="addMoreTd.ctrlMandatory == true" class="text-danger">*</span>
+                                                        <a class="custom-icon"   *ngIf="addMoreTd.ctrlhelptext" [attr.data-bs-toggle]="addMoreTd.ctrlhelptext" data-bs-placement="top" [title]="addMoreTd.ctrlhelptext">
+                                                           <i class="bi bi-info-circle"></i>
+                                                        </a>
+                                                    </label>
+                                                    <div class="control-holder ">
+                                                    <div class="form-group">
+                                              <div  *ngIf="addMoreTd.ctrlTypeId == 1">{{addMoreTd.ctrlLabel}}</div>
+                                                  <div  *ngIf="addMoreTd.ctrlTypeId == 2 " >
+                                                      <input  (keyup) = "EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)" [type]="addMoreTd.ctrlAttributeType == 0 ? 'text' : addMoreTd.ctrlAttributeType" [name]="addMoreTd.ctrlName"  class="form-control"  [placeholder]="addMoreTd.ctrlPlaceholder" [id]="addMoreTd.ctrlId"  bind-class="addMoreTd.ctrlClass"  (keypress)="addMoreTd.validationDetails==1 ? vldChkLst.isNumberKey($event) : '' || addMoreTd.validationDetails==2 ? vldChkLst.isCharKey($event) : '' || addMoreTd.validationDetails==3 ? vldChkLst.isAlphaNumeric($event) : '' || addMoreTd.validationDetails==4 ? vldChkLst.isDecimal($event) : ''" (input)="vldChkLst.validatePositiveNum($event)" autocomplete="off" [attr.data-typeid]="addMoreTd.ctrlTypeId" [attr.data-calcflag]="addMoreTd.addmorecalculationDetails[0]['ctrlChkCalculation']" [attr.data-clacfielddetails]="setCalcFieldValue(addMoreTd.addmorecalculationDetails[0]['ctrlCalcOptions'],formctrls.ctrlId)"/>                                                   
+                                                    </div>
+     
+     
+                                                    
+                                                    <div *ngIf="addMoreTd.ctrlTypeId == 3" >
+     
+                                                                    <select class="form-select" bind-class="addMoreTd.ctrlClass"  [id]="addMoreTd.ctrlId" [name]="addMoreTd.ctrlName" [attr.data-typeid]="addMoreTd.ctrlTypeId" [attr.data-dynbindflag] ="addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false" [attr.data-dynbinddependflag]="addMoreTd['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="addMoreTd['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld" [attr.data-otherval]="storeCasDetials(addMoreTd['addmorecascadingCtrlDetails'][0],addMoreTd.ctrlId)" [attr.data-id]="addMoreTd.ctrlId"   (change)="loadDynDepend(addMoreTd.ctrlId);EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)" >
+                                                                        <option value="0">Select</option>
+                                                                        <ng-container *ngIf="addMoreTd.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBind">
+     
+                                                                            <ng-container *ngFor="let cdStatic of addMoreTd.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let s = index">
+                                                                                <option class="form-check-label"     [value]="cdStatic.ctrlCCStaticValue">{{cdStatic.ctrlCCStaticName}}</option>
+                                                                            </ng-container>
+     
+                                                                        </ng-container>
+                                                                      <ng-template #loadDyanmicBind>
+                                                                        <ng-container *ngFor="let cdStatic of arralldynVal[addMoreTd.ctrlId];let s = index">
+                                                                        <option class="form-check-label"  [value]="cdStatic[addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]" >{{cdStatic[addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</option>
+                                                                        </ng-container>
+                                                                      </ng-template>
+                                                                    </select>
+                                                             </div>
+                                                                <div *ngIf="addMoreTd.ctrlTypeId == 4" >
+                                                                <textarea  rows="1" [name]="addMoreTd.ctrlName"  (keyup) = "EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)" class="form-control"  [placeholder]="addMoreTd.ctrlPlaceholder" [id]="addMoreTd.ctrlId"  bind-class="addMoreTd.ctrlClass"  (keypress)="addMoreTd.validationDetails==1 ? vldChkLst.isNumberKey($event) : '' || addMoreTd.validationDetails==2 ? vldChkLst.isCharKey($event) : '' || addMoreTd.validationDetails==3 ? vldChkLst.isAlphaNumeric($event) : '' || addMoreTd.validationDetails==4 ? vldChkLst.isDecimal($event) : ''"  [attr.data-typeid]="addMoreTd.ctrlTypeId"></textarea>
+     
+                                                                <!-- <ckeditor [editor]="editor" *ngIf="addMoreTd.ctrlClass == ckEdtorCls" rows="1" [id]="addMoreTd.ctrlId"   bind-class="addMoreTd.ctrlClass" [attr.data-parentflag]="addMoreTd['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true"  (change)="setCkEdtorValue($event,addMoreTd.ctrlId)" (ready)="setCkedtorArr(dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][addMoreTd['tablecolDetails'][0]['ctrlTblColName']] ,addMoreTd.ctrlId )"></ckeditor>    -->
+     
+                                                                </div>
+                                                                <div *ngIf="addMoreTd.ctrlTypeId == 5">
+                                                                    <div   [attr.data-dynbindflag] ="addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"  [attr.data-dynbinddependflag]="addMoreTd['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="addMoreTd['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"  [attr.data-otherval]="storeCasDetials(addMoreTd['addmorecascadingCtrlDetails'][0],addMoreTd.ctrlId)" [attr.data-id]="addMoreTd.ctrlId"    [attr.data-id]="addMoreTd.ctrlId" [attr.data-typeid]="addMoreTd.ctrlTypeId" >
+     
+                                                                        <ng-container *ngIf="addMoreTd.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindcheckbox">
+     
+                                                                        <div class="form-check form-check-inline" *ngFor="let cdStatic of addMoreTd.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let r = index" >
+                                                                            <input class="form-check-input gridcheckbox" type="checkbox" [name]="addMoreTd.ctrlId" [id]="addMoreTd.ctrlId +  r" [value]="cdStatic.ctrlCCStaticValue" (change)="loadDynDepend(addMoreTd.ctrlId,5);EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)"   [attr.data-typeid]="addMoreTd.ctrlTypeId" [ngClass]="'cls_'+addMoreTd.ctrlId"   />
+                                                                            <label class="form-check-label" for="{{addMoreTd.ctrlId +  r}}" >{{cdStatic.ctrlCCStaticName}}</label>
+                                                                            </div>
+                                                                        </ng-container>
+                                                                      <ng-template #loadDyanmicBindcheckbox>
+                                                                        <div class="form-check form-check-inline"  *ngFor="let cdDynamic of arralldynVal[addMoreTd.ctrlId];let r = index" >
+                                                                            <input class="form-check-input gridcheckbox "  bind-class="addMoreTd.ctrlClass" type="checkbox"  [name]="addMoreTd.ctrlId" [id]="addMoreTd.ctrlId +  r" [value]="cdDynamic[addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]"    (change)="loadDynDepend(addMoreTd.ctrlId,5);EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)"   [attr.data-typeid]="addMoreTd.ctrlTypeId" [ngClass]="'cls_'+addMoreTd.ctrlId" />
+                                                                            <label class="form-check-label" for="{{addMoreTd.ctrlId +  r}}" >{{cdDynamic[addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                                                        </div>
+                                                                      </ng-template>
+     
+                                                                     </div>
+                                                                    </div>
+                                                            <div *ngIf="addMoreTd.ctrlTypeId == 6">
+     
+                                                                <div   [attr.data-dynbindflag] ="addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"  [attr.data-dynbinddependflag]="addMoreTd['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="addMoreTd['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"  [attr.data-otherval]="storeCasDetials(addMoreTd['addmorecascadingCtrlDetails'][0],addMoreTd.ctrlId)"    [attr.data-id]="addMoreTd.ctrlId" [attr.data-typeid]="addMoreTd.ctrlTypeId" >
+     
+                                                                    <ng-container *ngIf="addMoreTd.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindRadio">
+     
+                                                                    <div class="form-check form-radio-inline" *ngFor="let cdStatic of addMoreTd.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let r = index" >
+     
+                                                                        <input  [ngClass]="'cls_'+addMoreTd.ctrlId"  bind-class="addMoreTd.ctrlClass" class="form-check-input gridradio"  type="radio" [name]="addMoreTd.ctrlId" [id]="addMoreTd.ctrlId +  r" [value]="cdStatic.ctrlCCStaticValue" (change)="loadDynDepend(addMoreTd.ctrlId,6);EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)"   [attr.data-typeid]="addMoreTd.ctrlTypeId"  />
+     
+     
+     
+                                                                        <label class="form-check-label"  [ngClass]="'chk_'+addMoreTd.ctrlId +  r" for="{{addMoreTd.ctrlId +  r}}" >{{cdStatic.ctrlCCStaticName}}</label>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                  <ng-template #loadDyanmicBindRadio>
+                                                                    <div class="form-check form-radio-inline"  *ngFor="let cdDynamic of arralldynVal[addMoreTd.ctrlId];let r = index" >
+                                                                        <input class="form-check-input gridradio "  bind-class="addMoreTd.ctrlClass" type="radio"  [name]="addMoreTd.ctrlId" [id]="addMoreTd.ctrlId +  r" [value]="cdDynamic[addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]"    (change)="loadDynDepend(addMoreTd.ctrlId,6);EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)"  [attr.data-typeid]="addMoreTd.ctrlTypeId" [ngClass]="'cls_'+addMoreTd.ctrlId" />
+                                                                        <label class="form-check-label" [ngClass]="'chk_'+addMoreTd.ctrlId" for="{{addMoreTd.ctrlId +  r}}" >{{cdDynamic[addMoreTd['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                                                    </div>
+                                                                  </ng-template>
+     
+                                                                 </div>
+                                                            </div>
+     
+     
+                                                            <div *ngIf="addMoreTd.ctrlTypeId == 7">
+     
+                                                                 <div class="custom-file-input"> 
+                                                                    <input  type="file" class="form-control" [name]="addMoreTd.ctrlName" [id]="addMoreTd.ctrlId"  bind-class="addMoreTd.ctrlClass" [attr.data-typeid]="addMoreTd.ctrlTypeId" (change)="saveFileTemp($event,addMoreTd.ctrlId,addMoreTd.ctrlFileType,addMoreTd.ctrlFileMaxLength,addMoreTd.ctrlForApproval,addMoreTd.ctrlFileSizeType);EnableAddMoreButton($event,formctrls.ctrlId,addMoreTd.ctrlId)" />
+                                                                    <div class="custom_file form-control" [id]="'fileName_'+addMoreTd.ctrlId">  Browse File  </div>
+                                                                    <small class="text-primary">1 file upto {{addMoreTd.ctrlFileMaxLength + ' ' + addMoreTd.ctrlFileSizeType}} or less ({{addMoreTd.ctrlFileType}}) </small>
+                                                                    <div class="d-flex justify-content-end d-none" [id]="'fileDownloadDiv_'+addMoreTd.ctrlId">
+                                                                        <a class="btn btn-outline-danger filesremovebtn" href="javascript:void(0)" (click)="removeFile(addMoreTd.ctrlId)" title="Remove file">
+                                                                         <i class="bi bi-trash"></i></a>
+                                                                        <a class="btn btn-outline-primary downloadbtn" href="javascript:void(0)" target="_blank" ><i class="bi bi-eye" title="View"></i></a>
+                                                                    </div>
+                                                                    </div>
+     
+                                                            </div>
+     
+                                                        </div>
+                                                    </div>
+                                                     </div>
+                                                        </ng-container>
+                                                          </div>
+                                                            <div class="fulldtlsTwo">
+                                                        <div class="fulldtls fulldtlsinner mb-3 me-1">
+                                                            <label  class="dynlabel mb-0"></label>
+                                                            <div class="control-holder">
+                                                                    <button class="btn btn-primary btnEvt text-right" (click)="addMoreData(formctrls.ctrlId)" title="Add More" [id]="'addMoreBtn_'+formctrls.ctrlId" disabled> <i class="bi bi-plus-lg"></i> Add To List </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+     
+                                                    <div *ngIf="arrAddmoreFilledData[formctrls.ctrlId]?.length > 0" >
+                                                       
+                                                                <div class="table-responsive mb-3">
+                                                                <table class="table table-bordered mb-0"  >
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th width="50px">Sl#</th>
+                                                                        <th *ngFor="let addMoreTh of arrAddmoreDetails[formctrls.ctrlId]">{{addMoreTh['ctrlLabel']}}</th>
+                                                                        <th width="80px;">Delete</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let addMoreDet of arrAddmoreFilledData[formctrls.ctrlId]; let addMoreCtr=index">
+                                                                        <td>{{addMoreCtr + 1}} </td>
+                                                                        <td *ngFor="let addMoreTd of arrAddmoreElemntKeys[formctrls.ctrlId]">
+                                                                            <ng-container *ngIf="addMoreDet[addMoreTd]['ctrlTypeId']==1;else showAddMoreText" >
+                                                                                {{addMoreDet[addMoreTd]['lblName'] }}
+                                                                            </ng-container>
+                                                                            <ng-template #showAddMoreText>
+                                                                            <ng-container   *ngIf="addMoreDet[addMoreTd]['ctrlTypeId']==3 || addMoreDet[addMoreTd]['ctrlTypeId']==5 || addMoreDet[addMoreTd]['ctrlTypeId']==6;else showFile" >
+                                                                                {{addMoreDet[addMoreTd]['ctrlValueText'] }}
+                                                                            </ng-container>
+                                                                        </ng-template>
+                                                                        <!-- <ng-template #showFile>
+                                                                            <ng-container *ngIf="addMoreDet[addMoreTd]['ctrlTypeId']==7;else showAddMoreValues" >
+                                                                                <ng-container *ngIf="addMoreDet[addMoreTd]['uploadFile']!=undefined" >
+                                                                                <a *ngIf="addMoreDet[addMoreTd]['editStaus']==1"  class="h4" href="{{storagePath+addMoreDet[addMoreTd]['uploadFile']['fileName']}}" target="_blank" ><i class="bi bi-eye" title="View"></i></a>   <!-- For edit case -->
+                                                                                <!--<a *ngIf=" addMoreDet[addMoreTd]['editStaus']==0"  class="h4" href="{{tempurl+addMoreDet[addMoreTd]['uploadFile']['fileName']}}" target="_blank" ><i class="bi bi-eye" title="View"></i></a><!-- For Add case -->
+                                                                           <!-- </ng-container>
+                                                                            </ng-container>
+                                                                         </ng-template> -->
+                                                                           <ng-template #showFile>
+                                                                         <ng-container
+                                                                             *ngIf="addMoreDet[addMoreTd]['ctrlTypeId']==7;else showAddMoreValues">
+                                                                             <ng-container
+                                                                                 *ngIf="addMoreDet[addMoreTd]['uploadFile']!=undefined && addMoreDet[addMoreTd]['uploadFile']['fileName']!='null' ; else showEmptyFile">
+     
+                                                                                 <ng-container
+                                                                                     *ngIf="addMoreDet[addMoreTd]['uploadFile']['fileType'] =='image' && addMoreDet[addMoreTd]['uploadFile']['fileName']!=''">
+     
+                                                                                     <img *ngIf="addMoreDet[addMoreTd]['editStaus']==1"
+                                                                                         class="downloadbtn" height="50"
+                                                                                         width="80"
+                                                                                         src="{{storagePath+addMoreDet[addMoreTd]['uploadFile']['fileName']}}"
+                                                                                         alt="uploadfile">
+                                                                                     <img *ngIf="addMoreDet[addMoreTd]['editStaus']==0"
+                                                                                         class="downloadbtn"
+                                                                                         src="{{tempurl+addMoreDet[addMoreTd]['uploadFile']['fileName']}}"
+                                                                                         height="50" width="80"
+                                                                                         alt="uploadfile">
+                                                                                 </ng-container>
+     
+                                                                                 <ng-container
+                                                                                     *ngIf="addMoreDet  && addMoreDet[addMoreTd]['uploadFile']['fileName']!='null' && addMoreDet[addMoreTd]['uploadFile']['fileType'] !='image' ">
+                                                                                    
+                                                                                     <!-- For edit case -->
+                                                                                         <!-- if file exist -->
+                                                                                         <a *ngIf="addMoreDet[addMoreTd]['editStaus']==1 && addMoreDet[addMoreTd]['uploadFile']['fileName'] != '' && addMoreDet[addMoreTd]['uploadFile']['fileName'] != 'NULL'"
+                                                                                         class="h4"
+                                                                                         href="{{storagePath+addMoreDet[addMoreTd]['uploadFile']['fileName'] }}"
+                                                                                         target="_blank">
+                                                                                         <i class="bi bi-eye"></i></a>
+                                                                                         <!-- End if file exist -->
+     
+                                                                                         <!-- if file does not exist -->
+                                                                                         <div *ngIf=" addMoreDet[addMoreTd]['editStaus']==1 && (addMoreDet[addMoreTd]['uploadFile']['fileName'] == '' || addMoreDet[addMoreTd]['uploadFile']['fileName']=='null'  || addMoreDet[addMoreTd]['uploadFile']['fileName']==undefined || addMoreDet[addMoreTd]['uploadFile']['fileName'] == 'NULL')"
+                                                                                         >
+                                                                                         <b>---</b></div> 
+                                                                                         <!-- End for if file does not exist -->
+                                                                                         <!--End For edit case -->
+                                                                                     <a *ngIf=" addMoreDet[addMoreTd]['editStaus']==0 && addMoreDet[addMoreTd]['uploadFile']['fileName']"
+                                                                                         class="h4"
+                                                                                         href="{{tempurl+addMoreDet[addMoreTd]['uploadFile']['fileName']}}"
+                                                                                         target="_blank"><i
+                                                                                             class="bi bi-eye"></i></a>
+                                                                                             
+                                                                                             <div *ngIf=" addMoreDet[addMoreTd]['editStaus']==0 && addMoreDet[addMoreTd]['uploadFile']['fileName'] == undefined">
+                                                                                                 <b>---</b>
+                                                                                            </div>     
+                                                                                             <!-- For Add case -->
+                                                                                 </ng-container>
+                                                                             </ng-container>
+                                                                         </ng-container>
+                                                                     </ng-template>
+                                                                     <!-- To show empty File -->
+                                                                     <ng-template #showEmptyFile>
+                                                                         <div> <b>---</b></div>  
+                                                                     </ng-template>
+                                                                     <!--End To show empty File -->
+                                                                     <ng-template #showAddMoreValues>
+                                                                       
+                                                                         <ng-container
+                                                                             *ngIf="addMoreDet[addMoreTd]['attrType']!='date';else showAddMoreTabularDate">
+                                                                             {{encDec.decodeHtml(addMoreDet[addMoreTd]['ctrlValue'])}} 
+                                                                         </ng-container>
+                                                                     </ng-template>
+                                                                     <ng-template #showAddMoreTabularDate>
+                                                                         {{encDec.decodeHtml(addMoreDet[addMoreTd]['date']) | date:'d-MMM-y'}} 
+                                                                     </ng-template>
+                                                                       </td>
+                                                                    <td>
+                                                                        <a class="text-danger filesremovebtn" href="javascript:void(0)" (click)="deleteAddMore($event,formctrls.ctrlId,addMoreCtr)" title="Remove">
+                                                                         <i class="bi bi-trash"></i></a>
+                                                                        <!-- <button class="btn btn-warning btnAdd me-1" (click)="editAddMore($event,formctrls.ctrlId,addMoreCtr)">Edit</button>  -->
+                                                                        <!-- <button class="btn btn-danger btnRemove me-1"(click)="deleteAddMore($event,formctrls.ctrlId,addMoreCtr)"><i class="bi bi-trash"></i></button>  -->
+                                                                    </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                </table>
+                                                            </div>
+                                                       
+                                                        <div  class="border-bottom h6"></div>
+     
+                                                            </div>
+                                                    </div>
+     
+                                            </ng-container>
+                                            <ng-template #showAddMoreColumnwise>
+     
+                                                <ng-container *ngIf="formctrls['radioAddmoreviewtype']=='column';else showAddMoreTabularwise">
+                                                    <div class="mb-3 " [attr.filladdmorearray]="fillAddMoreArray(formctrls.ctrlId,arrAddmoreDetails[formctrls.ctrlId],dynamicCtrlDetails[sctrls]['addMoreValueDetails'],formctrls.ctrlClass)">
+                                                        <div class="table-responsive mb-3">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th width="20px;">Sl#</th>
+                                                                <ng-container *ngFor="let addMoreTrLoop of formctrls['addmoreDetails']">
+                                                                <th>{{addMoreTrLoop['ctrlLabel'] }}<span *ngIf="addMoreTrLoop.ctrlMandatory == true" class="text-danger"> *</span>
+                                                                    <a class="custom-icon"  *ngIf="addMoreTrLoop.ctrlhelptext" [attr.data-bs-toggle]="addMoreTrLoop.ctrlhelptext" data-bs-placement="top" [title]="addMoreTrLoop.ctrlhelptext">
+                                                                       <i class="bi bi-info-circle"></i>
+                                                                    </a> </th>
+                                                                    </ng-container>
+                                                                <th width="80px;">submit</th>
+                                                             </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td  width="20px;">1</td>
+                                                                <td *ngFor="let addMoreTdLoop of formctrls['addmoreDetails']; let addMoreTdLoopCtr=index">
+     
+                                                                    <ng-container *ngIf="addMoreTdLoop.ctrlTypeId=='1';else showAddMoreColumnWiseTxtbox">
+                                                                        <label  class="mb-2 dynlabel">{{addMoreTdLoop.ctrlLabel}}
+                                                                            <a class="custom-icon"   *ngIf="addMoreTdLoop.ctrlhelptext" [attr.data-bs-toggle]="addMoreTdLoop.ctrlhelptext" data-bs-placement="top" [title]="addMoreTdLoop.ctrlhelptext">
+                                                                               <i class="bi bi-info-circle"></i>
+                                                                            </a>
+                                                                        </label>
+                                                                    </ng-container>
+                                                                    <ng-template #showAddMoreColumnWiseTxtbox>
+                                                                    <ng-container *ngIf="addMoreTdLoop.ctrlTypeId=='2'; else showAddMoreColumnWisedropdown">
+                                                                        <input  [type]="addMoreTdLoop.ctrlAttributeType == 0 ? 'text' : addMoreTdLoop.ctrlAttributeType" [name]="addMoreTdLoop.ctrlName"  class="form-control"  [placeholder]="addMoreTdLoop.ctrlPlaceholder" [id]="addMoreTdLoop.ctrlId"  bind-class="addMoreTdLoop.ctrlClass"  (keypress)="addMoreTdLoop.validationDetails==1 ? vldChkLst.isNumberKey($event) : '' || addMoreTdLoop.validationDetails==2 ? vldChkLst.isCharKey($event) : '' || addMoreTdLoop.validationDetails==3 ? vldChkLst.isAlphaNumeric($event) : '' || addMoreTdLoop.validationDetails==4 ? vldChkLst.isDecimal($event) : ''"  autocomplete="off" [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" [attr.data-calcflag]="addMoreTdLoop.addmorecalculationDetails[0]['ctrlChkCalculation']" [attr.data-clacfielddetails]="setCalcFieldValue(addMoreTdLoop.addmorecalculationDetails[0]['ctrlCalcOptions'],formctrls.ctrlId)"/>
+     
+                                                                    </ng-container>
+                                                                </ng-template>
+                                                                <ng-template #showAddMoreColumnWisedropdown>
+                                                                    <ng-container *ngIf="addMoreTdLoop.ctrlTypeId=='3';else showAddMoreColumnWisedtxtArea">
+                                                                        <select class="form-select" bind-class="addMoreTdLoop.ctrlClass"  [id]="addMoreTdLoop.ctrlId" [name]="addMoreTdLoop.ctrlName" [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" [attr.data-dynbindflag] ="addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false" [attr.data-dynbinddependflag]="addMoreTdLoop['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="addMoreTdLoop['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld" [attr.data-otherval]="storeCasDetials(addMoreTdLoop['addmorecascadingCtrlDetails'][0],addMoreTdLoop.ctrlId)" [attr.data-id]="addMoreTdLoop.ctrlId"   (change)="loadDynDepend(addMoreTdLoop.ctrlId)" >
+                                                                            <option value="0">Select</option>
+                                                                            <ng-container *ngIf="addMoreTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBind">
+     
+                                                                                <ng-container *ngFor="let cdStatic of addMoreTdLoop.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let s = index">
+                                                                                    <option class="form-check-label"     [value]="cdStatic.ctrlCCStaticValue">{{cdStatic.ctrlCCStaticName}}</option>
+                                                                                </ng-container>
+     
+                                                                            </ng-container>
+                                                                          <ng-template #loadDyanmicBind>
+                                                                            <ng-container *ngFor="let cdStatic of arralldynVal[addMoreTdLoop.ctrlId];let s = index">
+                                                                            <option class="form-check-label"  [value]="cdStatic[addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]" >{{cdStatic[addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</option>
+                                                                            </ng-container>
+                                                                          </ng-template>
+                                                                        </select>
+     
+                                                                </ng-container>
+                                                            </ng-template>
+                                                            <ng-template #showAddMoreColumnWisedtxtArea>
+                                                                <ng-container *ngIf="addMoreTdLoop.ctrlTypeId=='4';else showAddMoreColumnWisedradiobtn">
+                                                                    <textarea  rows="1" [name]="addMoreTdLoop.ctrlName"   class="form-control"  [placeholder]="addMoreTdLoop.ctrlPlaceholder" [id]="addMoreTdLoop.ctrlId"  bind-class="addMoreTdLoop.ctrlClass"  (keypress)="addMoreTdLoop.validationDetails==1 ? vldChkLst.isNumberKey($event) : '' || addMoreTdLoop.validationDetails==2 ? vldChkLst.isCharKey($event) : '' || addMoreTdLoop.validationDetails==3 ? vldChkLst.isAlphaNumeric($event) : '' || addMoreTdLoop.validationDetails==4 ? vldChkLst.isDecimal($event) : ''"  [attr.data-typeid]="addMoreTdLoop.ctrlTypeId"></textarea>
+     
+                                                                    <!-- <ckeditor [editor]="editor" *ngIf="addMoreTdLoop.ctrlClass == ckEdtorCls" rows="1" [id]="addMoreTdLoop.ctrlId"   bind-class="addMoreTdLoop.ctrlClass" [attr.data-parentflag]="addMoreTdLoop['dependctrlDetails'][0]['ctrlChkDepend']==true ? false:true"  (change)="setCkEdtorValue($event,addMoreTdLoop.ctrlId)" (ready)="setCkedtorArr(dynamicCtrlDetails[sctrls]['dataValue'] == null ? '' : dynamicCtrlDetails[sctrls]['dataValue'][addMoreTdLoop['tablecolDetails'][0]['ctrlTblColName']] ,addMoreTdLoop.ctrlId )"></ckeditor>    -->
+     
+                                                                </ng-container>
+     
+                                                            </ng-template>
+                                                            <ng-template #showAddMoreColumnWisedradiobtn>
+                                                                <ng-container *ngIf="addMoreTdLoop.ctrlTypeId=='5';else showAddMoreColumnWisedchkbox">
+                                                            <div   [attr.data-dynbindflag] ="addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"  [attr.data-dynbinddependflag]="addMoreTdLoop['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="addMoreTdLoop['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"  [attr.data-otherval]="storeCasDetials(addMoreTdLoop['addmorecascadingCtrlDetails'][0],addMoreTdLoop.ctrlId)" [attr.data-id]="addMoreTdLoop.ctrlId"    [attr.data-id]="addMoreTdLoop.ctrlId" [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" >
+     
+                                                                <ng-container *ngIf="addMoreTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindcheckbox">
+     
+                                                                <div class="form-check form-check-inline" *ngFor="let cdStatic of addMoreTdLoop.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let r = index" >
+                                                                    <input class="form-check-input gridcheckbox" type="checkbox" [name]="addMoreTdLoop.ctrlId" [id]="addMoreTdLoop.ctrlId +  r" [value]="cdStatic.ctrlCCStaticValue" (change)="loadDynDepend(addMoreTdLoop.ctrlId,5)"   [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" [ngClass]="'cls_'+addMoreTdLoop.ctrlId"   />
+                                                                    <label class="form-check-label" for="{{addMoreTdLoop.ctrlId +  r}}" >{{cdStatic.ctrlCCStaticName}}</label>
+                                                                    </div>
+                                                                </ng-container>
+                                                              <ng-template #loadDyanmicBindcheckbox>
+                                                                <div class="form-check form-check-inline"  *ngFor="let cdDynamic of arralldynVal[addMoreTdLoop.ctrlId];let r = index" >
+                                                                    <input class="form-check-input gridcheckbox "  bind-class="addMoreTdLoop.ctrlClass" type="checkbox"  [name]="addMoreTdLoop.ctrlId" [id]="addMoreTdLoop.ctrlId +  r" [value]="cdDynamic[addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]"    (change)="loadDynDepend(addMoreTdLoop.ctrlId,5)"   [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" [ngClass]="'cls_'+addMoreTdLoop.ctrlId" />
+                                                                    <label class="form-check-label" for="{{addMoreTdLoop.ctrlId +  r}}" >{{cdDynamic[addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                                                </div>
+                                                              </ng-template>
+     
+                                                             </div>
+                                                            </ng-container>
+                                                            </ng-template>
+     
+                                                            <ng-template #showAddMoreColumnWisedchkbox>
+                                                                <ng-container *ngIf="addMoreTdLoop.ctrlTypeId=='6';else showAddMoreColumnWisedfileUpload">
+                                                                    <div   [attr.data-dynbindflag] ="addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"  [attr.data-dynbinddependflag]="addMoreTdLoop['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false" [attr.data-dynbinddependctlfldid]="addMoreTdLoop['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"  [attr.data-otherval]="storeCasDetials(addMoreTdLoop['addmorecascadingCtrlDetails'][0],addMoreTdLoop.ctrlId)"    [attr.data-id]="addMoreTdLoop.ctrlId" [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" >
+     
+                                                                        <ng-container *ngIf="addMoreTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindRadio">
+     
+                                                                        <div class="form-check form-radio-inline" *ngFor="let cdStatic of addMoreTdLoop.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let r = index" >
+     
+                                                                            <input  [ngClass]="'cls_'+addMoreTdLoop.ctrlId"  class="form-check-input gridradio" type="radio" [name]="addMoreTdLoop.ctrlId" [id]="addMoreTdLoop.ctrlId +  r" [value]="cdStatic.ctrlCCStaticValue" (change)="loadDynDepend(addMoreTdLoop.ctrlId,6)"   [attr.data-typeid]="addMoreTdLoop.ctrlTypeId"  />
+     
+     
+     
+                                                                            <label class="form-check-label"  [ngClass]="'chk_'+addMoreTdLoop.ctrlId +  r" for="{{addMoreTdLoop.ctrlId +  r}}" >{{cdStatic.ctrlCCStaticName}}</label>
+                                                                            </div>
+                                                                        </ng-container>
+                                                                      <ng-template #loadDyanmicBindRadio>
+                                                                        <div class="form-check form-radio-inline"  *ngFor="let cdDynamic of arralldynVal[addMoreTdLoop.ctrlId];let r = index" >
+                                                                            <input class="form-check-input gridradio "  bind-class="addMoreTdLoop.ctrlClass" type="radio"  [name]="addMoreTdLoop.ctrlId" [id]="addMoreTdLoop.ctrlId +  r" [value]="cdDynamic[addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]"    (change)="loadDynDepend(addMoreTdLoop.ctrlId,6)"  [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" [ngClass]="'cls_'+addMoreTdLoop.ctrlId" />
+                                                                            <label class="form-check-label" [ngClass]="'chk_'+addMoreTdLoop.ctrlId" for="{{addMoreTdLoop.ctrlId +  r}}" >{{cdDynamic[addMoreTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                                                        </div>
+                                                                      </ng-template>
+     
+                                                                     </div>
+                                                                    </ng-container>
+                                                            </ng-template>
+                                                            <ng-template #showAddMoreColumnWisedfileUpload>
+                                                                <ng-container *ngIf="addMoreTdLoop.ctrlTypeId=='7'">
+                                                                 <div class="custom-file-input"> 
+                                                                    <input  type="file" class="form-control" [name]="addMoreTdLoop.ctrlName" [id]="addMoreTdLoop.ctrlId"  bind-class="addMoreTdLoop.ctrlClass" [attr.data-typeid]="addMoreTdLoop.ctrlTypeId" (change)="saveFileTemp($event,addMoreTdLoop.ctrlId,addMoreTdLoop.ctrlFileType,addMoreTdLoop.ctrlFileMaxLength,addMoreTdLoop.ctrlForApproval,addMoreTdLoop.ctrlFileSizeType)" />
+                                                                    <div class="custom_file form-control">  Browse File  </div>
+                                                                    <small class="text-primary">1 file upto {{addMoreTdLoop.ctrlFileMaxLength + ' ' + addMoreTdLoop.ctrlFileSizeType}} or less ({{addMoreTdLoop.ctrlFileType}}) </small>
+                                                                    <div class="d-flex justify-content-end d-none" [id]="'fileDownloadDiv_'+addMoreTdLoop.ctrlId">
+                                                                        <a class="btn btn-outline-danger filesremovebtn" href="javascript:void(0)" (click)="removeFile(addMoreTdLoop.ctrlId)" title="Remove file">
+                                                                         <i class="bi bi-trash"></i></a>
+                                                                        <a class="btn btn-outline-primary downloadbtn" href="javascript:void(0)" target="_blank" ><i class="bi bi-eye" title="View"></i></a>
+                                                                    </div>
+                                                                    </div>
+                                                                </ng-container>
+                                                            </ng-template>
+     
+                                                                </td>
+                                                                <td>
+                                                                    <a class=" btn btn-sm btn-primary" href="javascript:void(0)" (click)="addMoreData(formctrls.ctrlId)" title="Remove file"><i class="icon-plus-solid"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        </table>
+                                                        </div>
+                                                          </div>
+                                                </ng-container>
+                                            </ng-template>
+                                            <ng-template #showAddMoreTabularwise>
+     
+                                                <ng-container *ngIf="formctrls['radioAddmoreviewtype']=='table'">
+                                                    <div class="table-responsive tbl_fullwdh mb-3">
+                                                        
+     
+                                                        <table class="table table-bordered valign-middle mb-0 ">
+                                                              <thead>
+                                                            <tr>
+                                                                <th width="140px"></th>
+                                                                <th valign="middle" *ngFor="let addMoreTabularTh of formctrls.addmoreDetails">
+                                                                       {{addMoreTabularTh.ctrlLabel}} <span *ngIf="addMoreTabularTh.ctrlMandatory == true && !addMoreTabularTh.ctrlClass.includes('hide_mandatory')" class="text-danger">*</span>
+                                                                            <a class="custom-icon" href="javascript:void(0)"  *ngIf="addMoreTabularTh.ctrlhelptext" [attr.data-bs-toggle]="addMoreTabularTh.ctrlhelptext" data-bs-placement="top" [title]="addMoreTabularTh.ctrlhelptext">
+                                                                               <i class="bi bi-info-circle"></i>
+                                                                            </a>
+     
+                                                                        </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <tr *ngFor="let addMoreTabularTrLoop of formctrls.addmorerowdata;let addMoreTabularTrCtr = index"
+                                                                valign="middle">
+                                                                <td>{{addMoreTabularTrLoop.ctrlRowdataName}}</td>
+                                                                <td
+                                                                    *ngFor="let addMoreTabularTdLoop of formctrls.addmoreDetails;let addMoreTabularTdCtr = index">
+            
+                                                                    <div [ngSwitch]="addMoreTabularTdLoop.ctrlTypeId">
+            
+                                                                        <div *ngSwitchCase="1">
+            
+                                                                            <label
+                                                                                *ngIf="addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static'"
+                                                                                class="mb-2 dynlabel"
+                                                                                bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [attr.data-id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId">
+                                                                                {{addMoreTabularTdLoop.ctrlLabelData}}
+            
+                                                                            </label>
+            
+                                                                            <label
+                                                                                *ngIf="addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='dynamic'"
+                                                                                class="mb-2 dynlabel"
+                                                                                [attr.data-dynbindflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"
+                                                                                [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [attr.data-dynbinddependflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false"
+                                                                                [attr.data-dynbinddependctlfldid]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"
+                                                                                [attr.data-otherval]="storeCasDetials(addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0],addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr)"
+                                                                                [attr.data-id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId">
+                                                                                --
+            
+                                                                            </label>
+                                                                        </div>
+                                                                        <!--Added Change & keyup event By:Sibananda  -->
+                                                                        <div *ngSwitchCase="2">
+                                                                            <input
+                                                                                (change) = "addMoreTotal($event);addMoreTotal2($event)" 
+                                                                                (keyup) = "addMoreTotal($event);addMoreTotal2($event)"                                                                 (change) = "addMoreTotal($event);addMoreTotal2($event)" (keyup) = "addMoreTotal($event);addMoreTotal2($event)"                                                                    [type]="addMoreTabularTdLoop.ctrlAttributeType == 0 ||  addMoreTabularTdLoop.ctrlAttributeType == 'tel' ? 'text' : addMoreTabularTdLoop.ctrlAttributeType"
+                                                                                [name]="addMoreTabularTdLoop.ctrlName"
+                                                                                class="form-control"
+                                                                                [placeholder]="encDec.decodeHtml(addMoreTabularTdLoop.ctrlPlaceholder)"
+                                                                                [min]="addMoreTabularTdLoop.ctrlAttributeType=='number' ?0:''"
+                                                                                [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                bind-class="addMoreTabularTdLoop.ctrlClass "
+                                                                                [ngClass]="addMoreTabularTdLoop.ctrlName"
+                                                                                appBlockWhitespace appCommonAll  pattern="" artype="{{addMoreTabularTdLoop.ctrlAttributeType}}" cvalidation="{{addMoreTabularTdLoop.validationDetails}}" allowspecialchar="{{addMoreTabularTdLoop.blockSpecialChars}}"
+                                                                                autocomplete="off"
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                [value]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails'] )"
+                                                                                [attr.maxlength]=addMoreTabularTdLoop.ctrlMaxLength
+                                                                                />
+            
+                                                                        </div>
+                                                                        <div *ngSwitchCase="3">
+                                                                            <select class="form-select"
+                                                                                bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [name]="addMoreTabularTdLoop.ctrlName"
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                [attr.data-dynbindflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"
+                                                                                [attr.data-dynbinddependflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false"
+                                                                                [attr.data-dynbinddependctlfldid]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"
+                                                                                [attr.data-otherval]="storeCasDetials(addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0],addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr)"
+                                                                                [attr.data-id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                (change)="loadDynDepend(addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr,3)">
+                                                                                <option value="0">Select</option>
+                                                                                <ng-container
+                                                                                    *ngIf="addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBind">
+            
+                                                                                    <ng-container
+                                                                                        *ngFor="let cdStatic of addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let s = index">
+                                                                                        <option class="form-check-label"
+                                                                                            [selected]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails']) == cdStatic.ctrlCCStaticValue"
+                                                                                            [value]="cdStatic.ctrlCCStaticValue">
+                                                                                            {{cdStatic.ctrlCCStaticName}}</option>
+                                                                                    </ng-container>
+            
+                                                                                </ng-container>
+                                                                                <ng-template #loadDyanmicBind>
+                                                                                    <ng-container
+                                                                                        *ngFor="let cdStatic of arralldynVal[addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr];let s = index">
+                                                                                        <option class="form-check-label"
+                                                                                            [selected]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails']) == cdStatic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]"
+                                                                                            [value]="cdStatic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]">
+                                                                                            {{cdStatic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}
+                                                                                        </option>
+            
+                                                                                    </ng-container>
+                                                                                </ng-template>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div *ngSwitchCase="4">
+                                                                            <textarea
+                                                                                *ngIf="addMoreTabularTdLoop.ctrlClass != ckEdtorCls"
+                                                                                rows="1" [name]="addMoreTabularTdLoop.ctrlName"
+                                                                                class="form-control"
+                                                                                [placeholder]="encDec.decodeHtml(addMoreTabularTdLoop.ctrlPlaceholder)"
+                                                                                [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                
+                                                                                [attr.maxlength]=addMoreTabularTdLoop.ctrlMaxLength
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                (keyup)="vldChkLst.SpecialAlphaNumeric($event);vldChkLst.blockspecialchar_first($event, addMoreTabularTdLoop.blockSpecialChars)">{{checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName
+                                                                                ,dynamicCtrlDetails[sctrls]['addMoreValueDetails'])}}</textarea>
+            
+                                                                            <div
+                                                                                *ngIf="addMoreTabularTdLoop.ctrlClass == ckEdtorCls">
+                                                                                <!-- <angular-editor [config]="config"
+                                                                                    [(ngModel)]="dynamickeditor[secCtr+'_'+secCtr+'_'+addMoreTabularTrCtr+addMoreTabularTdCtr]"
+                                                                                    [attr.id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                    bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                    [attr.setdata]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails'],addMoreTabularTdLoop.ctrlTypeId,1,secCtr+'_'+secCtr+'_'+addMoreTabularTdCtr)"
+                                                                                    [attr.maxlength]=addMoreTabularTdLoop.ctrlMaxLength> </angular-editor> -->
+            
+                                                                                <ckeditor
+                                                                                    [(ngModel)]="dynamickeditor[addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr]"
+                                                                                    name="myckeditor" required [config]="ckeConfig"
+                                                                                    debounce="500"
+                                                                                    [attr.id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                    bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                    [attr.setdata]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails'],addMoreTabularTdLoop.ctrlTypeId,1,secCtr+'_'+secCtr+'_'+addMoreTabularTdCtr)"
+                                                                                    [attr.maxlength]="addMoreTabularTdLoop.ctrlMaxLength">
+                                                                                </ckeditor>
+            
+                                                                            </div>
+            
+                                                                        </div>
+                                                                        <div *ngSwitchCase="5">
+                                                                            <div [attr.data-dynbindflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"
+                                                                                [attr.data-dynbinddependflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false"
+                                                                                [attr.data-dynbinddependctlfldid]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"
+                                                                                [attr.data-otherval]="storeCasDetials(addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0],addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr)"
+                                                                                [attr.data-id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [attr.data-id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId">
+            
+                                                                                <ng-container
+                                                                                    *ngIf="addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindcheckbox">
+            
+                                                                                    <div class="form-check form-check-inline"
+                                                                                        *ngFor="let cdStatic of addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let r = index">
+                                                                                        <input class="form-check-input gridcheckbox"
+                                                                                            type="checkbox"
+                                                                                            bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                            [name]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                            [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r"
+                                                                                            [value]="cdStatic.ctrlCCStaticValue"
+                                                                                            (change)="loadDynDepend(addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr,5)"
+                                                                                            [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                            [ngClass]="'cls_'+addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr "
+                                                                                            [checked]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails'],addMoreTabularTdLoop.ctrlTypeId,cdStatic.ctrlCCStaticValue)" />
+            
+                                                                                        <label class="form-check-label"
+                                                                                            for="{{addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r}}">{{cdStatic.ctrlCCStaticName}}</label>
+                                                                                    </div>
+                                                                                </ng-container>
+                                                                                <ng-template #loadDyanmicBindcheckbox>
+                                                                                    <div class="form-check form-check-inline"
+                                                                                        *ngFor="let cdDynamic of arralldynVal[addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr];let r = index">
+                                                                                        <input
+                                                                                            class="form-check-input gridcheckbox "
+                                                                                            bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                            type="checkbox"
+                                                                                            [name]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                            [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r"
+                                                                                            [value]="cdDynamic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]"
+                                                                                            (change)="loadDynDepend(addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr,5)"
+                                                                                            [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                            [ngClass]="'cls_'+addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                            [checked]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails'],addMoreTabularTdLoop.ctrlTypeId,cdDynamic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName])" />
+            
+                                                                                        <label class="form-check-label"
+                                                                                            for="{{addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r}}">{{cdDynamic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                                                                    </div>
+                                                                                </ng-template>
+            
+                                                                            </div>
+                                                                        </div>
+                                                                        <div *ngSwitchCase="6">
+                                                                            <div [attr.data-dynbindflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCbindDatatype == 'dynamic' ? true : false"
+                                                                                [attr.data-dynbinddependflag]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0]['AMctrlCCbinddepentOther']=='yes'?true : false"
+                                                                                [attr.data-dynbinddependctlfldid]="addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].AMctrlCCbinddepentfld"
+                                                                                [attr.data-otherval]="storeCasDetials(addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0],addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr)"
+                                                                                [attr.data-id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId">
+            
+                                                                                <ng-container
+                                                                                    *ngIf="addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].ctrlCCbindDatatype =='static';else loadDyanmicBindRadio">
+            
+                                                                                    <div class="form-check form-check-inline"
+                                                                                        *ngFor="let cdStatic of addMoreTabularTdLoop.addmorecascadingCtrlDetails[0].addmorectrlStaticOptions;let r = index">
+            
+                                                                                        <input
+                                                                                            [ngClass]="'cls_'+addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                            class="form-check-input gridradio"
+                                                                                            type="radio"
+                                                                                            [name]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                            bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                            [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r"
+                                                                                            [value]="cdStatic.ctrlCCStaticValue"
+                                                                                            (change)="loadDynDepend(addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr,6)"
+                                                                                            [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                            [checked]="( checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails']) == (cdStatic.ctrlCCStaticValue))" />
+            
+                                                                                        <label class="form-check-label"
+                                                                                            [ngClass]="'chk_'+addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r"
+                                                                                            for="{{addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r}}">{{cdStatic.ctrlCCStaticName}}</label>
+                                                                                    </div>
+            
+                                                                                </ng-container>
+                                                                                <ng-template #loadDyanmicBindRadio>
+                                                                                    <div class="form-check form-check-inline"
+                                                                                        *ngFor="let cdDynamic of arralldynVal[addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr];let r = index">
+                                                                                        <input class="form-check-input gridradio "
+                                                                                            bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                            type="radio"
+                                                                                            [name]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                            [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r"
+                                                                                            [value]="cdDynamic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]"
+                                                                                            [checked]="(checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails']) == (cdDynamic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDValueColumnName]))"
+                                                                                            (change)="loadDynDepend(addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr,6)"
+                                                                                            [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                            [ngClass]="'cls_'+addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr" />
+                                                                                        <label class="form-check-label"
+                                                                                            [ngClass]="'chk_'+addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                            for="{{addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr +  r}}">{{cdDynamic[addMoreTabularTdLoop['addmorecascadingCtrlDetails'][0].ctrlCCDTextColumnName]}}</label>
+                                                                                    </div>
+                                                                                </ng-template>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div *ngSwitchCase="7">
+                                                                            <input type="file" class="form-control"
+                                                                                [name]="addMoreTabularTdLoop.ctrlName"
+                                                                                [id]="addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr"
+                                                                                bind-class="addMoreTabularTdLoop.ctrlClass"
+                                                                                [attr.data-typeid]="addMoreTabularTdLoop.ctrlTypeId"
+                                                                                (change)="saveFileTemp($event,addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr,addMoreTabularTdLoop.ctrlFileType,addMoreTabularTdLoop.ctrlFileMaxLength,addMoreTabularTdLoop.ctrlForApproval,addMoreTabularTdLoop.ctrlFileSizeType)"
+                                                                                [attr.data-fnccall]="checkAddMoreTabularkeyExists('slNo'+addMoreTabularTrLoop.ctrlRowdataSlNo,formctrls.ctrlId,addMoreTabularTdLoop.addmoretablecolDetails[0].ctrlTblColName ,dynamicCtrlDetails[sctrls]['addMoreValueDetails'],addMoreTabularTdLoop.ctrlTypeId,addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr,addMoreTabularTdLoop.ctrlForApproval,addMoreTabularTdLoop.ctrlFileType)" />
+                                                                            <small class="text-danger">1
+                                                                                file upto
+                                                                                {{addMoreTabularTdLoop.ctrlFileMaxLength
+                                                                                + ' ' +
+                                                                                addMoreTabularTdLoop.ctrlFileSizeType}}
+                                                                                or less
+                                                                                ({{addMoreTabularTdLoop.ctrlFileType}})
+                                                                            </small>
+                                                                            <div class="d-flex justify-content-end d-none"
+                                                                                [id]="'fileDownloadDiv_'+addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr">
+            
+                                                                                <ng-container
+                                                                                    *ngIf="addMoreTabularTdLoop.ctrlFileType =='image'">
+                                                                                    <img class="downloadbtn" src height="50"
+                                                                                        width="80">
+                                                                                </ng-container>
+            
+                                                                                <ng-container
+                                                                                    *ngIf="addMoreTabularTdLoop.ctrlFileType !='image'">
+                                                                                    <a class="h4 downloadbtn "
+                                                                                        href="javascript:void(0)" target="_blank"><i
+                                                                                            class="icon-download-solid"></i></a>
+                                                                                </ng-container>
+            
+                                                                                <a class=" h4 text-danger filesremovebtn btn-sm"
+                                                                                    href="javascript:void(0)"
+                                                                                    (click)="removeFile(addMoreTabularTdLoop.ctrlId+addMoreTabularTrCtr+addMoreTabularTdCtr)"
+                                                                                    title="Remove file"><i
+                                                                                        class="icon-trash"></i></a>
+            
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+            
+                                                            </tr>
+                                                            <tr *ngIf="arrTabularAddMoreTotData[formctrls.ctrlId]!=undefined">
+                                                                <td>Total</td>
+                                                                <td *ngFor="let addMoreTotLoop of formctrls.addmoreDetails">
+                                                                    <input type="text"
+                                                                        *ngIf="addMoreTotLoop.ctrlTypeId==2 && addMoreTotLoop.totalCalcAddMore ==true"
+                                                                        [id]="'tot_'+addMoreTotLoop.ctrlId" readonly="true"
+                                                                        class="form-control">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+     
+                                                </ng-container>
+     
+                                            </ng-template>
+                                            <!-- <div *ngIf="arrAddmoreFilledData[formctrls.ctrlId]?.length > 0" class="table-responsive">
+                                                <div class="table-responsive">
+                                                <table class="table table-bordered"  >
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Sl#</th>
+                                                        <th *ngFor="let addMoreTh of arrAddmoreDetails[formctrls.ctrlId]">{{addMoreTh['ctrlLabel']}}</th>
+                                                        <th width="80px;">Delete</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let addMoreDet of arrAddmoreFilledData[formctrls.ctrlId]; let addMoreCtr=index">
+                                                        <td>{{addMoreCtr + 1}} </td>
+                                                        <td *ngFor="let addMoreTd of arrAddmoreElemntKeys[formctrls.ctrlId]">
+                                                            <ng-container *ngIf="addMoreDet[addMoreTd]['ctrlTypeId']==1;else showAddMoreText" >
+                                                                {{addMoreDet[addMoreTd]['lblName'] }}
+                                                            </ng-container>
+                                                            <ng-template #showAddMoreText>
+                                                            <ng-container   *ngIf="addMoreDet[addMoreTd]['ctrlTypeId']==3 || addMoreDet[addMoreTd]['ctrlTypeId']==5 || addMoreDet[addMoreTd]['ctrlTypeId']==6;else showFile" >
+                                                                {{addMoreDet[addMoreTd]['ctrlValueText'] }}
+                                                            </ng-container>
+                                                        </ng-template>
+                                                        <ng-template #showFile>
+                                                            <ng-container *ngIf="addMoreDet[addMoreTd]['ctrlTypeId']==7;else showAddMoreValues" >
+                                                                <ng-container *ngIf="addMoreDet[addMoreTd]['uploadFile']!=undefined" >
+                                                                <a *ngIf="addMoreDet[addMoreTd]['editStaus']==1"  class="h4" href="{{storagePath+addMoreDet[addMoreTd]['uploadFile']['fileName']}}" target="_blank" ><i class="bi bi-eye" title="View"></i></a>   <!-- For edit case -->
+                                                                <!-- <a *ngIf=" addMoreDet[addMoreTd]['editStaus']==0"  class="h4" href="{{tempurl+addMoreDet[addMoreTd]['uploadFile']['fileName']}}" target="_blank" ><i class="bi bi-eye" title="View"></i></a> <!-- For Add case -->
+                                                            <!-- </ng-container>
+                                                            </ng-container>
+                                                         </ng-template>
+                                                         <ng-template #showAddMoreValues>
+                                                              {{addMoreDet[addMoreTd]['ctrlValue'] }}
+                                                           </ng-template>
+                                                       </td>
+                                                    <td>
+                                                        <a class="btn btn-outline-danger downloadbtn filesremovebtn" href="javascript:void(0)" (click)="deleteAddMore($event,formctrls.ctrlId,addMoreCtr)" title="Remove"><i class="bi bi-trash"></i></a>  -->
+                                                        <!-- <button class="btn btn-warning btnAdd me-1" (click)="editAddMore($event,formctrls.ctrlId,addMoreCtr)">Edit</button>  -->
+                                                        <!-- <button class="btn btn-danger btnRemove me-1"(click)="deleteAddMore($event,formctrls.ctrlId,addMoreCtr)"><i class="bi bi-trash"></i></button>  -->
+                                                    <!-- </td>
+                                                    </tr>
+                                                </tbody>
+                                                </table>
+                                            </div>
+                                            </div>      -->
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separator separator-dashed">
+            </div>
+            <div class="text-center p-3 pt-0" >
+                <!-- <a class="btn btn-secondary me-2" (click)="goToPrevious()"><i class="icon-arrow14"></i> Prev</a> -->
+                <button class="btn btn-success me-2" (click)="doSchemeApply()" [disabled]="btnSaveNextDisableStatus">Save</button>
+                <button class="btn btn-danger me-2 " (click)="reset()">Reset</button>
+            </div>
+        </div>
+    </ng-template>
+
+
+<!-- start of Equipment details modal -->
+<ng-template #equipmentDetailsModal id="equipmentDetailsModal" let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Select Equipment Details</h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <i class="icon-times-solid"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="fix-height">
+      <div class="row" *ngIf="booleanEquipmentStatus; else noRecordFound">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" width="50px">Sl#</th>
+                <th scope="col">Equipment Name</th>
+                <th scope="col">Equipment Value</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipment of objequipmentDetails; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ equipment.equipmentName }}</td>
+                <td>{{ equipment.equipmentValue }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-success"
+                    (click)="fillEquipmentDetails(equipment.intId)"
+                  >
+                    Select
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #noRecordFound>
+        <h6 class="no-content">No Record Found</h6>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
+<!-- End of Equipment details modal -->
+
+<!-- start of Fixed asset details modal -->
+<ng-template #fixedAssetsModal id="fixedAssetsModal" let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Select Fixed Assets Details
+    </h4>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <i class="icon-times-solid"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="fix-height">
+      <div class="row" *ngIf="booleanFixedAssetStatus; else noRecordFound">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" width="50px">Sl#</th>
+                <th scope="col">Asset Name</th>
+                <th scope="col">Asset Value</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let assets of objFixedAssets; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ assets.fixedAssetsName }}</td>
+                <td>{{ assets.fixedAssetsValue }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-success"
+                    (click)="fillAssetsDetails(assets.intId)"
+                  >
+                    Select
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #noRecordFound>
+        <h6 class="no-content">No Record Found</h6>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
+<!-- End of Fixed asset details modal -->
+
+
+
+<!-- Start of Previous details modal -->
+<ng-template #previousClaimModal id="previousClaimModal" let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Select Previous Claimed Details</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="modal.dismiss('Cross click')">
+          <i class="icon-times-solid"></i>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="fix-height">
+          <div class="row" *ngIf="booleanPrevClaimStatus;else noRecordFound ">
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th scope="col" width="50px">Sl#</th>
+                              <th scope="col">Claimed Amount</th>
+                              <th scope="col" *ngIf="intNoOfDateField != 1">From Date</th>
+                              <th scope="col" *ngIf="intNoOfDateField != 1">To Date</th>
+                              <th scope="col" *ngIf="intNoOfDateField == 1">Date</th>
+                              <th scope="col">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let claim of previousClaimedSubsidy; let i =index">
+                              <td>{{i + 1 }}</td>
+                              <td>{{claim.total_int_prev_cia_amt}}</td>
+                              <td *ngIf="intNoOfDateField != 1">{{claim.dtmCreatedOn}}</td>
+                              <td *ngIf="intNoOfDateField != 1">{{claim.stmUpdatedOn}}</td>
+                              <td *ngIf="intNoOfDateField == 1">{{claim.dtmCreatedOn}}</td>
+                              <td><button class="btn btn-sm btn-success" (click)="getPrevClaimDetails(claim.intId)">Select</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <ng-template #noRecordFound>
+              <h6 class="no-content"> No Record Found</h6>
+          </ng-template>
+      </div>
+  </div>
+      <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" id="closeModal"  >Close</button>
+      </div> -->
+</ng-template>
+
+
+<!-- End of Previous details modal -->
+<ng-template #towerDetailsModal id="towerDetailsModal" let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Select Tower</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          (click)="modal.dismiss('Cross click')">
+          <i class="icon-times-solid"></i>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="fix-height">
+          <div class="row" *ngIf="isTowerAvailable;else norecord ">
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th scope="col" width="50px">Sl#</th>
+                              <th scope="col">Operation</th>
+                              <th scope="col">Location</th>
+                              <th scope="col">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let b of towerDeatilsList; let i =index">
+                              <td>{{i + 1 }}</td>
+                              <td>{{b.vch_operation}}</td>
+                              <td>{{b.vch_od_ofc_location}}</td>
+                              <td><button class="btn btn-sm btn-success" (click)="setTowerDetails(b.intId)">Select</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <ng-template #norecord>
+              <h6 class="no-content"> No Record Found</h6>
+          </ng-template>
+      </div>
+  </div>
+      <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" id="closeModal"  >Close</button>
+      </div> -->
+</ng-template>
+
+</div>
+
+
+
+
+
+<!-- Added calLoader for auto fill time loading -->
+<div class="loader" *ngIf="loading || calLoader">
+  <div class="loader-item"></div>
+  <p>Loading...</p>
+</div>
+
+
+

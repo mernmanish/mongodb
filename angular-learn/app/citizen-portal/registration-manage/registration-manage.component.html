@@ -1,0 +1,95 @@
+<!--===Page Title===-->
+
+<div class="page-title p-3 pb-0" [ngClass]="{'d-none':fromadmin == 'admin'}">
+    <h4>View Application Details</h4> 
+  </div>
+  <!--===Page Title===-->
+  <!--===controle section===-->
+  <div class="page-controls-section" id="page-content">
+    <div class="border-0" [ngClass]="{'card':fromadmin != 'admin'}">
+      <div class="card-body p-3 pb-0">
+        <div class="controls-section">
+          <div *ngIf="formsList?.length > 0; else norecord">
+            <!-- <div class="d-flex justify-content-between mb-3">
+              <div></div>
+              <div>
+                Per Page:
+                <select (change)="onTableSizeChange($event)">
+                  <option *ngFor="let size of pageSizes" >
+                    {{ size }}
+                  </option>
+                </select>
+              </div>
+            </div> -->
+  
+            <div class="table-responsive print-section">
+              <table
+                data-toggle="table"
+                class="table table-bordered valign-middle"
+              >
+                <thead>
+                  <tr>
+                    <th width="50px">Sl#</th>
+                    <!-- <th>Reference No</th> -->
+                    <th *ngFor="let colName of dataCols">
+                      {{ colName.colHeader }}
+                    </th>
+                    <!-- <th>Status</th> -->
+                    <!-- <th width="80px">Details</th> -->
+                    <th width="120px">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let rows of dataResult; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <!-- <td> {{projectPrefix +'' + rows['vchApplicationNo']}}</td> -->
+                    <td *ngFor="let colName of dataCols">
+                      {{ rows[colName.colName] }}
+                    </td>
+                    <!-- <td>
+                      <div [innerHTML]="getStatus(rows)"></div>
+                    </td> -->
+                    <!-- <td>
+                        <a
+                        href="javascript:void(0);"
+                        class="btn btn-primary btn-sm"
+                        (click)="
+                          gotoPreview(rows.intOnlineServiceId)
+                        "
+                        >view</a>
+
+                      </td> -->
+
+                      <td>
+                        <a
+                        href="javascript:void(0);"
+                        class="btn btn-success btn-sm"
+                        (click)="editApplication(rows.intOnlineServiceId)"
+                        >Edit</a
+                      >
+                      </td>
+                    <!-- <td>
+                      {{rows['vchApplicationNo']}}
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-end">
+           
+            </div>
+          </div>
+          <ng-template #norecord>
+            <h6 class="no-content">No Record Found</h6>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="loader" *ngIf="loading">
+    <div class="loader-item"></div>
+    <p>Loading...</p>
+  </div>
+
+  

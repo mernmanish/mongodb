@@ -1,0 +1,31 @@
+
+
+
+<div class="pagenavigation">
+
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{page_info.vchPageName}}</li>
+            </ol>
+          </nav>
+    </div>    
+    </div>
+    <div class="container">
+    <div class="content-section" innerHtml={{page_info.vchContent}}>
+
+    </div>
+    </div>
+    <!-- innerHtml={{page_info.vchContent}} -->
+ 
+
+
+<div class="loader" *ngIf="loading">
+                <div class="loader-item"></div>
+                <p>Loading...</p>
+        </div>
+
+
+        
+

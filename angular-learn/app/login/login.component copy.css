@@ -1,0 +1,113 @@
+.loginbody{
+    min-height: 100vh;
+    display: flex;
+    background: #1953a7 url(../../assets/images/Login-bg.jpg);
+    background-size: cover;
+    align-items: center;
+    justify-content: end;
+}
+
+.loginform{
+    background-color: var(--white);
+    padding: 30px;
+    width: 500px;
+    margin-right: 2rem;
+    border-radius: 15px;
+}
+.input-group-text i{
+font-size: 27px;
+}
+#captchaImage{
+    height: 49px;
+}
+.input-group-text {
+    border-radius: 0 4px 4px 0;
+    background-color: #1953a726;
+    /* border: 1px solid var(--shadow); */
+    font-size: 1.1rem;
+    padding: 0.35rem 0.75rem;
+}
+.logo span {
+    font-size: 26px!important;
+    margin-top: 0.7rem;
+    font-weight: bold!important;
+    color: #000;
+}
+.logo span small{
+  font-size: 14px;
+  font-weight: normal;
+}
+.btn-warning {
+    color: #000;
+    background-color: #f2cb46;
+    border-color: #f2cb46;
+}
+.btn {
+    padding: 0.575rem 1rem;
+}
+
+.form-control, .form-select {
+    padding: 0.75rem 0.75rem;
+}
+.hide{ display: none;}
+.welcome{
+    color: #1953a7;
+    font-weight: bold;
+}
+.login-header h3{ font-weight: bold;font-size: 1.5rem;}
+.language-change{ width: 100px;}
+.language-change .form-select{ padding: 3px 6px;border: 1px solid #ebebeb;background-color: #f9f9f9;}
+.heading-style{
+    position: relative;
+    width: 12%;
+    height: 1px;
+    background-color: var(--light-grey);
+    margin-top: 1rem;
+    }
+    .heading-style::before{
+      content: "";
+      display: block;
+      width: 45%;
+      height: 3px;
+      background-color: var(--text-orange);
+      position: absolute;
+      top: -1px;
+    }
+
+     
+     .hideDiv {
+        display: block;
+     }
+
+     .showDiv input{
+         border-left: none;    padding-left: 2px;
+     }
+
+     /* .showDiv span{border: none;} */
+     /* .showDiv .form-control, .form-select{border: none;} 
+      .showDiv .input-group{ border: 1px solid #e2e2e2;} */
+     .showDiv i{ font-size: 1.5rem; color: #009a4e;}
+     .showDiv .input-group-text {  border: 1px solid #e3e3e3; border-top-left-radius: 4.5px; border-bottom-left-radius: 4.5px;}
+     .form-control:focus { background-color: #fff; box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%); }
+
+     @media screen and (max-width:1366px) {
+        .loginform {padding: 12px 20px;}
+        .mt-4 { margin-top: 0.8rem!important; }
+            .login-inputs .form-group{ margin-bottom: .5rem;}
+            .login-inputs p{margin-bottom: .5rem !important;}
+    }
+     
+     @media screen and (max-width:630px) {
+        .loginbody{
+            justify-content: center;
+        }
+        .loginform{
+            margin-right: 0;
+        }
+     }
+     @media screen and (max-width:500px) {
+     .loginbody {padding: 0 10px; }
+     .loginform{ margin-right: 0;}
+   
+
+}

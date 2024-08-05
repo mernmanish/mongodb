@@ -1,0 +1,17 @@
+
+.img-div{
+    background: #e9ecef;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 4px;
+}
+.img-div img{
+    height: 148px;
+}
+.ifsc_code{width: 60%;}
+@media screen and (max-width:1440px) {
+    .ifsc_code{width: 50%;}
+}
+.d-none{
+    display: none;
+}

@@ -1,0 +1,130 @@
+<div class="container-fluid">
+<div class="row">
+
+<div class="col-xl-12 col-lg-12"> 
+	<div class="section schemes-section">
+
+		
+			<h4 class="section-heading"> {{'Policies' | translate }}
+				<div class="heading-style"></div>
+			</h4>
+			
+		
+			<div class="card">
+				<h5 class="card-header">Registration Details</h5>
+				<div class="card-body">				  
+				  <div class="row">
+					<div class="col-lg-3 form-group">
+					   <label>Company Name</label>
+					   <label class="d-block fw-bold mt-2">{{regdInfo.vch_company_name}}</label>
+					</div>
+					<div class="col-lg-3 form-group">
+						<label>Reference Number</label>
+					   <label class="d-block fw-bold mt-2">{{regdInfo.vch_regd_no}}</label>
+					</div>
+							 
+				 				 
+					<div class="col-lg-3 form-group">
+						<label>Gst Number</label>
+					   <label class="d-block fw-bold mt-2">{{regdInfo.vch_gstin}}</label>
+					</div>
+					<div class="col-lg-3 form-group">
+						<label>Pan Number</label>
+					   <label class="d-block fw-bold mt-2">{{regdInfo.vch_organization_pan_number}}</label>
+					</div>
+				  </div>
+				</div>
+			  </div>
+		<!-- <div class="row">
+			<div class="col-md-12 text-danger">
+				<h6 style="margin: 0px 22px;">**Note: If the file size of any document exceeds the allowable limit, 
+					please upload the file to an online shared drive and provide the link in the document and upload in specified section of OIMS application.**</h6>
+			</div>
+		</div> -->
+	</div>
+
+	
+
+	<!-- Code Modified by Bibhuti bhusan sahoo 27 mar 2023 -->
+	<section *ngIf="allProducts; else noRecord" class="BankProductDetails">
+			<div class="row">
+				<ng-container *ngFor="let prod of respList; let aRwCnt=index;">
+				<div class="col-lg-3 mb-4" *ngIf="shouldDisplay(prod)">
+					<div  class="card h-100">
+
+						<div class="top-header p-3">
+              <h4 class="card-number">{{ getSerialNumber(aRwCnt) }}</h4>
+							<h4>{{prod.prodName}}</h4>
+							<hr>
+						</div>
+
+						
+						<div class="card-body">
+							<div class="action-btn mt-3 d-flex">
+
+								<ng-container *ngIf="loginSts; then aftrLgIn else bfrLgIn"></ng-container>
+								<ng-template #aftrLgIn>
+									<ng-container *ngIf="prod.intSchmCnt>0; then schemView"></ng-container>
+									<ng-template #schemView>
+										<a href="javascript:void(0)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal"
+											data-bs-target="#ProcessFlow"
+											(click)="modalLoanProduct(prod)">{{'View Details' | translate}}</a>
+									</ng-template>
+									<button href="javascript:void(0)"
+										class="btn btn-outline-primary  btn-sm"
+										(click)="doSchemeApply('0:0:0:'+prod.prodId+':'+prod.intServiceMode+':'+prod.intBaseType+':'+prod.prodName,prod.prodName,1,'Scheme',prod.bankId,prod.draftCountRegWise,prod.revertCountRegWise);">{{'Apply for Incentives' | translate }}</button>
+								</ng-template>
+								<ng-template #bfrLgIn>
+									<span *ngIf="prod.applyStatus"><a routerLink="/login"
+											class="btn btn-success me-2 btn-sm">{{'Apply for Incentives' | translate }}</a></span>
+								</ng-template>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+				</ng-container>
+			</div>
+
+	</section>
+	<!-- Code Added by Bibhuti bhusan sahoo 27 mar 2023 -->
+	<ng-template #noRecord>
+		<section>
+				<div class="row">
+					<div class="col-lg-12 mb-4">
+						<div class="card-head h-100 text-center text-primary">
+							<p>No Record Found</p>
+						</div>
+					</div>
+				</div>
+		</section>
+	</ng-template>
+	<!-- Code Added by Bibhuti bhusan sahoo 27 mar 2023 -->
+</div>
+</div>
+
+</div>
+
+<div class="loader" *ngIf="loading">
+	<div class="loader-item"></div>
+	<p>Loading...</p>
+</div>
+<!-- <div *ngIf="loaderService.loading$ | async" class="loader">
+	<div class="loader-item"></div>
+	<p>Loading...</p>
+  </div> -->
+
+<div class="modal fade sm" id="ProcessFlow" tabindex="-1" aria-labelledby="exampleLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleLabel">Incentive : {{incentiveDetails.prodName}}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div [innerHTML]="incentiveDetails.prodDesc"></div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,373 @@
+<!-- start scheme tab -->
+
+<div class="p-3 bg-light mb-3">
+    <h5 class="common-heading2 mb-0 ">{{schemeType}} : <span class="text-success">{{schemeName}}</span></h5>
+</div>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" value="1" (click)="goToSectn($event.target.value)" id="profile-tab" type="button"
+            role="tab" aria-controls="profile" aria-selected="true">Farmer Information</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" value="2" (click)="goToSectn($event.target.value)" id="scheme-tab" type="button"
+            role="tab" aria-controls="scheme" aria-selected="false">Scheme Information</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" value="3" (click)="goToSectn($event.target.value)" id="document-tab" type="button"
+            role="tab" aria-controls="document" aria-selected="false">Documents</button>
+    </li>
+</ul>
+<!-- end scheme tab -->
+<div class="tab-content" id="schmTabContent">
+    <div class="tab-pane fade show active" id="schmTab" role="tabpanel" aria-labelledby="scheme-tab">
+
+        <form focusInvalidInput [formGroup]="schemeDmgForm">
+            <div class="control-div">
+                <h5 class="common-heading2">Application Processing Address (Application Will Be Process To The Selected
+                    Block)</h5>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <label for="selDistrict" class="form-label"><span class="text-danger">*</span> District </label>
+                        <div class="form-group">
+                            <select class="form-select" formControlName="selDistrict" name="selDistrict"
+                                id="selDistrict" data-lbl="District" (change)="getBlockList($event.target.value)">
+                                <option value="0">Select</option>
+                                <option *ngFor="let distP of districtList;" value="{{distP.intHierarchyValueId}}">
+                                    {{distP.vchHierarchyValue}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <label for="selBlock" class="form-label"><span class="text-danger">*</span> Block/ ULB </label>
+                        <div class="form-group">
+                            <select class="form-select" formControlName="selBlock" name="selBlock" id="selBlock">
+                                <option value="0">Select</option>
+                                <option *ngFor="let blockP of blockList;" value="{{blockP.intHierarchyValueId}}">
+                                    {{blockP.vchHierarchyValue}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator separator-dashed"></div>
+            </div>
+        </form>
+
+        <form focusInvalidInput [formGroup]="schemeForm" (submit)="doSchemeApply();">
+            <div class="control-div">
+                <div *ngFor="let sectnInfo of respDynm;let aRwCnt=index;">
+                    <h5 class="common-heading2">{{sectnInfo.sectionName}}</h5>
+                    <div class="row">
+                        <ng-container *ngFor="let ctrlInfo of sectnInfo.sectionCtrls;let i=index;">
+                            <ng-container *ngIf="ctrlInfo.tinControlType==8; then shwAddMore"></ng-container>
+                            <ng-template #shwAddMore>
+                                <div class="col-md-12">
+                                   
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Sl#</th>
+                                                <th
+                                                    *ngFor="let addMoreCtrlInfo of ctrlInfo.jsnControlArray[0].ctrlAddMore;let j=index;">
+                                                    {{addMoreCtrlInfo['columnName']}}
+                                                </th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr *ngFor="let addMrArr of (scmFrmAdmObj[ctrlInfo.jsnControlArray[0].ctrlName]).controls;let adRowCtr=index">
+                                                <td>{{adRowCtr+1}}</td>
+                                                <td
+                                                formArrayName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                                                                *ngFor="let addMoreCtrlInfo of ctrlInfo.jsnControlArray[0].ctrlAddMore;let j=index;">
+                                                    <ng-container
+                                                        [ngSwitch]="ctrlInfo.jsnControlArray[0].ctrlAddMore[j].columnType">
+                                                        <ng-container *ngSwitchCase="'2'">
+                                                            <select class="form-select" formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}_{{adRowCtr}}_{{j}}">
+                                                                <option value="">Select</option>
+                                                                <option
+                                                                    *ngFor="let addMoreOpts of ctrlInfo.jsnControlArray[0].ctrlAddMore[j].optionArr;let addMoreOptK=index;"
+                                                                    [selected]="addMoreOpts.optionValue == ctrlInfo.vchFieldValue"
+                                                                    value="{{addMoreOpts.optionValue}}">
+                                                                    {{addMoreOpts.optionText}}</option>
+                                                            </select>
+                                                        </ng-container>
+                                                        <ng-container *ngSwitchCase="'6'">
+                                                            <input type="text" class="form-control" formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}_{{adRowCtr}}_{{j}}" />
+                                                        </ng-container>
+                                                        <ng-container *ngSwitchCase="'7'">
+                                                            <textarea class="form-control" formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}_{{adRowCtr}}_{{j}}"></textarea>
+                                                        </ng-container>
+                                                        <ng-container *ngSwitchDefault>
+                                                            <input type="text" class="form-control" fformControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}_{{adRowCtr}}_{{j}}" />
+                                                        </ng-container>
+                                                    </ng-container>
+    
+                                                </td>
+                                                <td>
+                                                    <button type="button" (click)="addRow(ctrlInfo.jsnControlArray[0].ctrlName,adRowCtr,(ctrlInfo.jsnControlArray[0].ctrlAddMore).length)" class="btn btn-sm btn-warning me-2 ">+</button>
+                                                    <button type="button" (click)="removeRow(ctrlInfo.jsnControlArray[0].ctrlName,adRowCtr)" class="btn btn-sm btn-danger me-2 ">-</button>
+                                                </td>
+                                            </tr>
+
+                                      
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </ng-template>
+                            <div *ngIf="ctrlInfo.tinControlType!=8"
+                                class="col-md-6 col-lg-4 clsDiv_{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                [ngClass]="ctrlInfo.jsnDispTagArray[0].tagFieldSts == 1?'d-none' : ''">
+
+                                <label for="{{ctrlInfo.jsnControlArray[0].ctrlName}}" class="form-label">
+                                    <ng-container *ngIf="ctrlInfo.tinMandatorySts==1; then shwMndSpn">
+                                    </ng-container>
+                                    <ng-template #shwMndSpn>
+                                        <span class="text-danger">*</span>
+                                    </ng-template>
+                                    {{ctrlInfo.vchLabelName}}
+                                </label>
+
+                                <div class="form-group">
+                                    <ng-container [class]="(ctrlInfo.jsnControlArray[0].ctrlName)+'Div'">
+                                        <ng-container [ngSwitch]="ctrlInfo.tinControlType" id="parentDiv">
+                                            <input type="button"
+                                                *ngIf="ctrlInfo.jsnControlArray[0].ctrlClass.includes('ifsc_code')"
+                                                value="Get IFSC code" class="btn btn-success float-end"
+                                                (click)="getIFSC()">
+                                            <ng-container *ngSwitchCase="'1'">
+                                                <ng-container
+                                                    *ngFor="let optInfo of ctrlInfo.jsnOptionArray[0].optionArr;let optK=index;">
+                                                    <input type="checkbox"
+                                                        formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                        name="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                        id="{{ctrlInfo.jsnControlArray[0].ctrlId+'_'+optK}}"
+                                                        [attr.data-lblname]="ctrlInfo.vchLabelName"
+                                                        [attr.data-sectype]="ctrlInfo.tinSectionType"
+                                                        [attr.data-frmconfgid]="ctrlInfo.intFormConfigId"
+                                                        [attr.data-ctrltype]="ctrlInfo.tinControlType" data-othval=""
+                                                        [attr.data-mandatory]="ctrlInfo.tinMandatorySts+'|'+ctrlInfo.tinControlType+'|'+(ctrlInfo.jsnControlArray[0].ctrlName)+'|'+ctrlInfo.vchLabelName+'|'+ctrlInfo.intFieldLength" />
+                                                    <label
+                                                        [for]="ctrlInfo.jsnControlArray[0].ctrlName+'_'+optK">&nbsp;{{optInfo.optionText}}</label>&nbsp;&nbsp;
+                                                </ng-container>
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="'2'">
+                                                <select #{{ctrlInfo.jsnControlArray[0].ctrlName}}
+                                                    class="form-select {{ctrlInfo.jsnControlArray[0].ctrlClass}} clsDynamicFrm cls_{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    name="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    id="{{ctrlInfo.jsnControlArray[0].ctrlId}}"
+                                                    [attr.data-lblname]="ctrlInfo.vchLabelName"
+                                                    [attr.data-sectype]="ctrlInfo.tinSectionType"
+                                                    [attr.data-frmconfgid]="ctrlInfo.intFormConfigId"
+                                                    [attr.data-ctrltype]="ctrlInfo.tinControlType" data-othval=""
+                                                    [attr.data-mandatory]="ctrlInfo.tinMandatorySts+'|'+ctrlInfo.tinControlType+'|'+(ctrlInfo.jsnControlArray[0].ctrlName)+'|'+ctrlInfo.vchLabelName+'|'+ctrlInfo.intFieldLength">
+                                                    <option value="">Select</option>
+                                                    <option
+                                                        *ngFor="let optInfo of ctrlInfo.jsnOptionArray[0].optionArr;let optK=index;"
+                                                        [selected]="optInfo.optionValue == ctrlInfo.vchFieldValue"
+                                                        value="{{optInfo.optionValue}}">{{optInfo.optionText}}</option>
+                                                </select>
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="'4'">&nbsp;:
+                                                <label><strong>{{ctrlInfo.jsnControlArray[0].labelText}}</strong></label>
+                                                <input type="hidden" class="{{ctrlInfo.jsnControlArray[0].ctrlClass}}"
+                                                    formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    name="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    id="{{ctrlInfo.jsnControlArray[0].ctrlId}}"
+                                                    [attr.data-lblname]="ctrlInfo.vchLabelName"
+                                                    [attr.data-sectype]="ctrlInfo.tinSectionType"
+                                                    [attr.data-frmconfgid]="ctrlInfo.intFormConfigId"
+                                                    [attr.data-ctrltype]="ctrlInfo.tinControlType"
+                                                    [attr.data-mandatory]="ctrlInfo.tinMandatorySts+'|'+ctrlInfo.tinControlType+'|'+(ctrlInfo.jsnControlArray[0].ctrlName)+'|'+ctrlInfo.vchLabelName+'|'+ctrlInfo.intFieldLength" />
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="'5'">
+                                                <ng-container
+                                                    *ngFor="let optInfo of ctrlInfo.jsnOptionArray[0].optionArr;let optK=index;">
+                                                    <input type="radio"
+                                                        class="{{ctrlInfo.jsnControlArray[0].ctrlClass}} clsDynamicFrm cls_{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                        value="{{optInfo.optionValue}}"
+                                                        formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                        name="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                        id="{{ctrlInfo.jsnControlArray[0].ctrlId+'_'+optK}}"
+                                                        [checked]="ctrlInfo.jsnControlArray[0].ctrlValue==optInfo.optionValue"
+                                                        [attr.data-lblname]="ctrlInfo.vchLabelName"
+                                                        [attr.data-sectype]="ctrlInfo.tinSectionType"
+                                                        [attr.data-frmconfgid]="ctrlInfo.intFormConfigId"
+                                                        [attr.data-ctrltype]="ctrlInfo.tinControlType"
+                                                        [attr.data-mandatory]="ctrlInfo.tinMandatorySts+'|'+ctrlInfo.tinControlType+'|'+(ctrlInfo.jsnControlArray[0].ctrlName)+'|'+ctrlInfo.vchLabelName+'|'+ctrlInfo.intFieldLength" />
+                                                    <label
+                                                        [for]="ctrlInfo.jsnControlArray[0].ctrlName+'_'+optK">&nbsp;{{optInfo.optionText}}</label>&nbsp;&nbsp;
+                                                </ng-container>
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="'6'">
+                                                <input type="text"
+                                                    [readonly]="enableDisable(ctrlInfo.jsnControlArray[0].ctrlName, ctrlInfo.jsnControlArray[0].ctrlClass)"
+                                                    class="form-control {{ctrlInfo.jsnControlArray[0].ctrlClass}} clsDynamicFrm cls_{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    name="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    id="{{ctrlInfo.jsnControlArray[0].ctrlId}}"
+                                                    [attr.data-lblname]="ctrlInfo.vchLabelName"
+                                                    [attr.data-sectype]="ctrlInfo.tinSectionType"
+                                                    [attr.data-frmconfgid]="ctrlInfo.intFormConfigId"
+                                                    [attr.data-ctrltype]="ctrlInfo.tinControlType"
+                                                    [maxLength]="ctrlInfo.intFieldLength"
+                                                    (keypress)="keyPressEvt(ctrlInfo.txtCtrlVldnTyp,$event)"
+                                                    autocomplete="off" data-othval=""
+                                                    [attr.data-mandatory]="ctrlInfo.tinMandatorySts+'|'+ctrlInfo.tinControlType+'|'+(ctrlInfo.jsnControlArray[0].ctrlName)+'|'+ctrlInfo.vchLabelName+'|'+ctrlInfo.intFieldLength"
+                                                    data-valdtn="0" appBlockCopyPaste />
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="'7'">
+                                                <textarea #{{ctrlInfo.jsnControlArray[0].ctrlName}}
+                                                    class="form-control {{ctrlInfo.jsnControlArray[0].ctrlClass}} clsDynamicFrm"
+                                                    formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    name="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    id="{{ctrlInfo.jsnControlArray[0].ctrlId}}"
+                                                    [attr.data-lblname]="ctrlInfo.vchLabelName"
+                                                    [attr.data-sectype]="ctrlInfo.tinSectionType"
+                                                    [attr.data-frmconfgid]="ctrlInfo.intFormConfigId"
+                                                    [attr.data-ctrltype]="ctrlInfo.tinControlType"
+                                                    [maxLength]="ctrlInfo.intFieldLength" data-othval=""
+                                                    [attr.data-mandatory]="ctrlInfo.tinMandatorySts+'|'+ctrlInfo.tinControlType+'|'+(ctrlInfo.jsnControlArray[0].ctrlName)+'|'+ctrlInfo.vchLabelName+'|'+ctrlInfo.intFieldLength"
+                                                    onkeyPress="" data-valdtn="0" rows="1"></textarea>
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="'8'">
+                                                test
+                                            </ng-container>
+
+                                            <ng-container *ngSwitchDefault>
+                                                <input type="text"
+                                                    class="form-control {{ctrlInfo.jsnControlArray[0].ctrlClass}} clsDynamicFrm"
+                                                    formControlName="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    name="{{ctrlInfo.jsnControlArray[0].ctrlName}}"
+                                                    id="{{ctrlInfo.jsnControlArray[0].ctrlId}}"
+                                                    [attr.data-lblname]="ctrlInfo.vchLabelName"
+                                                    [attr.data-sectype]="ctrlInfo.tinSectionType"
+                                                    [attr.data-frmconfgid]="ctrlInfo.intFormConfigId"
+                                                    [attr.data-ctrltype]="ctrlInfo.tinControlType"
+                                                    [maxLength]="ctrlInfo.intFieldLength" autocomplete="off"
+                                                    data-othval=""
+                                                    [attr.data-mandatory]="ctrlInfo.tinMandatorySts+'|'+ctrlInfo.tinControlType+'|'+(ctrlInfo.jsnControlArray[0].ctrlName)+'|'+ctrlInfo.vchLabelName+'|'+ctrlInfo.intFieldLength"
+                                                    data-valdtn="0" appBlockCopyPaste />
+                                            </ng-container>
+
+                                        </ng-container>
+                                    </ng-container>
+
+
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="separator separator-dashed"></div>
+                </div>
+                <div class="text-center">
+                    <a class="btn btn-danger me-2" (click)="goToBack()">Back</a>
+                    <ng-container
+                        *ngIf="((applctnId==0 && applctnSts<appDraftSts) || (applctnSts>=appDraftSts && applctnSts<appPrevwSts && applctnId>0)); then shwModBtn">
+                    </ng-container>
+                    <ng-template #shwModBtn>
+                        <button class="btn btn-warning me-2" (click)="onSaveAsDraftClick()">Save As Draft</button>
+                        <button class="btn btn-success me-2" (click)="onSaveNextClick()">Save & Next</button>
+                    </ng-template>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+</div>
+
+<div class="loader" *ngIf="loading">
+    <div class="loader-item"></div>
+    <p>Loading...</p>
+</div>
+
+
+<ng-template #someModal id="someModal" let-modal>
+    <form [formGroup]="ifscForm" (ngSubmit)="searchIFSC();">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Find IFSC Code</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                (click)="modal.dismiss('Cross click')">
+                <i class="icon-times-solid"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-5 col-lg-5">
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ 'Bank Name' | translate}} </label>
+                        <select class="form-select" formControlName="vchBankName"
+                            [ngClass]="{ 'is-invalid': ifscSubmitted && j.vchBankName.errors }">
+                            <option value="">Select</option>
+                            <option *ngFor="let bank of BankNames;" value="{{bank.vch_Bank_Name}}">
+                                {{bank.vch_Bank_Name}}</option>
+                        </select>
+                        <div *ngIf="ifscSubmitted && j.vchBankName.errors" class="invalid-feedback">
+                            <div *ngIf="j.vchBankName.errors.required">Select bank</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-5">
+                    <div class="form-group">
+                        <label><span class="text-danger">*</span> {{ 'District Name' | translate}} </label>
+                        <select class="form-select" formControlName="vchDistrictName"
+                            [ngClass]="{ 'is-invalid': ifscSubmitted && j.vchDistrictName.errors }"> >
+                            <option value="">Select</option>
+                            <option *ngFor="let dist of DistrictNames;" value="{{dist.vch_District}}">
+                                {{dist.vch_District}}</option>
+                        </select>
+                        <div *ngIf="ifscSubmitted && j.vchDistrictName.errors" class="invalid-feedback">
+                            <div *ngIf="j.vchDistrictName.errors.required">Select district</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 mt-4 ">
+                    <div class="form-group">
+                        <button class="btn btn-info">Search</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="fix-height">
+                <div class="row" *ngIf="isIFSCFlag;else norecord ">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="50px">Sl#</th>
+                                    <th scope="col">Branch Name</th>
+                                    <th scope="col">IFSC Code</th>
+                                    <th scope="col">Select IFSC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let b of Banks;let i=index">
+                                    <td>{{i + 1 }}</td>
+                                    <td>{{b.vch_Branch_Name}}</td>
+                                    <td>{{b.vch_Ifsc_Code}}</td>
+                                    <td><button class="btn btn-sm btn-success"
+                                            (click)="selectIFSC(b.vch_Branch_Name,b.vch_Ifsc_Code )">Select</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <ng-template #norecord>
+                    <h6 class="no-content"> No Record Found</h6>
+
+                </ng-template>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" id="closeModal"  >Close</button>
+            </div> -->
+    </form>
+</ng-template>

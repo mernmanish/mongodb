@@ -1,0 +1,132 @@
+.loginbody{
+    min-height: 100vh;
+    display: flex;
+    background: url(../../assets/images/newlogin-bg.jpg);
+    background-size: cover;
+    align-items: normal;
+    justify-content: space-between;
+}
+.loginbody-img{width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: 100% 100%;}
+
+.loginform{
+    background-color: #fcfefd;
+    padding: 30px;
+    width: 600px;
+    margin-right: 7rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+
+.new-login-headr{display: flex; justify-content: end; align-items: center;}
+.new-login-headr .language-change .form-select{ background-color: transparent; border: none;}
+.new-login-headr ul{ padding: 0; margin: 0; display: flex;position: absolute; top: 4rem;}
+.new-login-headr ul li{ list-style-type: none;padding: 0 12px 0 12px; border-right: 1px solid #e1e1e1;}
+.new-login-headr ul li select{ height: auto;}
+.new-login-headr ul li:last-child{ border-right: none; padding-right: 0;}
+.new-login-headr .form-select:focus{ box-shadow: none;}
+
+.dynlabel{
+    display: none;
+}
+.btn-warning {
+    color: #000!important; 
+    background-color: #f2cb46;
+    border-color: #f2cb46;
+}
+.logo span {
+    font-size: 26px!important;
+    margin-top: 0.7rem;
+    font-weight: bold!important;
+    color: #000 !important;
+}
+.logo span small{
+  font-size: 14px;
+  font-weight: normal;
+}
+.btn {
+    padding: 0.575rem 1rem;
+}
+.form-control, .form-select {
+    padding: 0.75rem 0.75rem;
+}
+.hide{ display: none;}
+.welcome{
+    color: #1953a7;
+    font-weight: 600;
+}
+.login-header h3{ font-weight: bold;}
+
+.heading-style{
+    position: relative;
+    width: 12%;
+    height: 1px;
+    background-color: var(--light-grey);
+    margin-top: 1rem;
+    }
+    .heading-style::before{
+      content: "";
+      display: block;
+      width: 45%;
+      height: 3px;
+      background-color: var(--text-orange);
+      position: absolute;
+      top: -1px;
+    }
+
+    .showDiv input{ border-left: none;    padding-left: 2px;    }
+    .showDiv i{ font-size: 1.5rem; color: #009a4e;}
+    .showDiv i.aadhaar-icon { font-size: .9rem;}
+    .showDiv .input-group-text.bg-green{ background-color: #4a8b71; color: var(--white);padding-left: 1rem;  padding-right: 1rem;}
+    .showDiv .input-group-text {  border: 1px solid #e3e3e3;    border-top-left-radius: 4.5px;border-bottom-left-radius: 4.5px;}
+    .form-control:focus {  background-color: #fff; box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%); }
+    .login-header h3{ font-weight: bold;font-size: 1.5rem;}
+    .loginform .heading-style{    margin: inherit;}
+    .language-change{ width: 100px;}
+.language-change .form-select{ padding: 3px 6px;border: 1px solid #ebebeb;background-color: #f9f9f9;}
+
+
+.new-irms-css .form-select{ border:none;background-color: #ececec;}
+.new-irms-css .form-control{ border:none;background-color: #ececec;}
+.new-irms-css .input-group-text{ background-color: #ececec;border-radius: 6px 4px 4px 6px}
+.new-irms-css .captcha-i .form-control, .form-select{ background-color: transparent;}
+.new-irms-css .captcha-i .input-group-text.addon{background-color: transparent; border: none;}
+.new-irms-css .btn-primary { --bs-btn-color: #fff; --bs-btn-bg: #1953a7; --bs-btn-border-color: #1953a7;}
+.loginbody-img img{ max-width: 100%;}
+.login-header .logo a{ align-items: center;}
+
+@media screen and (max-width:1400px) {
+    .loginbody-img img{ max-width: 50%;}
+    .new-login-headr{margin-bottom: 2rem;}
+    .new-login-headr ul{  top: 1rem;}
+    }
+@media screen and (max-width:1366px) {
+    .loginform {padding: 12px 20px;}
+    .mt-4 { margin-top: 0.8rem!important; }
+    .login-inputs .form-group{ margin-bottom: .5rem;}
+    .login-inputs p{margin-bottom: .5rem !important;}
+}
+
+@media screen and (max-width:768px) {
+.loginform{  margin-right: 0rem; }
+.logo span { font-size: 22px!important; }
+.new-login-headr { margin-bottom: 3rem;}
+.loginbody-img img{ max-width: 85%;}
+}
+@media screen and (max-width:630px) {
+    .loginbody{ justify-content: center;}
+    .loginform{   margin-right: 0;  }
+    .logo span { font-size: 22px!important;    }
+    .new-login-headr{margin-bottom: 2rem;}
+ }
+ @media screen and (max-width:500px) {
+ .loginbody {padding: 0 10px; }
+ .loginform{ margin-right: 0;}
+ .loginbody-img{ display: none;}
+}

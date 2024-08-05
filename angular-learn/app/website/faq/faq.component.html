@@ -1,0 +1,46 @@
+
+        <div class="pagenavigation">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <div class="breadcrumb-level">
+                <div> 
+                  <h2>Frequently Asked Questions</h2>                       
+                <ol class="breadcrumb mb-0">             
+                  <li class="breadcrumb-item"><a href="#" routerLink="/home">Home</a></li>
+                  <li class="breadcrumb-item active"><a href="#" aria-current="page">{{'FAQ' | translate }}</a></li>                  
+                </ol>
+              </div> 
+            </div>
+            </nav>               
+          </div>    
+          </div>
+          
+        <section class="faq">
+          <div class="content-section">
+          <div class="container">           
+            <h4 class="section-heading"> {{'Frequently Asked Questions (FAQs)' | translate }}
+              <div class="heading-style"></div>
+            </h4>
+            <div class="accordion accordion-content-pd" id="myAccordion">             
+              <div class="accordion-item" *ngFor="let faq of faqs;let aRwCnt=index;">
+                  <h2 class="accordion-header" id="heading{{aRwCnt}}">
+                      <button *ngIf="this.language=='Odia'" type="button" class="accordion-button collapsed" data-bs-toggle="collapse" attr.data-bs-target="#collapse{{aRwCnt}}" aria-expanded="false">{{faq.faqO}}</button>									
+                      <button *ngIf="this.language=='English'" type="button" class="accordion-button collapsed" data-bs-toggle="collapse" attr.data-bs-target="#collapse{{aRwCnt}}" aria-expanded="false">{{faq.faq}}</button>									
+                  </h2>
+                  <div [ngClass]="{'show': aRwCnt === 0}" id="collapse{{aRwCnt}}" class="accordion-collapse collapse" data-bs-parent="#myAccordion">
+                      <div class="accordion-body">
+                          <p *ngIf="this.language=='Odia'" innerHtml="{{faq.ansO}}"></p>
+                          <p *ngIf="this.language=='English'" innerHtml="{{faq.faqE}}"></p>
+                      </div>
+                  </div>
+              </div>         
+            </div>                
+        </div>
+      </div> 
+    </section>
+      
+
+<div class="loader" *ngIf="loading">
+  <div class="loader-item"></div>
+  <p>Loading...</p>
+</div>                                                                                                                                                                                                       

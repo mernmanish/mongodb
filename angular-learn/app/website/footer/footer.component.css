@@ -1,0 +1,195 @@
+
+  
+  .website-footer .social {
+    text-align: right;
+  }
+  @media (min-width: 768px) {
+    .website-footer .social {
+      text-align: right;
+    }
+   
+  }
+  .website-footer .social a {
+    color: #858796;
+    padding: 0 0.2rem;
+    font-size: 1.6rem;
+  }
+  .website-footer .social a:hover.twitter-tab {
+    color: #01a1f9;
+  }
+  .website-footer .social a:hover.facebook-tab {
+    color: #3966b7;
+  }
+  .website-footer a {
+    color: #BABABA;
+    text-decoration: none;
+  }
+  .website-footer .fot-link a {
+    padding: 0 0.5rem;
+  }
+  .website-footer .fot-link a:first-child {
+    padding-left: 0;
+  }
+  .website-footer .fot-link a:hover {
+    color: #fff;
+  }
+  
+  .foote-top {
+    /* background-color: rgba(255, 255, 255, 0.08); */
+    padding: 1.8rem 0 1.2rem 0;
+    /* border-bottom: rgba(255, 255, 255, 0.4); */
+  }
+  .foote-top h3 {
+    color: #f8f9fc;
+    font-weight: 500;
+  }
+  
+  
+  .foote-top ul{
+    list-style: none;
+    margin-bottom: 0rem;
+}   
+
+.foote-top ul li{
+    margin: 0;
+    padding: .5rem 0 7px 2rem;
+    position: relative;
+}
+.foote-top ul.listed-items li:after{
+   position: absolute;
+   font-family: bootstrap-icons !important;
+        content: "\F138";
+        color: #ffc107;
+        font-size:1rem;
+        left: 0px;
+        top: 5px
+}
+.foote-top ul li a:hover {
+  color: #ffc107;
+}
+
+
+.foote-top ul.socialico li{  
+  padding-left: 0;
+  padding-top: 0;
+  
+}
+
+.foote-top ul.socialico li a{
+  width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #59663f;
+    margin-right: 12px;
+    border-radius: 4px;
+    color: var(--bg-lt-orange);
+    cursor: pointer;font-size: 1.4rem;
+}
+.foote-top ul.socialico li a:hover{ background-color:var(--bg-lt-orange); color: var(--text-dark) ;}
+.foote-top .adress-li{ }
+.foote-top .adress-li span{color:#BABABA; font-size: 1em;}
+.foote-top ul.adress-li li{ display: flex;    padding: 10px 0 10px 0;}
+.adress-li li i{ margin-right: 8px;  color: #ffc107;    padding-top: 3px;}
+
+  /* .foote-top ul li::after {
+    position: absolute;
+    font-size: 12px; 
+    color: #858796;
+    left: 0rem;
+    top: 8px;
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  } */
+  .foote-top p{line-height: 1.6rem;}
+  @media screen and (max-width: 576px) {
+    .website-footer.sticky-footer .copyright {
+      padding: 0 0 0.5rem;
+      text-align: center;
+    }
+    .website-footer.sticky-footer .powered {
+      text-align: center;
+    }
+  
+    .foote-top {
+      padding: 1rem 0;
+    }
+    .foote-top h4 {
+      font-size: 1.1rem;
+    }
+    .foote-top ul li {
+      width: 100%;
+    }
+  }
+  .scroll-to-top {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(90, 92, 105, 0.5);
+    line-height: 30px;
+  }
+  .scroll-to-top:focus, .scroll-to-top:hover {
+    color: white;
+  }
+  .scroll-to-top:hover {
+    background: #5a5c69;
+  }
+  .scroll-to-top i {
+    font-weight: 800;
+  }
+
+  .copyright{
+    padding: 0.8rem 0;
+    text-align: center;
+    color: #BABABA;
+    background-color: #122036;
+    border-top: 1px solid #2b4267;
+  }
+
+  .website-footer {
+    font-size: 85%;
+    flex-shrink: 0;
+    background: #122036;
+    background-size: cover;
+    background-position: top center;
+   
+}
+
+  @media screen and (max-width:800px) {
+.foote-top ul li {  padding: 0.5rem 0 0 1.5rem;     }
+.foote-top ul li:after { font-size: .7rem; }
+.website-footer{ font-size: 1rem;}
+.foote-top h4.section-heading { margin-bottom: 0rem;}
+
+
+  }
+ 
+
+  .scrollup {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+    display: none;
+    border-radius: 50%;
+    background-color: rgb(56 75 104 / 55%);
+    color: #fff;
+    font-size: 1.3rem;
+    border: none;
+    z-index: 1;
+
+    
+  }
+
+  @media screen and (max-width: 600px) {
+    .scrollup {right: 10px;}
+  }

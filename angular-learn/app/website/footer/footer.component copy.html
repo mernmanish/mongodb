@@ -1,0 +1,162 @@
+<!-- Footer -->
+<div class="website-footer">
+        <div class="container">
+                <div class="foote-top">
+
+                        <div class="row">
+
+
+                                <div class="col-md-8 col-lg-5">
+                                        <h4 class=" text-white">{{'Important Links' | translate}}</h4>
+                                        <ul>
+                                                <li>
+                                                        <a href="http://www.fardodisha.gov.in/" target="_blank">{{ 'Fisheries & Animal Resource Development Department' | translate}}</a>
+                                                </li>
+                                                <li>
+                                                        <a href="https://agriodisha.nic.in/Home/English" target="_blank">{{ 'Department of Agriculture & Farmer Empowerment' | translate}}</a>
+                                                </li>
+                                                <li>
+                                                        <a href="https://odishaahvs.nic.in/" target="_blank">{{ 'Directorate of Animal Husbandry & Veterinary Services' | translate}} </a>
+                                                </li>
+                                                <li>
+                                                        <a href="https://odishafisheries.nic.in/" target="_blank">{{ 'Directorate of Fisheries' | translate}}</a>
+                                                </li>
+                                                <li>
+                                                        <a href="https://agriodisha.nic.in/Home/Test" target="_blank">{{ 'Directorate of Agriculture & Food Production' | translate}}</a>
+                                                </li>
+                                                <li>
+                                                        <a href="http://odihort.nic.in/" target="_blank">{{ 'Directorate of Horticulture' | translate}}</a>
+                                                </li>
+                                                <li>
+                                                        <a href="https://www.soilodisha.nic.in/" target="_blank">{{ 'Directorate of Soil Conservation & Watershed Development' | translate}}</a>
+                                                </li>
+
+                                        </ul>
+                                </div>
+                                
+                                <div class="col-md-12 col-lg-4">
+                                        <h4 class=" text-white">{{'Contact Us' | translate}} </h4>
+                                        <p class="text-white mb-0">{{'Head Office' | translate}}<br>{{'Fisheries & Animal Resources Development Department' | translate}}<br>
+                                               {{'Odisha Secretariat, Sachivalaya Marg, Bhubaneswar -751001'| translate}} <br>{{'Telephone'| translate}}: 
+                                                <a href="tel:0674-2536985">{{'(0674) 2536985'| translate}}</a>,<a href="tel:0674-2322960">{{'2322960'| translate}}</a><br>{{'Fax'| translate}}: {{'(0674) 2390681'| translate}}<br>{{'Email'| translate}}:
+                                                <a href="mailto:helpdesk.sugam@odisha.gov.in">helpdesk.sugam@odisha.gov.in</a></p>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                        <h4 class=" text-white">{{'Quick Links' | translate}}</h4>
+                                        <ul>
+                                                <li>
+                                                        <a routerLink="/home/howtoapply">{{'How to Apply' |
+                                                                translate}}</a>
+                                                </li>
+                                                <li>
+                                                        <a routerLink="/home/knowyourstatus">{{'Know your status' | translate}}</a>
+                                                </li>
+                                                <li>
+                                                        <a href="javascript:void(0)" (click)="getIFSC()">{{'Get IFSC
+                                                                Code' | translate}}</a>
+                                                </li>
+                                                <li>
+                                                                <a routerLink="/home/content/contact-us">{{'Contact Us' | translate}}</a>
+                                                        </li>
+
+                                        </ul>
+                                </div>
+                     
+                        </div>
+                </div>
+                <div class="copyright"> <span>&copy;
+                                <script>
+                                        document.write(new Date().getFullYear());
+                                </script>{{'Credit Portal' | translate}}, All rights reserved
+                        </span> </div>
+        </div>
+
+</div>
+
+<ng-template #someModal id="someModal" let-modal>
+        <form [formGroup]="ifscForm" (ngSubmit)="searchIFSC();">
+                <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">{{'Find IFSC Code' | translate}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                (click)="modal.dismiss('Cross click')">
+                                <i class="icon-times-solid"></i>
+                        </button>
+                </div>
+                <div class="modal-body">
+                        <div class="row">
+                                <div class="col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                                <label><span class="text-danger">*</span> {{ 'Bank Name' | translate}}
+                                                </label>
+                                                <select class="form-select" formControlName="vchBankName"
+                                                        [ngClass]="{ 'is-invalid': ifscSubmitted && j.vchBankName.errors }">
+                                                        <option value="">Select</option>
+                                                        <option *ngFor="let bank of BankNames;"
+                                                                value="{{bank.vch_Bank_Name}}">{{bank.vch_Bank_Name}}
+                                                        </option>
+                                                </select>
+                                                <div *ngIf="ifscSubmitted && j.vchBankName.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="j.vchBankName.errors.required">Select bank</div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                                <label><span class="text-danger">*</span> {{ 'District Name' |
+                                                        translate}} </label>
+                                                <select class="form-select" formControlName="vchDistrictName"
+                                                        [ngClass]="{ 'is-invalid': ifscSubmitted && j.vchDistrictName.errors }">
+                                                        >
+                                                        <option value="">Select</option>
+                                                        <option *ngFor="let dist of DistrictNames;"
+                                                                value="{{dist.vch_District}}">{{dist.vch_District}}
+                                                        </option>
+                                                </select>
+                                                <div *ngIf="ifscSubmitted && j.vchDistrictName.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="j.vchDistrictName.errors.required">Select district
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-2 col-lg-2 mt-4 ">
+                                        <div class="form-group">
+                                                <button  class="btn btn-success">Search</button>
+                                        </div>
+                                </div>
+                        </div>
+
+
+                        <div class="fix-height">
+                                <div class="row" *ngIf="isIFSCFlag;else norecord ">
+                                        <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th scope="col" width="50px">Sl#</th>
+                                                                        <th scope="col">Branc Name</th>
+                                                                        <th scope="col">IFSC Code</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr *ngFor="let b of Banks;let i=index">
+                                                                        <td>{{i + 1 }}</td>
+                                                                        <td>{{b.vch_Branch_Name}}</td>
+                                                                        <td>{{b.vch_Ifsc_Code}}</td>
+                                                                </tr>
+                                                        </tbody>
+                                                </table>
+                                        </div>
+                                </div>
+                                <ng-template #norecord>
+                                        <h6 class="no-content"> No Record Found</h6>
+
+                                </ng-template>
+                        </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" id="closeModal"  >Close</button>
+            </div> -->
+        </form>
+</ng-template>

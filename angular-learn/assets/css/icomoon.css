@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts-new/icomoon.eot?vy448u');
+  src:  url('../fonts-new/icomoon.eot?vy448u#iefix') format('embedded-opentype'),
+    url('../fonts-new/icomoon.ttf?vy448u') format('truetype'),
+    url('../fonts-new/icomoon.woff?vy448u') format('woff'),
+    url('../fonts-new/icomoon.svg?vy448u#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' ;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-black-and-white:before {
+  content: "\e907";
+}
+.icon-border:before {
+  content: "\e900";
+  color: #bcd4fb;
+}
+.icon-bpo-policy:before {
+  content: "\e901";
+}
+.icon-dp-policy:before {
+  content: "\e902";
+  /* color: #bcd4fb; */
+}
+.icon-e-policy:before {
+  content: "\e903";
+}
+.icon-home:before {
+  content: "\e904";
+}
+.icon-it-policy:before {
+  content: "\e905";
+}
+.icon-search:before {
+  content: "\e906";
+}

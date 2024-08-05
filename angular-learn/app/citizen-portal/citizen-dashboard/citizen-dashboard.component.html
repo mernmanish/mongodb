@@ -1,0 +1,303 @@
+
+<h4 class="section-heading"> Registration Status <div class="heading-style"></div>
+</h4>
+
+
+<div class="noRecord" *ngIf="errMsg!=''">{{errMsg}}</div>
+
+<div class="incentive-status" *ngFor="let regDetails of regDetails;let i = index;">
+  <div class="accordion" id="accordionExample1">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingMrutu">
+        <button class="accordion-button collapsed accordionBG" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseMrutu' + i" aria-expanded="false"
+         aria-controls="collapseMrutu{{i}}">
+          <div class="accordian-list m-mb-5">
+            <div class="d-flex">
+              <span class="reference-txt">Reference No.</span>
+              <span class="mx-2">|</span>
+
+              <h5 class="mb-0 primary-text m-mb-5-mtp">{{regDetails?.vch_regd_no}}</h5>
+            </div>
+            <div>
+              <span class="badge bg-light-primary rounded-pill" *ngIf="regDetails?.vchActionName==null || regDetails?.vchActionName==0 || regDetails?.vchActionName==''">Pending</span>
+              <span class="badge bg-light-danger rounded-pill" *ngIf="regDetails?.vchActionName==7">Rejected</span>
+              <span class="badge bg-warning rounded-pill" *ngIf="regDetails?.vchActionName==3">Reverted</span>
+              <span class="badge bg-light-success rounded-pill" *ngIf="regDetails?.vchActionName==8">Approved</span>
+            </div>
+          </div>
+        </button>
+      </h2>
+      
+
+      <div id="collapseMrutu{{i}}" class="accordion-collapse collapse show" aria-labelledby="headingMrutu" data-bs-parent="#accordionExample1">
+        <div class="accordion-body p-0 accordian-content">
+          <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+               <label class="form-label d-block">Company Name</label>
+               <span>
+                  {{regDetails?.vch_company_name}} </span>
+             </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+               <label class="form-label d-block">Managing director</label>
+               <span>
+                  {{regDetails?.vch_managing_director}} </span>
+             </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+              <label class="form-label d-block">Date of Application</label>
+              <span>
+                <i class="bi bi-calendar"></i> {{regDetails?.dtm_createdOn}} </span>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+              <label class="form-label d-block text-nowrap">Application Processed On</label>
+              <span><i class="bi bi-calendar"></i> {{regDetails?.dtm_status_date}} </span>
+            </div>
+
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 d-flex align-items-center">
+               <button type="button" class="btn btn-outline-success  btn-sm me-1" data-bs-toggle="modal" data-bs-target="#ProcessFlow" (click)="viewDetails(regDetails)">View Details</button>
+               <span *ngIf="(regDetails.vchActionName == 3)">
+               <button type="button" class="btn btn-primary btn-sm me-1" (click)="modalLoanProduct1(regDetails)">
+               <i class="bi bi-pencil me-1"></i>Edit </button></span>
+               <span *ngIf="(regDetails.vchActionName == 7 || regDetails.vchActionName == 8)">
+                  <button type="button" class="btn btn-primary btn-sm me-1" (click)="newRegistration()">
+                  <i class="bi bi-pencil me-1"></i>Apply New</button></span>
+               <span *ngIf="regDetails?.vchActionName==8">
+               <button type="button" class="btn btn-warning login-btn btn-sm" (click)="gotoincentives(regDetails)">Go To Incentive </button>
+               </span>
+             </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let incentive of regDetails.incentives; let incentive_index = index;">
+         <div id="collapseMrutu{{i}}" class="accordion-collapse collapse show subHeadingMrutu" aria-labelledby="subHeadingMrutu" data-bs-parent="#accordionExample1">
+            <div class="accordion-body p-0 accordian-content">
+            <div class="row">
+
+               <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                  <label class="form-label d-block"> Incentive Name </label>
+                  <span>{{incentive?.basicDetails.vchProcessName}}</span>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                  <label class="form-label d-block">Incentive Number</label>
+                  <span>
+                  <i class="bi bi-calendar"></i> {{incentive?.basicDetails.vch_application_id}} </span>
+               </div>
+
+               <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                  <label class="form-label d-block">Incentive Status</label>
+
+                  <div>
+                     <span class="badge bg-light-primary rounded-pill" *ngIf="incentive?.basicDetails.AprovedStatus==0">{{incentive?.basicDetails.ApplicationStatus}}</span>
+                     <span class="badge bg-light-primary rounded-pill" *ngIf="incentive?.basicDetails.AprovedStatus==1">{{incentive?.basicDetails.ApplicationStatus}}</span>
+                     <span class="badge bg-light-primary rounded-pill" *ngIf="incentive?.basicDetails.AprovedStatus==3">{{incentive?.basicDetails.ApplicationStatus}}</span>
+                     <span class="badge bg-light-danger rounded-pill" *ngIf="incentive?.basicDetails.AprovedStatus==7">{{incentive?.basicDetails.ApplicationStatus}}</span>
+                     <span class="badge bg-light-success rounded-pill" *ngIf="incentive?.basicDetails.AprovedStatus==8">{{incentive?.basicDetails.ApplicationStatus}}</span>
+                     <span class="badge bg-light-success rounded-pill" *ngIf="incentive?.basicDetails.AprovedStatus==29">{{incentive?.basicDetails.ApplicationStatus}}</span>
+                     <span class="badge bg-warning rounded-pill" *ngIf="incentive?.basicDetails.AprovedStatus==null && incentive?.basicDetails.AppStatusId==1">{{incentive?.basicDetails.ApplicationStatus}}</span>
+                  </div>
+               </div>
+
+               <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+                  <label class="form-label d-block">Incentive Apply Date</label>
+                  <span><i class="bi bi-calendar"></i> {{incentive?.basicDetails.ApplyDate}} </span>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+               <p *ngIf="incentive?.basicDetails.ActionTakenDate" >
+                  <label class="form-label d-block">Action Taken Date</label>
+                  <span><i class="bi bi-calendar"></i> {{incentive?.basicDetails.ActionTakenDate}} </span>
+               </p>
+               </div>
+               <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mb-2">
+                  <button type="button" class="btn btn-outline-success  btn-sm" data-bs-toggle="modal" data-bs-target="#ProcessFlow" (click)="viewIncentiveDetails(incentive)">View Details</button>&nbsp;&nbsp;&nbsp;
+                  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ProcessFlow" (click)="incentiveEdit(incentive.basicDetails.intProcessId,incentive.basicDetails.intOnlineServiceId, incentive.basicDetails.int_incentive_id, incentive.basicDetails.int_policy_id,incentive.basicDetails.int_reg_id)" *ngIf="incentive?.basicDetails.AppStatusId==1 || (incentive?.basicDetails.AprovedStatus==3 && incentive?.basicDetails.AppStatusId==3)">Edit</button>
+               </div>
+            </div>
+            </div>
+         </div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
+
+<div class="loader" *ngIf="loading">
+   <div class="loader-item"></div>
+   <p>Loading...</p>
+</div>
+
+
+<div class="modal fade xl" id="ProcessFlow" tabindex="-1" aria-labelledby="exampleLabel" aria-hidden="true" *ngIf="incentiveDesc?.vchProcessName">
+   <div class="modal-dialog modal-dialog-centered modal-xl">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleLabel">Incentives  : {{incentiveDesc?.vchProcessName}}</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+         <div>
+            <!-- ------------- -->
+            <div class="incentive-status">
+               <div *ngIf="sectionwise" class="accordion" id="accordionExample">
+                 <!-- section Wise -->
+                  <div class="accordion-item" *ngFor="let dynPrvKeys of dynamicCtrlPreviewKeys; let i = index">
+                     <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseTwo'+i" aria-expanded="false" aria-controls="collapseTwo">
+                           {{dynamicpreviewDetails[dynPrvKeys]['sectionName']}}
+                        </button>
+                     </h2>
+                     <div id="collapseTwo{{i}}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body p-1">
+                           <div class="dynamic-ctrls">
+
+                              <div class="dynGridCls" *ngFor="let dynPrvForm of dynamicpreviewDetails[dynPrvKeys]['arrFormWiseValue']" [ngClass]="{'onegrid':gridtype == 1, 'twogrid': gridtype == 2, 'threeGrid':gridtype == 3,'fullwidthSection':dynPrvForm.ctrlTypeId==10}">
+                                 <div class="fulldtls" [ngClass]="{'fullgrid':dynPrvForm.ctrlTypeId == 10}" >
+                                    <label *ngIf=" dynPrvForm.ctrlTypeId!=12" class="mb-0 dynlabel label-text">
+                                    {{ dynPrvForm.ctrlName}}
+
+                                    </label>
+                                    <div class="control-holder">
+                                       <div class="form-group">
+                                          <div *ngIf="dynPrvForm.ctrlTypeId==10">
+                                             <!-- For Add More -->
+                                             <table class="table table-bordered">
+                                                <tr>
+                                                   <th width="10px">Sl#</th>
+                                                   <th *ngFor="let addMoreTh of dynPrvForm.addMoreDetails[0];">
+                                                      {{addMoreTh.ctrlName}}
+                                                   </th>
+                                                </tr>
+                                                <tr *ngFor="let addMoreDet of dynPrvForm.addMoreDetails; let addMoreTrCtr=index">
+                                                   <td>{{addMoreTrCtr + 1}} </td>
+                                                   <ng-container *ngFor="let addMoreTdDet of addMoreDet ">
+                                                      <td *ngIf="addMoreTdDet.ctrlTypeId!=7">{{addMoreTdDet.ctrlValue }}</td>
+                                                      <td *ngIf="addMoreTdDet.ctrlTypeId==7">
+                                                      <a target="_blank" class="text-danger h4 mt-2 d-inline-block" [href]="addMoreTdDet.ctrlValue">
+                                                         <i class="icon-file-pdf-solid"></i>
+                                                      </a>
+                                                      </td>
+                                                   </ng-container>
+                                                </tr>
+                                             </table>
+                                          </div>
+                                          <div *ngIf="dynPrvForm.ctrlTypeId==8">
+                                             <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h2';else h3heading">
+                                             <h2>{{dynPrvForm.ctrlValue}}</h2>
+                                             </ng-container>
+                                             <ng-template #h3heading>
+                                             <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h3';else h4heading">
+                                                <h3>{{dynPrvForm.ctrlValue}}</h3>
+                                             </ng-container>
+                                             </ng-template>
+                                             <ng-template #h4heading>
+                                             <ng-container *ngIf="dynPrvForm.ctrlHeadingType =='h4';else h5heading">
+                                                <h4>{{dynPrvForm.ctrlValue}}</h4>
+                                             </ng-container>
+                                             </ng-template>
+                                             <ng-template #h5heading>
+                                             <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h5';else h6heading">
+                                                <h5>{{dynPrvForm.ctrlValue}}</h5>
+                                             </ng-container>
+                                             </ng-template>
+                                             <ng-template #h6heading>
+                                             <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h6';else h1heading">
+                                                <h6>{{dynPrvForm.ctrlValue}}</h6>
+                                             </ng-container>
+                                             </ng-template>
+                                             <ng-template #h1heading>
+                                             <ng-container>
+                                                <h1>{{dynPrvForm.ctrlValue}}</h1>
+                                             </ng-container>
+                                             </ng-template>
+                                          </div>
+                                          <label *ngIf="dynPrvForm.ctrlTypeId!=7 && dynPrvForm.ctrlTypeId!=10" [innerHTML]="dynPrvForm.ctrlValue"></label>
+                                          <a *ngIf="dynPrvForm.ctrlTypeId==7" target="_blank" class="text-danger h4 mt-2 d-inline-block" [href]="dynPrvForm.ctrlValue">
+                                             <i class="icon-file-pdf-solid"></i>
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+
+                              </div>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div *ngIf="!sectionwise">
+               <!-- without section -->
+               <div class="dynamic-ctrls" *ngFor="let dynPrvKeys of dynamicCtrlPreviewKeys; let i = index">
+                  <div class="dynGridCls" [ngClass]="{'onegrid':gridtype == 1, 'towgrid': gridtype == 2, 'threeGrid':gridtype == 3}" *ngFor="let dynPrvForm of dynamicpreviewDetails[dynPrvKeys]['arrFormWiseValue']">
+                  <label *ngIf="dynPrvForm.ctrlTypeId!=8 && dynPrvForm.ctrlTypeId!=12" class="mb-0 dynlabel">
+                     {{ dynPrvForm.ctrlName}}
+                  </label>
+                  <div *ngIf="dynPrvForm.ctrlTypeId==10">
+                     <table class="table table-bordered">
+                        <tr>
+                        <th width="10">Sl#</th>
+                        <th *ngFor="let addMoreTh of dynPrvForm.addMoreDetails[0];">
+                           {{addMoreTh.ctrlName}}
+                        </th>
+                        </tr>
+                        <tr *ngFor="let addMoreDet of dynPrvForm.addMoreDetails; let addMoreTrCtr=index">
+                        <td>{{addMoreTrCtr + 1}} </td>
+                        <ng-container *ngFor="let addMoreTdDet of addMoreDet ">
+                           <td *ngIf="addMoreTdDet.ctrlTypeId!=7">{{addMoreTdDet.ctrlValue }}</td>
+                           <td *ngIf="addMoreTdDet.ctrlTypeId==7">
+                              <a target="_blank" class="text-danger h4 mt-2 d-inline-block" [href]="addMoreTdDet.ctrlValue">
+                              <i class="icon-file-pdf-solid"></i>
+                              </a>
+                           </td>
+                        </ng-container>
+                        </tr>
+                     </table>
+                  </div>
+                  <div *ngIf="dynPrvForm.ctrlTypeId==8">
+                     <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h2';else h3heading">
+                        <h2>{{dynPrvForm.ctrlValue}}</h2>
+                     </ng-container>
+                     <ng-template #h3heading>
+                        <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h3';else h4heading">
+                        <h3>{{dynPrvForm.ctrlValue}}</h3>
+                        </ng-container>
+                     </ng-template>
+                     <ng-template #h4heading>
+                        <ng-container *ngIf="dynPrvForm.ctrlHeadingType =='h4';else h5heading">
+                        <h4>{{dynPrvForm.ctrlValue}}</h4>
+                        </ng-container>
+                     </ng-template>
+                     <ng-template #h5heading>
+                        <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h5';else h6heading">
+                        <h5>{{dynPrvForm.ctrlValue}}</h5>
+                        </ng-container>
+                     </ng-template>
+                     <ng-template #h6heading>
+                        <ng-container *ngIf="dynPrvForm.ctrlHeadingType == 'h6';else h1heading">
+                        <h6>{{dynPrvForm.ctrlValue}}</h6>
+                        </ng-container>
+                     </ng-template>
+                     <ng-template #h1heading>
+                        <ng-container>
+                        <h1>{{dynPrvForm.ctrlValue}}</h1>
+                        </ng-container>
+                     </ng-template>
+                  </div>
+                  <div class="control-holder" *ngIf="dynPrvForm.ctrlTypeId!=8 && dynPrvForm.ctrlTypeId!=12 && dynPrvForm.ctrlTypeId!=10">
+                     <div class="form-group">
+                        <label *ngIf="dynPrvForm.ctrlTypeId!=7" [innerHTML]="dynPrvForm.ctrlValue"></label>
+                        <a *ngIf="dynPrvForm.ctrlTypeId==7" target="_blank" class="text-danger h4 mt-2 d-inline-block" [href]="dynPrvForm.ctrlValue">
+                        <i class="icon-file-pdf-solid"></i>
+                        </a>
+                     </div>
+                  </div>
+                  </div>
+               </div>
+            </div>
+            <!-- --------- -->
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+

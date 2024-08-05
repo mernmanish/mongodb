@@ -1,0 +1,99 @@
+ng-scrollbar.scroll-event {
+  --scrollbar-size: 3px;
+  --scrollbar-thumb-color: #2a9a63;
+  --scrollbar-hover-size: 6px;
+  --scrollbar-track-color: rgba(0, 0, 0, 0.05);
+  --scrollbar-border-radius: 10px;
+
+  height: 350px;
+  max-height: 350px;
+  border-radius: 3px;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.page-container{
+  padding: 15px 0!important;
+}
+
+
+.listed-ul{padding: 15px 20px 15px 7px;}
+.listed-ul li{ padding: 10px 0 10px 30px;position: relative;    border-bottom: 1px solid #ededed;}
+.listed-ul li:last-child{ border-bottom: none;}
+.listed-ul li::before{content:"\e970"; position: absolute; top: 10px; left: 0; font-family: icons; font-size: 1.4rem;color: #ffa500;}
+.listed-ul li .text-grey{ font-size: .8rem;}
+
+.timeline { display: flex; flex-direction: column; align-items: flex-start; gap: 32px;    margin-top: 2rem;    margin-bottom: 1rem;}  
+.title > h2,
+.title > h1 { margin: 0;}  
+.title > h2 {  opacity: 50%; }  
+.events {position: relative; display: grid; grid-template-columns: 16px 1fr; row-gap: 40px; padding-top: 0px; width: fit-content; }  
+.event { display: grid; grid-template-columns: 16px 1fr; column-gap: 16px; grid-column: 1 / 3;}  
+.date > h2,
+.description > p { margin: 0;}  
+.knob { grid-column: 1 / 2;align-self: center; width: 100%; aspect-ratio: 1 / 1;  z-index: 1;  background: #009a4e; border-radius: 50%;}  
+.date,
+.description { grid-column: 2 / 3; align-self: center;}  
+.description span { opacity: .5;}  
+.line {position: absolute; grid-column: 1 / 2; justify-self: center;  height: 100%; width: 2px; z-index: 0; background-color: rgb(0 154 78);}
+.farmer-info .accordion-button:focus{ box-shadow: none;}
+.BankDetails h6{ font-size: 1.1rem;}
+.wid-85{ width: 85%;}
+
+.resgister .nav-pills{
+  --bs-nav-pills-link-active-bg: transparent!important;
+}
+
+
+.page-container.register-page{
+       padding: 25px 0!important;
+}
+.resgister .text-bg-success {
+  color: #fff!important;
+  background-color: #43ab62!important;
+}
+.border .custome-form{
+  flex: 0 0 33.33%!;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .twogrid {
+      flex: 0 0 100% !important;
+      align-items: center;
+      padding: 0 1rem;
+  }
+  .resgister .nav-pills .nav-link{
+    margin-right: 20px;
+    padding: 10px 15px;
+  }
+  .fulldtlsinner{flex: 0 0 100% !important;}
+
+  .tbl_fullwdh table tr th  { min-width:100px;}
+
+}
+
+@media screen and (max-width: 800px) {
+.register-tab-mob{ 
+  overflow: auto;
+  }
+
+  .register-tab-mob ul{ width: 100%; display: flex;}
+
+  .register-tab-mob ul {
+    margin-bottom: 0 !important;
+}
+
+}
+
+@keyframes blink-animation {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.blink {
+  animation: blink-animation 1.5s infinite;
+}

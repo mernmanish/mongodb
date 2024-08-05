@@ -1,0 +1,120 @@
+<div class="pagenavigation">
+  <div class="container">
+     <nav aria-label="breadcrumb">
+        <div class="breadcrumb-level">
+           <div>
+              <h2>Policies</h2>
+              <ol class="breadcrumb mb-0">
+                 <li class="breadcrumb-item"><a href="#">Home</a></li>
+                 <li class="breadcrumb-item active" aria-current="page">{{'Policies' | translate }}</li>
+              </ol>
+           </div>
+        </div>
+     </nav>
+  </div>
+</div>
+<div class="content-section" >
+  <section class="how-apply">
+     <div class="container">
+        <div class="row">
+           <div class="col-lg-12 ">
+            <div class="incentives-sec-ul">
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation" *ngFor="let policyDet of arrPolicyList; let rwCnt=index;">
+                  <button class="nav-link" [ngClass]="{'active': policyDet.vchModuleID === activeTabIndex}" 
+                  (click)="setActiveIndex(policyDet.vchModuleID)"  type="button"  role="tab" aria-selected="true">{{policyDet.vchModuleName}}</button>
+                </li>
+              </ul>
+          </div>
+          <div class="tab-content" id="pills-tabContent">
+            <ng-container *ngFor="let policyDet of arrPolicyList;">
+              <div class="tab-pane fade" [ngClass]="{'show active': policyDet.vchModuleID === activeTabIndex}" 
+              id="{{policyDet.vchModuleName}}"  role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="incentives-sec">
+                  <div class="row">
+                    <div class="col-lg-8 d-flex align-items-center incentv-mb-3 ">
+                      <h2 class="mb-0">Incentives <span>({{ policyDet.processes.length }})</span></h2>
+                      <div class="" role="group" aria-label="Basic outlined example">
+                        <a (click)="downloadFile(policyDet.vchPolicyForm,policyDet.policyFormName)" type="button" class="btn btn-outline-blue ms-3" title="Download {{policyDet.vchModuleName}} Policy pdf" target="_blank">
+                          <i class="bi bi-filetype-pdf"></i> Policy
+                        </a>
+                        <a (click)="downloadFile(policyDet.vchPolicyGuidline,policyDet.policyGuidlineName)" type="button" class="btn btn-outline-blue ms-3" title="Download {{policyDet.vchModuleName}} Operational Guideline pdf" target="_blank">
+                          <i class="bi bi-filetype-pdf"></i> OG
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="input-group">
+                        <input class="form-control border-end-0 border" type="search" #searchInput id="example-search-input" placeholder="Search..." (input)="filterProcesses(searchInput.value, policyDet)">
+                        <span class="input-group-append">
+                          <button class="btn btn-outline-secondary border-start-0 border-bottom-0 border ms-n5" type="button">
+                            <i class="bi bi-search"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="list-documents">
+                  <ng-template #filteredProcessList>
+                    <ul *ngIf="!filteredProcess; else noFilteredProcess">
+                      <li *ngFor="let process of policyDet.processes">
+                        <a (click)="handleProcessClick({ process: process, txtContentPolicy: process.txtContentPolicy, policyDet: policyDet.processes })">{{ process.vchProcessName }}</a>
+                      </li>
+                    </ul>
+                    <div class="noRecord" *ngIf="filteredProcess && filteredProcess.length === 0">
+                      No Such Incentive(s) found.
+                    </div>
+                  </ng-template>
+          
+                  <ng-template #noFilteredProcess>
+                    <ul *ngIf="filteredProcess && filteredProcess.length > 0">
+                      <li *ngFor="let process of filteredProcess">
+                        <a (click)="handleProcessClick({ process: process, txtContentPolicy: process.txtContentPolicy, policyDet: policyDet.processes })">{{ process.vchProcessName }}</a>
+                      </li>
+                    </ul>
+                  </ng-template>
+          
+                  <div class="noRecord" *ngIf="!filteredProcess && searchTerm.trim() !== ''; else filteredProcessList">
+                    No Such Incentive(s) found.
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+                          
+            <aside class="customizer">
+              <a href="javascript:void(0)" class="service-panel-toggle">
+                  <i class="bi bi-filetype-pdf font-20 bell"></i>
+              </a>
+              <div class="customizer-body ps-container ps-theme-default">                  
+                  <div class="tab-content" id="pills-tabContent">      
+                      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">                          
+                         <div>
+                           <a (click)="downloadFile(staticUrl,'SampleRagistration.pdf');" class="btn btn-outline-blue mb-2">Sample Registration Form</a>
+                           <a (click)="downloadFile(userManualFileUrl,'OIMS-UserManual.pdf');" class="btn btn-outline-blue mb-2">User Manual</a>
+                         </div>
+                      </div>                     
+                   </div>
+                </div>             
+          </aside>
+          </div>                          
+           </div>         
+        </div>
+     </div>
+  </section>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="userPolicy" tabindex="-1" aria-labelledby="exampleLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="exampleLabel">User Manual</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           <iframe width="100%" height="500" [attr.src]="vchLink" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+     </div>
+  </div>
+</div>

@@ -1,0 +1,185 @@
+<!-- Footer -->
+<div class="website-footer">
+        <div class="container">
+                <div class="foote-top">
+                        <div class="row">
+                                                           
+                                <div class="col-md-12 col-lg-4">                                        
+                                        <!-- <h4 class="section-heading text-white"> {{'Contact Us' | translate }}
+                                                <div class="heading-style"></div>
+                                            </h4> -->
+                                          <a href="javascript:void(0);">
+                                                <img src="{{siteURL}}assets/images/footer-logo.png" alt="IRMS-logo">
+                                          </a>
+                                            <ul class="adress-li mt-4">
+                                                <li class="text-white pb-0">
+                                                <!-- <i class="icon-map1 me-2"></i>  -->
+                                                <div>
+                                                <span class="d-block mb-2">
+                                                        Odisha Computer Application Centre, (Technical Directorate to Electronics & IT Department) OCAC Building, Plot No-N-1/7-D, Acharya Vihar, RRL Post Office, Bhubaneswar- 751013.
+                                                </span>
+                                                       
+                                                </div>
+                                                </li>
+                                              
+                                                    <!-- <li class="text-white pt-0"><i class="icon-envelope-solid me-2"></i><a href="mailto:contact.ocac@odisha.gov.in">contact.ocac@odisha.gov.in</a></li> -->
+                                            </ul>                                        
+                                </div>
+                                <div class="col-md-12 col-lg-5">                                       
+                                        <h4 class="section-heading text-white"> {{'Important Links' | translate }}
+                                                <!-- <div class="heading-style"></div> -->
+                                            </h4>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                                <ul class="listed-items">
+                                                        <li *ngFor="let link of impLinks; let i = index;">
+                                                           <!-- <a href="{{link.link}}" target="_blank" *ngIf="this.language=='Odia'">{{link.importantLinkO}}</a> -->
+                                                           <a href="{{link.link}}" target="_blank" *ngIf="this.language=='English'">{{link.importantLinkE}}</a>
+                                                        </li>
+                                                </ul>
+                                        </div>  
+                                        <div class="col-lg-6">
+                                                <ul class="listed-items">
+                                                      <li>
+                                                             <a  href="javascript:void(0);" title="E&IT Department" >E&IT Department</a>
+                                                       </li>
+                                                      <li *ngFor="let menu of menuitems; let i = index;">
+                                                        <a routerLink="/home/{{menu.linkUrl}}"
+                                                            routerLinkActive="active">{{menu.vchPageName}}</a>
+                                                    </li>
+                                                     
+                                                </ul>
+                                        </div>                                       
+                                </div>                                      
+                        </div> 
+                                <div class="col-md-4 col-lg-3">                                        
+                                        <h4 class="section-heading text-white"> Connect us
+                                               
+                                            </h4>
+                                            <ul class="listed-items">
+                                                <li>
+                                                <a  href=" contact.ocac@odisha.gov.in" title="contact.ocac@odisha.gov.in" >contact.ocac@odisha.gov.in</a>
+                                                </li>
+                                        </ul>
+                                        <!-- <ul class="socialico d-flex">
+                                                
+                                                <li>
+                                                        <a target="_blank" href="{{socYTLink}}" class="icon-link twitter brand"><i class="icon-youtube"></i></a>            
+                                                </li>
+                                                <li>
+                                                        <a class="icon-link twitter brand" href="https://twitter.com/krushibibhag?lang=en" target="_blank"><i class="icon-twitter1"></i></a>
+                                                </li>
+                                                <li>
+                                                        <a class="icon-link twitter brand" href="https://twitter.com/farddept?lang=en" target="_blank"><i class="icon-twitter1"></i></a>
+                                                </li>
+                                                
+
+                                        </ul> -->
+                                </div>
+                     
+                        </div>
+                </div>
+              
+        </div>
+
+        <div class="copyright"> <span >&copy;
+                <script>
+                        document.write(new Date().getFullYear());
+                </script>
+                OIMS, an initiative by  </span>
+                Electonics & Information technology Department, Government of Odisha.
+        
+</div>
+<button class="scrollup" (click)="scrollToTop()"><i class="bi bi-caret-up"></i></button>
+</div>
+
+<ng-template #someModal id="someModal" let-modal>
+        <form [formGroup]="ifscForm" (ngSubmit)="searchIFSC();">
+                <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">{{'Find IFSC Code' | translate}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                (click)="modal.dismiss('Cross click')">
+                                <i class="icon-times-solid"></i>
+                        </button>
+                </div>
+                <div class="modal-body">
+                        <div class="row">
+                                <div class="col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                                <label><span class="text-danger">*</span> {{ 'Bank Name' | translate}}
+                                                </label>
+                                                <select class="form-select" formControlName="vchBankName"
+                                                        [ngClass]="{ 'is-invalid': ifscSubmitted && j.vchBankName.errors }">
+                                                        <option value="">Select</option>
+                                                        <option *ngFor="let bank of BankNames;"
+                                                                value="{{bank.vch_Bank_Name}}">{{bank.vch_Bank_Name}}
+                                                        </option>
+                                                </select>
+                                                <div *ngIf="ifscSubmitted && j.vchBankName.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="j.vchBankName.errors.required">Select bank</div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                                <label><span class="text-danger">*</span> {{ 'District Name' |
+                                                        translate}} </label>
+                                                <select class="form-select" formControlName="vchDistrictName"
+                                                        [ngClass]="{ 'is-invalid': ifscSubmitted && j.vchDistrictName.errors }">
+                                                        >
+                                                        <option value="">Select</option>
+                                                        <option *ngFor="let dist of DistrictNames;"
+                                                                value="{{dist.vch_District}}">{{dist.vch_District}}
+                                                        </option>
+                                                </select>
+                                                <div *ngIf="ifscSubmitted && j.vchDistrictName.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="j.vchDistrictName.errors.required">Select district
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-2 col-lg-2 mt-4 ">
+                                        <div class="form-group">
+                                                <button  class="btn btn-success">Search</button>
+                                        </div>
+                                </div>
+                        </div>
+
+
+                        <div class="fix-height">
+                                <div class="row" *ngIf="isIFSCFlag;else norecord ">
+                                        <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th scope="col" width="50px">Sl#</th>
+                                                                        <th scope="col">Branc Name</th>
+                                                                        <th scope="col">IFSC Code</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr *ngFor="let b of Banks;let i=index">
+                                                                        <td>{{i + 1 }}</td>
+                                                                        <td>{{b.vch_Branch_Name}}</td>
+                                                                        <td>{{b.vch_Ifsc_Code}}</td>
+                                                                </tr>
+                                                        </tbody>
+                                                </table>
+                                        </div>
+                                </div>
+                                <ng-template #norecord>
+                                        <h6 class="no-content"> No Record Found</h6>
+
+                                </ng-template>
+                        </div>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" id="closeModal"  >Close</button>
+            </div> -->
+
+
+           
+        </form>
+</ng-template>
